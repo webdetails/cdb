@@ -27,15 +27,15 @@ import pt.webdetails.cpf.persistence.PersistenceEngine;
 public class CdbContentGenerator extends SimpleContentGenerator {
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
-  public void edit(OutputStream out) throws IOException {
+  public void console(OutputStream out) throws IOException {
     IParameterProvider pathParams = parameterProviders.get("path");
     ServletRequestWrapper wrapper = (ServletRequestWrapper) pathParams.getParameter("httprequest");
-    String root = wrapper.getScheme() + "://" + wrapper.getServerName() + ":" + wrapper.getServerPort();
+    String root = wrapper.getServerName() + ":" + wrapper.getServerPort();
 
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("solution", "system");
-    params.put("path", "cdb/resources/editor/");
-    params.put("file", "editor.wcdf");
+    params.put("path", "cdb/presentation/");
+    params.put("file", "cdb.wcdf");
     params.put("absolute", "true");
     params.put("root", root);
     out.write(InterPluginComms.callPlugin("pentaho-cdf-dd", "Render", params).getBytes("utf-8"));
