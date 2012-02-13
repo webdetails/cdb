@@ -16,15 +16,16 @@ import pt.webdetails.cda.dataaccess.MdxDataAccess;
  *
  * @author pdpi
  */
-public class SaikuConnector extends AbstractConnector {
+public class SaikuConnector implements Connector {
 
     @Override
     public DataAccess exportCdaDataAccess(JSONObject query) {
         String id, name, queryContent;
         try {
-            id = query.getString("id");
-            name = query.getString("id");
-            queryContent = query.getString("query");
+            id = query.getString("name");
+            JSONObject definition = new JSONObject(query.getString("definition"));
+            name = id;
+            queryContent = definition.getString("query");
             DataAccess dataAccess = new MdxDataAccess(id,name,id,queryContent);
             //dataAccess;
             return dataAccess;
@@ -37,10 +38,11 @@ public class SaikuConnector extends AbstractConnector {
     public Connection exportCdaConnection(JSONObject query) {
         String jndi, catalog, cube, id;
         try {
-            id = query.getString("id");
-            jndi = query.getString("jndi");
-            cube = query.getString("cube");
-            catalog = query.getString("catalog");
+            id = query.getString("name");
+            JSONObject definition = new JSONObject(query.getString("definition"));
+            jndi = definition.getString("jndi");
+            cube = definition.getString("cube");
+            catalog = definition.getString("catalog");
             MondrianJndiConnectionInfo cinfo = new MondrianJndiConnectionInfo(jndi, catalog, cube);
             Connection conn = new JndiConnection(id, cinfo);
             return conn;

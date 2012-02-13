@@ -5,7 +5,6 @@
 package pt.webdetails.cdb.connector;
 
 import org.json.JSONObject;
-import pt.webdetails.cdb.query.Query;
 import pt.webdetails.cda.dataaccess.DataAccess;
 import pt.webdetails.cda.connections.Connection;
 
@@ -15,15 +14,6 @@ import pt.webdetails.cda.connections.Connection;
  */
 public interface Connector {
 
-    public Query newQuery();
-
-    void editQuery();
-
-    void viewQuery();
-
-    void deleteQuery();
-
     DataAccess exportCdaDataAccess(JSONObject query);
-
     Connection exportCdaConnection(JSONObject query);
 }

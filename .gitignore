@@ -2,3 +2,6 @@ bin/*
 override.properties
 lib/*
 nbproject/private/*
+.DS_Store
+dist
+build

@@ -17,6 +17,7 @@ import pt.webdetails.cpf.InvalidOperationException;
 import pt.webdetails.cpf.SimpleContentGenerator;
 import pt.webdetails.cpf.annotations.AccessLevel;
 import pt.webdetails.cpf.annotations.Exposed;
+import pt.webdetails.cpf.olap.OlapUtils;
 import pt.webdetails.cpf.persistence.PersistenceEngine;
 
 /**
@@ -76,18 +77,25 @@ public class CdbContentGenerator extends SimpleContentGenerator {
   }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
-  public void crud(OutputStream out) throws IOException {
+  public void connector(OutputStream out) throws IOException {
     IParameterProvider pathParams = parameterProviders.get("path");
     IParameterProvider requestParams = parameterProviders.get("request");
-    String method = requestParams.getStringParameter("method", null);
-    if ("new".equals(method)) {
-      out.write(ConnectorEngine.getInstance().newDataAccess().getBytes("utf-8"));
-    } else if ("edit".equals(method)) {
-      out.write(ConnectorEngine.getInstance().editDataAccess().getBytes("utf-8"));
-    } else if ("delete".equals(method)) {
-      out.write(ConnectorEngine.getInstance().deleteDataAccess().getBytes("utf-8"));
-    } else if ("view".equals(method)) {
-      out.write(ConnectorEngine.getInstance().viewDataAccess().getBytes("utf-8"));
+    ConnectorEngine engine = ConnectorEngine.getInstance();
+    try {
+      engine.process(requestParams, pathParams, out);
+    } catch (Exception e) {
+      logger.error(e);
+    }
+  }
+
+  @Exposed(accessLevel = AccessLevel.PUBLIC)
+  public void olaputils(OutputStream out) {
+    OlapUtils utils = new OlapUtils();
+    IParameterProvider requestParams = parameterProviders.get("request");
+    try {
+      out.write(utils.process(requestParams).toString().getBytes("utf-8"));
+    } catch (IOException e) {
+      logger.error(e);
     }
   }
 
