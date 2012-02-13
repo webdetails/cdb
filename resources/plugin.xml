@@ -5,7 +5,7 @@
   </static-paths>
   <content-types />
   <content-generator scope="local" id="cdb" type="graphicsGenerator" url="">
-    <classname>pt.webdetails.crp.CrpContentGenerator</classname>
+    <classname>pt.webdetails.cdb.CdbContentGenerator</classname>
     <title>CDB</title>
   </content-generator>
   <!-- Menu entry -->
