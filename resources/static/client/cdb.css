@@ -64,7 +64,7 @@ border: 0;
 /* Window Background */
 body{
 	font-family: Gudea;
-	background: url(img/shad_h.png) no-repeat scroll center 80px #dee8ec;
+	background: url(img/cdb_header.png) no-repeat scroll center 45px #dee8ec;
 }
 /* Dashboard Background / Blueprint Container */
 div.container  {
@@ -74,18 +74,18 @@ div.container  {
    2. HEADER 
    ========================================================================== */
 .WDheader {
-	background: url(img/logoW.png) no-repeat left 40px #dee8ec;
+/*	background: url(img/logoW.png) no-repeat left 40px #dee8ec;*/
 	height: 70px;
-	padding-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .WDh1 {
-	background-color: #05282c;
+	background-color: #093F4E;
 	height:  30px;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 .WDh2 {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 
@@ -260,66 +260,6 @@ div.container  {
 .WDfilterCellBody .chzn-container-multi .chzn-choices .search-field input{
 }
 
-/* .buttonWrapper and .checked classes added for this project using jquery */
-ul.toggleGroup {
- padding:0;
- margin:0;
- margin-top: 5px;
- display:inline-block;
- float:left;
- list-style: none outside none;
- position: relative;
-}
-ul.toggleGroup li {
-  display:inline-block;
-  position:relative;
-  width:952px;
-  padding-bottom:5px;
-  height: 26px;
-}
-ul.toggleGroup li input {
-  visibility:hidden;
-}
-ul.toggleGroup label {
-  display:block;
-  height:28px;
-  line-height: 28px;
-  color: #2C393E;
-  background-color: #ffffff;
-  border: 1px solid #829299;
-  font-size: 20px;
-  padding-left: 20px;
-  font-weight: 300;
-}
-
-/*ul.toggleGroup label:hover {
-  display:block;
-  height:28px;
-  line-height: 28px;
-  color: #a6b0b5;
-  background-color: #eeeeee;
-  border: 1px solid #829299;
-  font-size: 20px;
-  padding-left: 20px;
-  font-weight: 300;
-}*/
-
-
-ul.toggleGroup label .buttonWrapper {
-  display:inline-block;
-  float:right;
-  margin:  3px;
-  height:23px;
-  width:23px;
-  background: url(img/checkbox.png) 0px 0px;
-}
-
-
-
-ul.toggleGroup label.checked .buttonWrapper {
-	background: url(img/checkbox.png) 69px 0px;
-}
-
 
 /* =============================================================================
    4. DATA CELLS
@@ -349,7 +289,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cad3d6', end
 	background: -o-linear-gradient(top,  #cad3d6 0%,#a6b0b5 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top,  #cad3d6 0%,#a6b0b5 100%); /* IE10+ */
 	background: linear-gradient(top,  #cad3d6 0%,#a6b0b5 100%); /* W3C */
-	}
+}
 
 /* Data Cells header*/
 .WDdataCellHeader{
@@ -526,12 +466,32 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cad3d6', end
 /* =============================================================================
    7. SELECTORS AND BUTTONS 
    ========================================================================== */
+.WDh1 button {
+	background:  none;	
+	width: 120px;
+	border: none;
+	color: #b3bfc4;
+	height: 30px;
+} 
+
+.WDh1 button:hover {
+	background: none;
+	border: none;
+	color: #ffffff;
+}  
+
+.WDh1 button:active {
+	background: none;
+}
+   
+   
+   
 .WDfilterCell select{
 }
 
 button {
 	color: #0f1414;
-	height: 23px;
+	height: 22px;
 	width: 86px;
 	border: 1px solid #829299;
 	font-size: 12px;
@@ -553,45 +513,6 @@ button:disabled {
 	color:  #b3bfc4;
 	border-color: #b3bfc4;
 }
-
-div.activateButton {
-	margin: 20px 14px;	
-}
-
-div.activateButton.active button {
-	color: #ffffff;
-	height: 28px;
-	width: 921px;
-	border: 1px solid #829299;
-	font-size: 15px;
-	background-color:#52a229;
-}
-
-div.activateButton.inactive button {
-	color: #0F1414;
-	height: 28px;
-	width: 921px;
-	border: 1px solid #829299;
-	font-size: 15px;
-	background-color: #white;
-}
-
-div.activateButton.active button:hover,
-div.activateButton.inactive button:hover {
-	border: 1px solid transparent;
-	background-color: #cad3d6;
-	color:  #0f1414;
-}
-
-div.activateButton.active button:active,
-div.activateButton.inactive button:active {
-	background-color: #cad3d6;
-	color:  #0F1414;
-	border: 1px solid #829299;
-}
-
-
-
 
 
 /* Multi Button */
@@ -662,11 +583,12 @@ div.activateButton.inactive button:active {
 /**** Chosen Select *****/
 /* All Chosen elements */
 .chzn-container{
-	width: 445px !important;
-	font-size: 17px;
+	width: 295px !important;
+	font-size: 14px;
 	color: #05282C;
-	height: 28px;
-	line-height: 28px;
+	height: 22px;
+	line-height: 22px;
+	zoom: 0;
 }
 .chzn-container * {
 }
@@ -679,12 +601,12 @@ div.activateButton.inactive button:active {
 	background: white;
 	box-shadow: none;
 	-webkit-box-shadow: none;
-	border: 1px solid #0f1414;
-	top: 31px !important;
+	border: 1px solid #0F1414;
+	top: 23px !important;
 	border-image: initial;
 }
 .chzn-drop{
-	width: 443px !important;
+	width: 293px !important;
 }
 .chzn-drop  .chzn-search{
 	display: none;
@@ -696,6 +618,7 @@ div.activateButton.inactive button:active {
 }
 .chzn-drop  .chzn-results li{
 	margin: 2px 0px;
+	line-height: 40%;
 }
 .chzn-drop .chzn-results em{
 }
@@ -723,7 +646,8 @@ div.activateButton.inactive button:active {
 	-webkit-background-clip: initial;
 	color: #05282C;
 	border-image: initial;
-	height: 27px;
+	height: 19px;
+	line-height: 19px;
 }
 .chzn-container-single:hover .chzn-single{
 	border: 1px solid #CAD3D6;
@@ -739,9 +663,9 @@ div.activateButton.inactive button:active {
 	width: 23px;
 	border: none;
 	border-image: initial;
-	top: 2px;
+	top: -2px;
 	height: 23px;
-	right: 3px;
+	right: -1px;
 }
 
 
@@ -765,52 +689,6 @@ div.activateButton.inactive button:active {
 	
 } 
 
-/* =============================================================================
-   Sitemap
-   ========================================================================== */
-   
-.siteMap, .siteMap * {
-	margin:0;
-    padding:0;
-    list-style:none;
-}
-
-.siteMap {
- 	padding-top:8px;
- 	padding-left: 20px;
-    line-height:1.0;
- 	float:left;
-}
-.siteMap ul {
-
-}
-.siteMap ul li {
-    width:100%;
-}
-.siteMap li:hover {
-    visibility:inherit; /* fixes IE7 'sticky bug' */
-}
-.siteMap li {
-	display:inline-block;
-	padding-right:25px;
-	margin-right:10px;
-}
-.siteMap a {
- 	text-decoration:none;
- 	font-size: 13px;
- 	color: #829299;
- 	cursor:pointer;  
-}
-.siteMap li a:hover{
- 	color: #a6a6a6;  
-}
-.siteMap li.siteMapSelected a{
- 	color: #dee8ec;  
- 	font-weight: bold;
-}
-
-   
-
 
 
 /* =============================================================================
@@ -824,7 +702,25 @@ div.activateButton.inactive button:active {
    ========================================================================== */
 
 
+.WDbutton {
+	float: right;
+	position: relative;
+	bottom: 23px;
+}
 
+.removeButton button,
+.saveButton button {
+	background: none;
+	margin-right: 5px;
+}
+
+.proceedButton {
+	float: right;
+}
+
+.exportButton {
+	background: none;
+}
 
 @font-face {
   font-family: 'Gudea';
@@ -836,128 +732,33 @@ div.activateButton.inactive button:active {
 
 .cdbBig {
 	float: right;
-	font-size: 19px;
-	font-weight: bold;
-	height: 20px;
-	padding-top: 53px;
+	background: url('img/cdb_logo.png') no-repeat left bottom;
+	height: 15px;
+	margin-top: 50px;
 	position: relative;
-	width: 38px;	
+	width: 45px;
 }
 
 .cdbSmall {
 	float: right;
-    font-size: 11px;
-    font-weight: bold;
-    padding-top: 61px;
-    position: relative;
-}
-
-#siteMapObj{
-	width: 700px;
-}
-
-.WDbutton {
-	float: right;
+	font-size: 11px;
+	margin-top: 52px;
 	position: relative;
-	bottom: 23px;
+	margin-left: 5px;
+	height: 15px;
 }
 
-.allButton{
- 	right: 6px;
-}
-
-.refineButton, .generateButton, .clearButton{
-	bottom: 23px;
-    right: 3px;
-}
-
-
-
-/***** cluster info runes */
-
-.memberInfo {
-	padding-top: 10px;
-}
-
-.infoTitle {
-	font-size: 14px;
-	padding-left: 30px;
-	color: #03272A;
-}
-
-.clusterInfoColumn1 {
-	border-left: 1px dashed #A6B0B5;
-	border-right: 1px dashed #A6B0B5;
-	padding: 0px;
-	margin: 0px;
-}
-
-
-.superClient {
-	position: relative;
+.cdbVersion {
 	float: right;
-	right: 15px;
-	font-weight: normal;
-	bottom: 25px;
-}
-
-.cacheMemory {
-	font-size: 105px;
-	padding: 20px 0px 0px 30px;
-	text-align: right;
-	color: #05282C;
-	display: inline-block;
-	width: 60%;
-	letter-spacing: -4px;
-}
-
-.percentageSymbol {
-	display: inline-block;
-	color: #05282C;
-}
-
-
-
-.cacheMemoryFooter {
-	padding-left: 30px;
-}
-
-
-/************** Settings Rules *********/
-.saveButton button, .resetButton button, .applyButton button {
-	background:  none;	
-	margin-right: 3px;
-}
-
-.saveButton button:disabled, 
-.saveButton button:disabled:hover, 
-.resetButton button:disabled,
-.resetButton button:disabled:hover,
-.applyButton button:disabled,
-.applyButton button:disabled:hover {
-	border: 1px solid #829299;
-	color: #829299;
-}  
-
-.settingsOption {
-	margin-left: 20px;
-	margin-right: 0px;
-	width: 445px;
-}
-
-.settingsOption.last {
-	margin-right: 20px;
-}
-
-
-.settingsLabel{
-	margin: 0px 0px 5px 0px;
-	color: #2C393E;
-	font-size: 13px;
+	font-size: 11px;
+	top: 52px;
+	position: relative;
+	color: #B3BFC4;
+	margin-left: 5px;
+	height: 15px;
 }
 
 .WDinput input{
-	width: 435px;
 	height: 25px;
 	font-size: 14px;
 	color: #05282C;
@@ -972,3 +773,203 @@ div.activateButton.inactive button:active {
 	background-position: 14px 1px;
 	border: 1px solid #0f1414;
 }
+
+.WDinput.groupName input{
+	font-size: 14px;
+	color: inherit;
+	border: transparent 1px solid;
+	padding-left: 5px;
+	font-weight: bold;
+	height: 17px;
+	min-width: 150px;
+	width:  auto;
+	margin: 4px;
+	background: none;
+}
+
+.WDinput.groupName input:hover{
+	background: url('img/writeUnfocus.png') no-repeat;
+	background-position: -267px -3px;
+}
+
+.WDinput.groupName input:focus {
+	background: url('img/writeFocus.png') no-repeat;
+	background-position: -267px -3px;
+	border: 1px solid #0f1414;
+}
+
+.WDbutton {
+	bottom: 29px;
+}
+
+
+.group {
+	margin-bottom: 5px;
+}
+
+.groupHeader {
+	height: 30px;
+}
+
+button .label{	
+	height: 23px;
+	width: 23px;
+	display: inline-block;
+	float: right;
+	margin: 2px;
+}
+
+.addQueryButton,
+.pasteQueryButton {
+	display: inline-block;
+	margin:  5px 5px 5px 0px;
+}
+
+.addQueryButton button,
+.pasteQueryButton button{
+	height: 28px;
+	width: 200px;
+	text-align: left;
+	padding: 0px;
+}
+
+.addQueryButton button .name,
+.pasteQueryButton button .name {
+	display: inline-block;
+	margin: 6px 10px;
+}
+
+.addQueryButton button .label{
+	background: url('img/new.png') no-repeat scroll -23px;
+}
+
+.addQueryButton button:hover .label{
+	background-position-x:  -46px;
+}
+
+.addQueryButton button:active .label{
+	background-position-x: -69px;
+}
+
+.pasteQueryButton button .label{
+	background: url('img/paste.png') no-repeat scroll -23px;	
+}
+
+.pasteQueryButton button:hover .label{
+	background-position-x: -46px;	
+}
+
+.pasteQueryButton button:active .label{
+	background-position-x: -69px;	
+}
+
+.addQueryButton button:disabled, 
+.addQueryButton button:disabled:hover, 
+.pasteQueryButton button:disabled,
+.pasteQueryButton button:disabled:hover {
+	background: white;
+} 
+
+.addQueryButton button:disabled .label, 
+.addQueryButton button:disabled:hover .label, 
+.pasteQueryButton button:disabled .label,
+.pasteQueryButton button:disabled:hover .label{
+	background-position-x: 0px;
+} 
+
+.queryName.toEdit input,
+.queryName.toEdit input:hover {
+	font-size: 12px;
+	background: white url('img/writeUnfocus.png') no-repeat -187px;
+	border: 1px solid #829299;
+}
+
+.queryName input{
+	font-size: 12px;
+	height: 17px;
+	width: 230px;
+	border: 1px solid transparent;
+}
+
+.queryName input:hover {
+	font-size: 12px;
+	border: 1px solid transparent;
+	background:  white url('img/writeUnfocus.png') no-repeat -187px;
+}
+
+.queryName input:focus {
+	font-size: 12px;
+	border: 1px solid #0F1414;
+	background:  white url('img/writeFocus.png') no-repeat -187px;
+}
+
+.query > div {
+	display: inline-block;
+}
+
+.query button {
+	height: 21px;
+}
+
+.extraRight {
+	margin-right: 5px;
+}
+
+.editionEnvironment {
+	border: 1px solid #848F95;
+	z-index: 1;
+	position: absolute;
+	width: 948px;
+	background: white;
+}
+
+.query .queryOkButton button {
+	background: #52A228;
+	color: white;
+	border-color: #7F9292;
+}
+
+.query .queryOkButton button:hover {
+	background: #3C771D;
+	border-color: #3C771D;
+}
+
+.query .queryOkButton button:active {
+	background: #3c771d;
+	border-color: #121914;
+}
+
+.query .queryCancelButton button {
+	background: #394A50;
+	color: white;
+	border-color: #394A50;	
+}
+
+.query .queryCancelButton button:hover {
+	background: #2d3a3f;
+	border-color: #2d3a3f;
+}
+
+.query .queryCancelButton button:active {
+	background: #2d3a3f;
+	border-color: #111616;	
+}
+
+.query .queryActiveTypeButton button:disabled,
+.query .queryActiveTypeButton button:disabled:hover,
+.query .queryActiveTypeButton button:disabled:active {
+	color: #0F1414;
+	border: 1px solid #829299;
+	background-color: white;
+}
+
+.query .queryActiveTypeButton button,
+.query .queryActiveTypeButton button:hover,
+.query .queryActiveTypeButton button:active {
+	background: none;
+	border: 1px solid transparent;
+	text-align: left;
+	padding-left: 8px;
+}
+
+

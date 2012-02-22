@@ -38,6 +38,7 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     params.put("file", "cdb.wcdf");
     params.put("absolute", "true");
     params.put("root", root);
+    params.put("debug","true");
     out.write(InterPluginComms.callPlugin("pentaho-cdf-dd", "Render", params).getBytes("utf-8"));
   }
 
