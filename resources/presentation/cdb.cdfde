@@ -95,29 +95,6 @@
     ]
    },
    {
-    "id": "394913c7-1ec7-3f50-240d-fc5d13af32d6",
-    "type": "LayoutResourceFile",
-    "typeDesc": "Resource",
-    "parent": "UnIqEiD",
-    "properties": [
-     {
-      "name": "name",
-      "value": "cdbPatch",
-      "type": "Id"
-     },
-     {
-      "name": "resourceType",
-      "value": "Javascript",
-      "type": "Label"
-     },
-     {
-      "name": "resourceFile",
-      "value": "static/client/patch.js",
-      "type": "ResourceFile"
-     }
-    ]
-   },
-   {
     "id": "f5cd65f4-6a01-2a1e-0bb5-1f933035b881",
     "type": "LayoutResourceFile",
     "typeDesc": "Resource",
@@ -862,7 +839,7 @@
      },
      {
       "name": "height",
-      "value": "",
+      "value": "700",
       "type": "Integer"
      },
      {
@@ -905,7 +882,7 @@
      },
      {
       "name": "cssClass",
-      "value": "",
+      "value": "group",
       "type": "String"
      },
      {
@@ -1755,7 +1732,7 @@
      },
      {
       "name": "cssClass",
-      "value": "",
+      "value": "queryCopyButton",
       "type": "String"
      },
      {
@@ -1828,7 +1805,7 @@
      },
      {
       "name": "cssClass",
-      "value": "",
+      "value": "queryExportButton",
       "type": "String"
      },
      {
@@ -1901,7 +1878,7 @@
      },
      {
       "name": "cssClass",
-      "value": "",
+      "value": "queryProceedButton",
       "type": "String"
      },
      {
@@ -2094,6 +2071,1002 @@
       "type": "TextAlign"
      }
     ]
+   },
+   {
+    "id": "2a25d536-eb88-7827-23ec-5bcc62062af6",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "exportEnvironment",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "600",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "exportEnvironment",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "de6174d3-7f95-ea71-71df-ca560e368934",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "2a25d536-eb88-7827-23ec-5bcc62062af6",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": "10",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "661b42bc-9743-d766-7bb0-3eafa784acad",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "de6174d3-7f95-ea71-71df-ca560e368934",
+    "properties": [
+     {
+      "name": "name",
+      "value": "exportLabel",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "exportLabel",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "right",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "5875b517-858a-0308-d0d4-570b2c43d20f",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "661b42bc-9743-d766-7bb0-3eafa784acad",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "Export as... ",
+      "type": "Html"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "cdb3e07c-5d98-6dd3-d85a-3ce36d344477",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "de6174d3-7f95-ea71-71df-ca560e368934",
+    "properties": [
+     {
+      "name": "name",
+      "value": "exportTypes",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "905af271-0d51-cc78-8847-013f891f1445",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "de6174d3-7f95-ea71-71df-ca560e368934",
+    "properties": [
+     {
+      "name": "name",
+      "value": "code",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "500",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "c93f1588-0cfb-ff59-b356-94c977f1fd47",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "de6174d3-7f95-ea71-71df-ca560e368934",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "978d4b4e-5087-e12b-4d5f-e47d4c8f2dfc",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "c93f1588-0cfb-ff59-b356-94c977f1fd47",
+    "properties": [
+     {
+      "name": "name",
+      "value": "saveToFile",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "saveToFile",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "e40f4141-d83d-c140-462f-2b9e7e4879c2",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "c93f1588-0cfb-ff59-b356-94c977f1fd47",
+    "properties": [
+     {
+      "name": "name",
+      "value": "copyToClipboard",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": "5",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "copyToClipboard",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "fe0078d9-d0ae-d953-a849-c56d42b2b282",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "removeEnvironment",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "removeEnvironment",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "39efb379-d8a2-57e9-7f9f-cfdae8bebb59",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "fe0078d9-d0ae-d953-a849-c56d42b2b282",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": "7",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "1c7e30e9-a07a-a31c-af9a-3a6436ba68ef",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "39efb379-d8a2-57e9-7f9f-cfdae8bebb59",
+    "properties": [
+     {
+      "name": "name",
+      "value": "removeLabel",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "removeLabel",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "right",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "64dbafd6-3cfd-e925-f133-9f4433bb1481",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "1c7e30e9-a07a-a31c-af9a-3a6436ba68ef",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "Remove... ",
+      "type": "Html"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "e33402c7-00d6-abdf-a298-2c223088e077",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "39efb379-d8a2-57e9-7f9f-cfdae8bebb59",
+    "properties": [
+     {
+      "name": "name",
+      "value": "removeGroupOrQueries",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "removeGroupOrQueries",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "c28563bf-3db2-92e1-69ef-49d8672abb61",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "39efb379-d8a2-57e9-7f9f-cfdae8bebb59",
+    "properties": [
+     {
+      "name": "name",
+      "value": "queriesToRemove",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "queriesToRemove",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "e3498d20-77e6-b46e-39bd-b9a27b459c8a",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "39efb379-d8a2-57e9-7f9f-cfdae8bebb59",
+    "properties": [
+     {
+      "name": "name",
+      "value": "removeSelectionButton",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "removeSelectionButton",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "ae20a0e5-f4cb-92cf-c207-c11230d9b188",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "openEnvironment",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "openEnvironment",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "18cc617e-5071-c505-18f2-4bb8384e3688",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "ae20a0e5-f4cb-92cf-c207-c11230d9b188",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": "7",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "90552bc4-78ea-be96-66e0-ec53a5c2e17d",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "18cc617e-5071-c505-18f2-4bb8384e3688",
+    "properties": [
+     {
+      "name": "name",
+      "value": "openLabel",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "openLabel",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "left",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "1a7e8ec7-9c41-adea-8f43-823457cece73",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "90552bc4-78ea-be96-66e0-ec53a5c2e17d",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<b><u>O</u>pen </b>Data Group ",
+      "type": "Html"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "63d90ea2-898f-99d0-7a7c-e1bceab5712c",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "18cc617e-5071-c505-18f2-4bb8384e3688",
+    "properties": [
+     {
+      "name": "name",
+      "value": "availableGroups",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "availableGroups",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "cad91e03-6109-35a5-a2d0-019d1f5dc5b5",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "18cc617e-5071-c505-18f2-4bb8384e3688",
+    "properties": [
+     {
+      "name": "name",
+      "value": "openSelectionButton",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "openSelectionButton",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
    }
   ]
  },
@@ -2219,7 +3192,7 @@
      },
      {
       "name": "expression",
-      "value": "",
+      "value": "function(event){\n    var $exportEnv = $(\"#openEnvironment\");\n    var left = $(this).parent().parent().position().left + 120;\n    var top = $(this).parent().position().top -1;\n    \n\n    function clickBox(event){\n        event.stopPropagation();\n    }\n    function clickDoc (){\n        $exportEnv.animate({\n            height: 'toggle'\n        }, 400, function(){\n            $(document).unbind(\"click\",clickDoc);\n            $exportEnv.unbind(\"click\", clickBox);\n        });\n    }\n\n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(clickBox);\n    $(document).click(clickDoc);\n    \n    event.stopPropagation();\n}",
       "type": "JavaScript"
      },
      {
@@ -2272,7 +3245,7 @@
      },
      {
       "name": "label",
-      "value": "dummy",
+      "value": "New",
       "type": "String"
      },
      {
@@ -2307,7 +3280,7 @@
      },
      {
       "name": "postExecution",
-      "value": "function(){\n    $(\"#\"+this.htmlObject + \" button\").text(\"\");\n    $(\"#\"+this.htmlObject + \" button\").append($('<div class=name> <span> New Query </span> </div>'));\n    $(\"#\"+this.htmlObject + \" button\").append($('<div class=label>  </div>'));\n\n}",
+      "value": "\n",
       "type": "JavaScript"
      },
      {
@@ -2345,7 +3318,7 @@
      },
      {
       "name": "label",
-      "value": "dummy",
+      "value": "Paste",
       "type": "String"
      },
      {
@@ -2380,7 +3353,7 @@
      },
      {
       "name": "postExecution",
-      "value": "function(){\n    $(\"#\"+this.htmlObject + \" button\").text(\"\");\n    $(\"#\"+this.htmlObject + \" button\").append($('<div class=name> <span> Paste Query </span> </div>'));\n    $(\"#\"+this.htmlObject + \" button\").append($('<div class=label>  </div>'));\n\n}",
+      "value": "",
       "type": "JavaScript"
      },
      {
@@ -2511,7 +3484,7 @@
      },
      {
       "name": "expression",
-      "value": "wd.cdb.removeGroup()",
+      "value": "function(event){\n    var $exportEnv = $(\"#removeEnvironment\");\n    var left = $(this).parent().parent().position().left + 950 - 271;\n    var top = $(this).parent().position().top -1;\n    \n\n    function clickBox(event){\n        event.stopPropagation();\n    }\n    function clickDoc (){\n        $exportEnv.animate({\n            height: 'toggle'\n        }, 400, function(){\n            $(document).unbind(\"click\",clickDoc);\n            $exportEnv.unbind(\"click\", clickBox);\n        });\n    }\n\n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(clickBox);\n    $(document).click(clickDoc);\n    \n    event.stopPropagation();\n}",
       "type": "JavaScript"
      },
      {
@@ -2730,7 +3703,7 @@
      },
      {
       "name": "expression",
-      "value": "",
+      "value": "function(event){\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(this).parent().parent().position().left + 950 - 392;\n    var top = $(this).parent().position().top -1;\n    \n\n    function clickBox(event){\n        event.stopPropagation();\n    }\n    function clickDoc (){\n        $exportEnv.animate({\n            height: 'toggle'\n        }, 400, function(){\n            $(document).unbind(\"click\",clickDoc);\n            $exportEnv.unbind(\"click\", clickBox);\n        });\n    }\n\n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(clickBox);\n    $(document).click(clickDoc);\n    \n    event.stopPropagation();\n}",
       "type": "JavaScript"
      },
      {
@@ -2964,7 +3937,445 @@
      },
      {
       "name": "postExecution",
+      "value": "function(){\n    var element = $(\"#\"+this.htmlObject).parent();\n    $(\"#\"+this.htmlObject+\" button\").mouseenter(\n            function(){\n                if(element.attr('state') == 'closed'){\n                    element.css('background-color','#CAD3D6').css('border-color','#CAD3D6');\n                    $(this).html('<span class=\"queryType\">'+$(this).text()+'</span>'+'<span class=\"editLabel\"> Edit </span>');            \n                }\n            }\n        ).mouseleave(\n            function(){\n                if(element.attr('state') == 'closed'){\n                    element.css('background-color','#FFFFFF').css('border-color','#848F95');\n                    $(this).html($(this).find('.queryType').text());\n                }\n            }\n        ).click(\n             function(){\n                element.css('background-color','#FFFFFF').css('border-color','#848F95');     \n            }   \n        );\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
       "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "4261c722-b779-a7af-4890-7555ee497e50",
+    "type": "ComponentsbuttonComponent",
+    "typeDesc": "Button Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "saveToFileButton",
+      "type": "Id"
+     },
+     {
+      "name": "label",
+      "value": "Save to file...",
+      "type": "String"
+     },
+     {
+      "name": "htmlObject",
+      "value": "saveToFile",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "tableStyle",
+      "value": "classic",
+      "type": "TableStyle"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "expression",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "d9e19154-f5e4-5301-1e58-4c0a4c674762",
+    "type": "ComponentsbuttonComponent",
+    "typeDesc": "Button Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "copyToClipboardButton",
+      "type": "Id"
+     },
+     {
+      "name": "label",
+      "value": "Copy to clipboard",
+      "type": "String"
+     },
+     {
+      "name": "htmlObject",
+      "value": "copyToClipboard",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "tableStyle",
+      "value": "classic",
+      "type": "TableStyle"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "expression",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "25f0b05c-9a0f-f27b-fd7d-3af954cef0d0",
+    "type": "ComponentsbuttonComponent",
+    "typeDesc": "Button Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "removeEntireGroupButton",
+      "type": "Id"
+     },
+     {
+      "name": "label",
+      "value": "Remove Entire Group",
+      "type": "String"
+     },
+     {
+      "name": "htmlObject",
+      "value": "removeEntireGroup",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "tableStyle",
+      "value": "classic",
+      "type": "TableStyle"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "expression",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function(){\n    $(\"#\"+this.htmlObject+\" button\").html('<b>Remove </b>Entire Group');\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "57a234ff-c25f-ad2c-2ea4-34be2c3fbcd2",
+    "type": "ComponentsbuttonComponent",
+    "typeDesc": "Button Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "selectAndRemoveQueriesButton",
+      "type": "Id"
+     },
+     {
+      "name": "label",
+      "value": "Select and Remove Queries",
+      "type": "String"
+     },
+     {
+      "name": "htmlObject",
+      "value": "selectAndRemoveQueries",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "tableStyle",
+      "value": "classic",
+      "type": "TableStyle"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "expression",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function(){\n    $(\"#\"+this.htmlObject+\" button\").html('<b>Select and Remove </b>Queries');\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "266971ec-6921-dc46-c0ee-e7285fab8fbb",
+    "type": "ComponentsbuttonComponent",
+    "typeDesc": "Button Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "removeSelectionButton",
+      "type": "Id"
+     },
+     {
+      "name": "label",
+      "value": "Remove selected items",
+      "type": "String"
+     },
+     {
+      "name": "htmlObject",
+      "value": "removeSelectionButton",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "tableStyle",
+      "value": "classic",
+      "type": "TableStyle"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "expression",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function(){\n    $(\"#\"+this.htmlObject+\" button\").html('<b>Remove </b> selected items');\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "45fc4966-b7a3-abc7-e8c2-39e1ae2d9f1f",
+    "type": "ComponentsbuttonComponent",
+    "typeDesc": "Button Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "openSelectionButton",
+      "type": "Id"
+     },
+     {
+      "name": "label",
+      "value": "Open selected items",
+      "type": "String"
+     },
+     {
+      "name": "htmlObject",
+      "value": "openSelectionButton",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "tableStyle",
+      "value": "classic",
+      "type": "TableStyle"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "expression",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function(){\n    $(\"#\"+this.htmlObject+\" button\").html('<b>Open </b> selected items');\n}",
       "type": "JavaScript"
      },
      {
@@ -3071,6 +4482,96 @@
      {
       "name": "propertyValue",
       "value": "Insert Query Name...",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "dbfc8aa7-9dca-f94a-c66f-01a9e13b9b98",
+    "type": "ComponentsJavascriptParameter",
+    "typeDesc": "Custom Parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "Dashboards.storage.groupsQueries",
+      "type": "Id"
+     },
+     {
+      "name": "javaScript",
+      "value": "{}",
+      "type": "JavaScript"
+     }
+    ]
+   },
+   {
+    "id": "37ee2bbb-ddd8-7895-d1f6-77640b76392f",
+    "type": "ComponentsParameter",
+    "typeDesc": "Parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "exportTypeParam",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "c6d2e7d9-bb5f-89e3-47aa-28338c52744a",
+    "type": "ComponentsParameter",
+    "typeDesc": "Parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "removeGroupOrQueriesParam",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "4fac4e1c-4ad8-d241-fad5-e5e2d1a94162",
+    "type": "ComponentsParameter",
+    "typeDesc": "Parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "queriesToRemoveParam",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "3935014c-c573-fc1e-9dfa-33bc5b858282",
+    "type": "ComponentsParameter",
+    "typeDesc": "Parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "groupsToOpenParam",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "",
       "type": "String"
      }
     ]
@@ -3309,6 +4810,393 @@
     ]
    },
    {
+    "id": "ae2e3f56-b0ed-684e-e35c-66589ffa7e6e",
+    "type": "ComponentsSelect",
+    "typeDesc": "Select Component",
+    "parent": "SELECTORS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "exportType",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "exportTypeParam",
+      "type": "Parameter"
+     },
+     {
+      "name": "htmlObject",
+      "value": "exportTypes",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "xActionArrayParameter",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "dataSource",
+      "type": "Datasource",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "valuesArray",
+      "value": "[[\"R\",\"R\"],[\"Python\",\"Python\"],[\"Ubber\",\"Ubber\"],[\"Quasimodo\",\"Quasimodo\"]]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "valueAsId",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "externalPlugin",
+      "value": "chosen",
+      "type": "String"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function(){\n    $(\"#\"+this.htmlObject + ' .chzn-container').css('width','380px !important').css('margin','5px');\n    $(\"#\"+this.htmlObject + ' .chzn-drop').css('width','378px !important');\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "3deefe88-4544-a4d4-44e2-800ee8aab221",
+    "type": "ComponentsmultiButton",
+    "typeDesc": "Multiple button Component",
+    "parent": "SELECTORS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "removeGroupOrQueries",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "removeGroupOrQueriesParam",
+      "type": "Parameter"
+     },
+     {
+      "name": "htmlObject",
+      "value": "removeGroupOrQueries",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "xActionArrayParameter",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "dataSource",
+      "type": "Datasource",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "valuesArray",
+      "value": "[[\"Remove Entire Group\",\"Remove Entire Group\"],[\"Select and Remove Queries\",\"Select and Remove Queries\"]]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "valueAsId",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "separator",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "isMultiple",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "function(){\n    this.previousParam = \"Remove Entire Group\";\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function(){\n    $.each($(\"#\"+this.htmlObject + \" button\"),function(){\n        var element = $(this);\n        if(element.html() == \"Remove Entire Group\"){\n            element.html('<b>Remove </b> Entire Group');\n        } else if(element.html() == \"Select and Remove Queries\"){\n            element.html('<b>Select and Remove </b> Queries');            \n        }\n    });\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "function(){\n    if(Dashboards.getParameterValue(this.parameter) != this.previousParam){\n        if(Dashboards.getParameterValue(this.parameter) == \"Remove Entire Group\"){\n            $(\"#queriesToRemove\").animate({\n                height: 'toggle'\n            },500,function(){});\n        } else if(Dashboards.getParameterValue(this.parameter) == \"Select and Remove Queries\"){\n            $(\"#queriesToRemove\").animate({\n                height: 'toggle'\n            },500,function(){});\n        }\n        this.previousParam = Dashboards.getParameterValue(this.parameter);\n    }\n    \n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "e205a3a2-faf6-fa8b-a86b-d855c4a4927c",
+    "type": "ComponentsmultiButton",
+    "typeDesc": "Multiple button Component",
+    "parent": "SELECTORS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "queriesToRemove",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "queriesToRemoveParam",
+      "type": "Parameter"
+     },
+     {
+      "name": "htmlObject",
+      "value": "queriesToRemove",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "xActionArrayParameter",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "dataSource",
+      "type": "Datasource",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "valuesArray",
+      "value": "[[\"Test1\",\"Test1\"],[\"Test2\",\"Test2\"],[\"Test3\",\"Test3\"],[\"Test4\",\"Test4\"]]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "valueAsId",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "separator",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "isMultiple",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "function(){\n    $(\"#\"+this.htmlObject).hide();\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "3292ca63-1962-f2b7-231b-ea385b7903a1",
+    "type": "ComponentsmultiButton",
+    "typeDesc": "Multiple button Component",
+    "parent": "SELECTORS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "availableGroups",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "groupsToOpenParam",
+      "type": "Parameter"
+     },
+     {
+      "name": "htmlObject",
+      "value": "availableGroups",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "xActionArrayParameter",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "dataSource",
+      "type": "Datasource",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "valuesArray",
+      "value": "[[\"Group1\",\"Group1\"],[\"Group2\",\"Group2\"],[\"Group3\",\"Group3\"]]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "valueAsId",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "separator",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "isMultiple",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
     "id": "SCRIPT",
     "name": "Scripts",
     "type": "Label",
@@ -3335,7 +5223,7 @@
      },
      {
       "name": "javaScript",
-      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionEnvironment\").hide();\n}",
+      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionEnvironment\").hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide()\n}",
       "type": "JavaScript"
      }
     ]

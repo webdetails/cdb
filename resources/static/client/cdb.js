@@ -13,6 +13,8 @@ wd.cdb = wd.cbd || {};
 wd.cdb.groupIndex = 0;
 wd.cdb.queryIndex = 0;
 
+wd.cdb.queryClipboardded = undefined;
+
 
 wd.cdb.cloneGroupNameInput = function(){
 	var groupName = 'group'+wd.cdb.groupIndex;
@@ -29,6 +31,13 @@ wd.cdb.cloneGroupNameInput = function(){
 	var clone = render_groupNameInput.clone(paramMap,{},objectPlaceHolderMap);
 	clone.htmlObject = groupName+'Name';
 	clone.name = 'render_'+groupName+'NameInput';
+	clone.postChange = function() {
+		var storage = Dashboards.storage.groupsQueries;
+		storage[groupName].name = Dashboards.getParameterValue(groupName+'NameParam');
+		
+		Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
+		Dashboards.saveStorage();
+	};
 	Dashboards.addComponents([clone]);
 	window[clone.name] = clone;
 	
@@ -59,6 +68,7 @@ wd.cdb.cloneRemoveGroupButton = function(){
 	var clone = render_removeGroupButton.clone({},{},objectPlaceHolderMap);
 	clone.htmlObject = groupName+'Remove';
 	clone.name = 'render_'+groupName+'Remove';
+
 	Dashboards.addComponents([clone]);
 	window[clone.name] = clone;
 	
@@ -75,7 +85,7 @@ wd.cdb.cloneAddQueryButton = function(){
 	clone.htmlObject = groupName+'AddQuery';
 	clone.name = 'render_'+groupName+'AddQuery';
 	clone.expression = function(){ 
-		wd.cdb.addQuery(groupName+'Queries');
+		wd.cdb.addQuery(groupName,false);
 	};
 	Dashboards.addComponents([clone]);
 	window[clone.name] = clone;
@@ -93,7 +103,7 @@ wd.cdb.clonePasteQueryButton = function(){
 	clone.htmlObject = groupName+'PasteQuery';
 	clone.name = 'render_'+groupName+'PasteQuery';
 	clone.expression = function(){
-		wd.cdb.pasteQuery(groupName+'Queries');
+		wd.cdb.pasteQuery(groupName);
 	};
 	Dashboards.addComponents([clone]);
 	window[clone.name] = clone;
@@ -122,13 +132,16 @@ wd.cdb.createGroup = function(){
 	
 	objectPlaceholder.append(group);
 	
+	wd.cdb.createGroupElement(groupName,'Untitled Group'+wd.cdb.groupIndex);
+	
 	Dashboards.update(wd.cdb.cloneGroupNameInput());
 	Dashboards.update(wd.cdb.cloneSaveGroupButton());	
 	Dashboards.update(wd.cdb.cloneRemoveGroupButton());
 	Dashboards.update(wd.cdb.cloneAddQueryButton());
 	Dashboards.update(wd.cdb.clonePasteQueryButton());
 	
-	$('#'+groupName+'PasteQuery button').attr('disabled','disabled');
+	if(wd.cdb.queryClipboardded == undefined)
+		$('#'+groupName+'PasteQuery button').hide();
 	
 	group.animate({
 	    height: 'toggle'
@@ -142,14 +155,16 @@ wd.cdb.saveGroup = function(){
 	console.log("Save Group");
 };
 
-wd.cdb.removeGroup = function(){
-	console.log("Remove Group");
+wd.cdb.removeGroup = function(groupName){
+	var storage = Dashboards.storage.groupsQueries;
+	delete storage[groupName];
+
+	Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
+	Dashboards.saveStorage();
 };	
 
 
-wd.cdb.cloneQueryNameInput = function(){
-	var queryName = 'query'+wd.cdb.groupIndex+''+(wd.cdb.queryIndex);
-	
+wd.cdb.cloneQueryNameInput = function(groupName, queryName, initialValue){
 	var objectPlaceHolderMap = {
 		'dummyQueryName': (queryName+'Name') 
 	};
@@ -158,20 +173,25 @@ wd.cdb.cloneQueryNameInput = function(){
 		'queryNameParam' : (queryName+'NameParam')
 	};
 	
-	Dashboards.setParameter(queryName+'NameParam','Insert Query Name...');
+	Dashboards.setParameter(queryName+'NameParam',initialValue);
 	
 	var clone = render_queryNameInput.clone(paramMap,{},objectPlaceHolderMap);
 	clone.htmlObject = queryName+'Name';
 	clone.name = 'render_'+queryName+'NameInput';
+	clone.postChange = function(){
+		var storage = Dashboards.storage.groupsQueries;
+		storage[groupName].queries[queryName].name = Dashboards.getParameterValue(queryName+'NameParam');
+		
+		Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
+		Dashboards.saveStorage();
+	};
 	Dashboards.addComponents([clone]);
 	window[clone.name] = clone;
 	
 	return clone;
 };
 
-wd.cdb.cloneQueryTypeSelector = function(){
-	var queryName = 'query'+wd.cdb.groupIndex+''+(wd.cdb.queryIndex);
-	
+wd.cdb.cloneQueryTypeSelector = function(groupName, queryName, initialValue){
 	var objectPlaceHolderMap = {
 		'dummyQueryType': (queryName+'Type') 
 	};
@@ -180,11 +200,18 @@ wd.cdb.cloneQueryTypeSelector = function(){
 		'queryTypeParam' : (queryName+'TypeParam')
 	};
 	
-	Dashboards.setParameter(queryName+'TypeParam','Saiku');
+	Dashboards.setParameter(queryName+'TypeParam',initialValue);
 	
 	var clone = render_queryTypeSelector.clone(paramMap,{},objectPlaceHolderMap);
 	clone.htmlObject = queryName+'Type';
 	clone.name = 'render_'+queryName+'TypeSelector';
+	clone.postChange = function(){
+		var storage = Dashboards.storage.groupsQueries;
+		storage[groupName].queries[queryName].type = Dashboards.getParameterValue(queryName+'TypeParam');
+		
+		Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
+		Dashboards.saveStorage();
+	};
 	Dashboards.addComponents([clone]);
 	window[clone.name] = clone;
 	
@@ -192,9 +219,7 @@ wd.cdb.cloneQueryTypeSelector = function(){
 };
 
 
-wd.cdb.cloneCopyButton = function(){
-	var queryName = 'query'+wd.cdb.groupIndex+''+(wd.cdb.queryIndex);
-
+wd.cdb.cloneCopyButton = function(groupName, queryName){
 	var objectPlaceHolderMap = {
 		'dummyCopy': (queryName+'CopyButton') 
 	};
@@ -202,15 +227,24 @@ wd.cdb.cloneCopyButton = function(){
 	var clone = render_copyQueryButton.clone({},{},objectPlaceHolderMap);
 	clone.htmlObject = queryName+'CopyButton';
 	clone.name = 'render_'+queryName+'CopyButton';
+	clone.expression = function(){
+		var storage = Dashboards.storage.groupsQueries;
+		wd.cdb.queryClipboardded = storage[groupName].queries[queryName];
+		$.each($.find('.pasteQueryButton button'),
+			function(){
+				$(this).show();
+			});
+
+		$.each($.find('.queryCopyButton button'),function(){$(this).css('background-color','transparent');});
+		$(this).css('background-color','#CAD3D6');
+	};
 	Dashboards.addComponents([clone]);
 	window[clone.name] = clone;
 	
 	return clone;
 };
 
-wd.cdb.cloneExportButton = function(){
-	var queryName = 'query'+wd.cdb.groupIndex+''+(wd.cdb.queryIndex);
-
+wd.cdb.cloneExportButton = function(groupName, queryName){
 	var objectPlaceHolderMap = {
 		'dummyExport': (queryName+'ExportButton') 
 	};
@@ -224,9 +258,7 @@ wd.cdb.cloneExportButton = function(){
 	return clone;
 };
 
-wd.cdb.cloneOkButton = function(){
-	var queryName = 'query'+wd.cdb.groupIndex+''+(wd.cdb.queryIndex);
-
+wd.cdb.cloneOkButton = function(groupName, queryName){
 	var objectPlaceHolderMap = {
 		'dummyOkButton': (queryName+'OkButton') 
 	};
@@ -260,9 +292,7 @@ wd.cdb.cloneOkButton = function(){
 	return clone;
 };
 
-wd.cdb.cloneCancelButton = function(){
-	var queryName = 'query'+wd.cdb.groupIndex+''+(wd.cdb.queryIndex);
-
+wd.cdb.cloneCancelButton = function(groupName, queryName){
 	var objectPlaceHolderMap = {
 		'dummyCancelButton': (queryName+'CancelButton') 
 	};
@@ -321,9 +351,7 @@ wd.cdb.cloneCancelButton = function(){
 };
 
 
-wd.cdb.cloneProceedButton = function(){
-	var queryName = 'query'+wd.cdb.groupIndex+''+(wd.cdb.queryIndex);
-
+wd.cdb.cloneProceedButton = function(groupName, queryName){
 	var objectPlaceHolderMap = {
 		'dummyProceedButton': (queryName+'ProceedButton') 
 	};
@@ -358,9 +386,7 @@ wd.cdb.cloneProceedButton = function(){
 };
 
 
-wd.cdb.cloneActiveTypeButton = function(){
-	var queryName = 'query'+wd.cdb.groupIndex+''+(wd.cdb.queryIndex);
-
+wd.cdb.cloneActiveTypeButton = function(groupName, queryName){
 	var objectPlaceHolderMap = {
 		'dummyQueryActiveTypeButton': (queryName+'ActiveTypeButton') 
 	};
@@ -401,8 +427,8 @@ wd.cdb.cloneActiveTypeButton = function(){
 
 
 
-wd.cdb.addQuery = function(holderName){
-	var holder = $("#"+holderName);
+wd.cdb.addQuery = function(groupName,isPaste,copyQuery){
+	var holder = $("#"+groupName+'Queries');
 	
 	if(holder.children().length == 0){
 		holder.height('37px');
@@ -413,7 +439,7 @@ wd.cdb.addQuery = function(holderName){
 	var dummyQuery = $("#dummyQuery");
 	var query = dummyQuery.clone();
 	query.css('maxWidth','950px');
-	var queryName = 'query'+wd.cdb.groupIndex+''+(++wd.cdb.queryIndex);
+	var queryName = 'query'+wd.cdb.getIndexFromGroupName(groupName)+''+(++wd.cdb.queryIndex);
 	query.attr('id',queryName);
 	
 	query.find("#dummyQueryName").attr('id',queryName+'Name').css('margin','4px 8px 4px 4px');
@@ -425,20 +451,31 @@ wd.cdb.addQuery = function(holderName){
 	query.find("#dummyCancelButton").attr('id',queryName+'CancelButton').css('margin','4px 1px 4px 4px').hide();
 	query.find("#dummyQueryActiveTypeButton").attr('id',queryName+'ActiveTypeButton').css('margin','4px 8px').hide();
 
-	
+	wd.cdb.createQueryElement(groupName,queryName);
+	if(isPaste){
+		var storage = Dashboards.storage.groupsQueries;
+		storage[groupName].queries[queryName].body = copyQuery.body;
+		Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
+		Dashboards.saveStorage();	
+	}
 	
 	holder.append(query);
 	
 	wd.cdb.setQueryState(queryName,'new');
 	
-	Dashboards.update(wd.cdb.cloneQueryNameInput());
-	Dashboards.update(wd.cdb.cloneQueryTypeSelector());
-	Dashboards.update(wd.cdb.cloneCopyButton());
-	Dashboards.update(wd.cdb.cloneExportButton());	
-	Dashboards.update(wd.cdb.cloneProceedButton());
-	Dashboards.update(wd.cdb.cloneOkButton());
-	Dashboards.update(wd.cdb.cloneCancelButton());
-	Dashboards.update(wd.cdb.cloneActiveTypeButton());
+	if(isPaste){
+		Dashboards.update(wd.cdb.cloneQueryNameInput(groupName, queryName, copyQuery.name+' (Copy)'));
+		Dashboards.update(wd.cdb.cloneQueryTypeSelector(groupName, queryName, copyQuery.type));	
+	} else {
+		Dashboards.update(wd.cdb.cloneQueryNameInput(groupName, queryName, 'Insert Query Name...'));
+		Dashboards.update(wd.cdb.cloneQueryTypeSelector(groupName, queryName, undefined));
+	}
+	Dashboards.update(wd.cdb.cloneActiveTypeButton(groupName, queryName));
+	Dashboards.update(wd.cdb.cloneCopyButton(groupName, queryName));
+	Dashboards.update(wd.cdb.cloneExportButton(groupName, queryName));	
+	Dashboards.update(wd.cdb.cloneProceedButton(groupName, queryName));
+	Dashboards.update(wd.cdb.cloneOkButton(groupName, queryName));
+	Dashboards.update(wd.cdb.cloneCancelButton(groupName, queryName));
 	
 	$("#"+queryName+"ActiveTypeButton button").css('width','295px');
 	
@@ -448,26 +485,52 @@ wd.cdb.addQuery = function(holderName){
 	    // Animation complete.
 	  });
 	  
-	
-	console.log("Add Query");
 };
 
-wd.cdb.pasteQuery = function(queryHolder){
-	console.log("Paste Query");
+wd.cdb.pasteQuery = function(groupName,queryName){
+	wd.cdb.addQuery(groupName,true,wd.cdb.queryClipboardded);
 };
 
 
 wd.cdb.getQueryState = function(queryName){
 	return $("#"+queryName).attr('state');
-}
+};
 
 wd.cdb.setQueryState = function(queryName, state){
 	$("#"+queryName).attr('state',state);
-}
+};
 
 wd.cdb.getSelectedQueryType = function(queryName){
 	var name = "";
 	var component = Dashboards.getComponentByName('render_'+queryName+'TypeSelector');
 	
 	return Dashboards.getParameterValue(component.parameter);
+};
+
+wd.cdb.getIndexFromGroupName = function(groupName){
+	return parseInt(groupName.substr(5));
 }
+
+wd.cdb.createGroupElement = function(groupName, name){
+	var storage = Dashboards.storage.groupsQueries;
+	storage[groupName] = {
+		'name': name,
+		'queries': {}
+	}; 
+	
+	Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
+	Dashboards.saveStorage();
+};
+
+wd.cdb.createQueryElement = function(groupName, queryName){
+	var storage = Dashboards.storage.groupsQueries;
+	storage[groupName].queries[queryName] = {
+		'name': 'none',
+		'type': 'none',
+		'body': 'none'
+	};
+	
+	Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
+	Dashboards.saveStorage();
+};
+

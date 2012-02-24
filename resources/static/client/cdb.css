@@ -518,11 +518,13 @@ button:disabled {
 /* Multi Button */
 .pentaho-toggle-button {
 	display:  inline-block;
+	margin: 5px;
 }
 .pentaho-toggle-button-horizontal-first {
+	margin-left: 7px;
 }
 .pentaho-toggle-button-horizontal-last {
-	padding-left: 10px;
+	margin-right: 7px;
 }
 .pentaho-toggle-button:hover,
 .pentaho-toggle-button:hover button{
@@ -533,50 +535,26 @@ button:disabled {
 
 
 .boxshadow .pentaho-toggle-button button {
-	font-size: 19px;
 	font-weight: normal;
 	background: white;
-	color: #A6B0B5;
 	border: solid 1px #A6B0B5;
 	box-shadow: none;
-	width: 470px;
-	height: 28px;
 }
 .pentaho-toggle-button-horizontal-last button {
 }
 .pentaho-toggle-button-horizontal-first button {
 }
 .boxshadow .pentaho-toggle-button-down button {
-	color: #03272a;
-	font-weight: bold;
-	font-size: 19px;
 	border: solid 1px #829299;
 	box-shadow: none;
-	width: 470px;
-	height: 28px;
 	background: #cad3d6; /* Old browsers */
-	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NhZDNkNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNhNmIwYjUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-	background: -moz-linear-gradient(top,  #cad3d6 0%, #a6b0b5 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cad3d6), color-stop(100%,#a6b0b5)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #cad3d6 0%,#a6b0b5 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #cad3d6 0%,#a6b0b5 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #cad3d6 0%,#a6b0b5 100%); /* IE10+ */
-	background: linear-gradient(top,  #cad3d6 0%,#a6b0b5 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cad3d6', endColorstr='#a6b0b5',GradientType=0 ); /* IE6-8 */
 }
 
-.svg .boxshadow .pentaho-toggle-button-down button {
 
-}
-
-.no-svg .boxshadow .pentaho-toggle-button-down button {
-
-}
-
-.boxshadow .pentaho-toggle-button:hover,
 .boxshadow .pentaho-toggle-button:hover button{
-
+	border: 1px solid transparent;
+	background-color: #cad3d6;
+	color:  #0f1414;
 }
 
 
@@ -825,14 +803,6 @@ button .label{
 	margin:  5px 5px 5px 0px;
 }
 
-.addQueryButton button,
-.pasteQueryButton button{
-	height: 28px;
-	width: 200px;
-	text-align: left;
-	padding: 0px;
-}
-
 .addQueryButton button .name,
 .pasteQueryButton button .name {
 	display: inline-block;
@@ -880,7 +850,7 @@ button .label{
 .queryName.toEdit input,
 .queryName.toEdit input:hover {
 	font-size: 12px;
-	background: white url('img/writeUnfocus.png') no-repeat -187px;
+	background: transparent url('img/writeUnfocus.png') no-repeat -187px;
 	border: 1px solid #829299;
 }
 
@@ -888,19 +858,20 @@ button .label{
 	font-size: 12px;
 	height: 17px;
 	width: 230px;
+	background-color: transparent;
 	border: 1px solid transparent;
 }
 
 .queryName input:hover {
 	font-size: 12px;
 	border: 1px solid transparent;
-	background:  white url('img/writeUnfocus.png') no-repeat -187px;
+	background:  transparent url('img/writeUnfocus.png') no-repeat -187px;
 }
 
 .queryName input:focus {
 	font-size: 12px;
 	border: 1px solid #0F1414;
-	background:  white url('img/writeFocus.png') no-repeat -187px;
+	background:  transparent url('img/writeFocus.png') no-repeat -187px;
 }
 
 .query > div {
@@ -909,6 +880,12 @@ button .label{
 
 .query button {
 	height: 21px;
+	background-color: transparent;
+}
+
+.query button:hover,
+.query button:active {
+	background-color: #CAD3D6;
 }
 
 .extraRight {
@@ -970,6 +947,115 @@ button .label{
 	border: 1px solid transparent;
 	text-align: left;
 	padding-left: 8px;
+}
+
+.editLabel {
+	float: right;
+	color: #848F95;
+}
+
+
+/*export */
+.exportEnvironment {
+	border: 1px solid #848F95;
+	z-index: 1;
+	position: absolute;
+	background: white;
+
+}
+
+.exportLabel, .removeLabel {
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #848F95;
+}
+
+.openLabel {
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #848F95;
+	font-size: 14px;
+}
+
+.saveToFile,
+.copyToClipboard {
+	margin: 15px 5px 5px 5px;
+	width: 185px;
+}
+
+.saveToFile button,
+.copyToClipboard button {
+	width: 185px;
+}
+
+
+/*remove environment*/
+.removeEnvironment,
+.openEnvironment {
+	border: 1px solid #848F95;
+	z-index: 1;
+	position: absolute;
+	background: white;
+}
+
+.removeSelectionButton, 
+.selectAndRemoveQueries,
+.removeEntireGroup,
+.openSelectionButton {
+	margin: 5px;
+	
+}
+
+/* Multi Button */
+.removeGroupOrQueries .pentaho-toggle-button,
+.queriesToRemove .pentaho-toggle-button,
+.availableGroups .pentaho-toggle-button {
+	display:  inline-block;
+	margin: 2px 5px;
+}
+.boxshadow .removeGroupOrQueries .pentaho-toggle-button button,
+.boxshadow .availableGroups .pentaho-toggle-button button {
+	width: 260px;
+	text-align: left;
+	border: none;
+	background: none;
+}
+
+.boxshadow .queriesToRemove .pentaho-toggle-button button {
+	width: 240px;
+	margin-left: 20px;
+	text-align: left;
+	border: none;
+	background: none;
+}
+
+.boxshadow .removeGroupOrQueries .pentaho-toggle-button-down button,
+.boxshadow .queriesToRemove .pentaho-toggle-button-down button,
+.boxshadow .availableGroups .pentaho-toggle-button-down button{
+	border: none;
+	box-shadow: none;
+	background: #848F95;
+	color:  #FFFFFF;
+}
+
+.boxshadow .removeGroupOrQueries .pentaho-toggle-button:hover button, 
+.boxshadow .queriesToRemove .pentaho-toggle-button:hover button,
+.boxshadow .availableGroups .pentaho-toggle-button:hover button {
+	border: none;
+	background: #cad3d6;
+
+}
+
+
+
+
+.removeSelectionButton button,
+.openSelectionButton button,
+.availableGroups button{
+	width: 260px;
+	text-align: center;
 }
 
 
