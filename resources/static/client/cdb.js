@@ -401,8 +401,8 @@ wd.cdb.cloneActiveTypeButton = function(groupName, queryName){
 			$('#editionEnvironment').show().animate({
 			    height: '300px'
 			  }, 500, function() {
-			  	wd.cdb.setQueryState(queryName,'edition edited');
-			  	$("#"+queryName+'OkButton').show();
+			 	wd.cdb.setQueryState(queryName,'edition edited');
+			 	$("#"+queryName+'OkButton').show();
 			  	$("#"+queryName+'CancelButton').show();
 			  	$("#"+queryName+'CopyButton').show();
 			  	$("#"+queryName+'ExportButton').show();
@@ -431,9 +431,9 @@ wd.cdb.addQuery = function(groupName,isPaste,copyQuery){
 	var holder = $("#"+groupName+'Queries');
 	
 	if(holder.children().length == 0){
-		holder.height('37px');
+		holder.height('36px');
 	} else {
-		holder.height(parseInt(holder.height()+37)+'px');	
+		holder.height(parseInt(holder.height()+36)+'px');	
 	}
 	
 	var dummyQuery = $("#dummyQuery");
@@ -501,7 +501,6 @@ wd.cdb.setQueryState = function(queryName, state){
 };
 
 wd.cdb.getSelectedQueryType = function(queryName){
-	var name = "";
 	var component = Dashboards.getComponentByName('render_'+queryName+'TypeSelector');
 	
 	return Dashboards.getParameterValue(component.parameter);
@@ -509,7 +508,7 @@ wd.cdb.getSelectedQueryType = function(queryName){
 
 wd.cdb.getIndexFromGroupName = function(groupName){
 	return parseInt(groupName.substr(5));
-}
+};
 
 wd.cdb.createGroupElement = function(groupName, name){
 	var storage = Dashboards.storage.groupsQueries;
@@ -534,3 +533,53 @@ wd.cdb.createQueryElement = function(groupName, queryName){
 	Dashboards.saveStorage();
 };
 
+
+wd.cdb.clickBox = function(event){
+	event.stopPropagation();
+};	
+
+wd.cdb.clickDocRemoveEnv = function(){
+    var $removeEnv = $("#removeEnvironment");	
+	$removeEnv.animate({
+	    height: 'toggle'
+	}, 400, function(){
+	    $(document).unbind("click",wd.cdb.clickDocRemoveEnv);
+	    $removeEnv.unbind("click", wd.cdb.clickBox);
+	});
+};
+
+wd.cdb.clickDocOpenEnv = function(){
+    var $openEnv = $("#openEnvironment");	
+	$openEnv.animate({
+	    height: 'toggle'
+	}, 400, function(){
+	    $(document).unbind("click",wd.cdb.clickDocOpenEnv);
+	    $openEnv.unbind("click", wd.cdb.clickBox);
+	});
+};
+
+wd.cdb.clickDocExportEnv = function(){
+	var $exportEnv = $("#exportEnvironment");	
+	$exportEnv.animate({
+	    height: 'toggle'
+	}, 400, function(){
+	    $(document).unbind("click",wd.cdb.clickDocExportEnv);
+	    $exportEnv.unbind("click", wd.cdb.clickBox);
+	});
+};
+
+wd.cdb.openGroups = function(list){
+	for(var i = 0; i < list.length; i++){
+		Dashboards.log("Open group "+list[i]);
+	}
+};
+
+wd.cdb.removeQueries = function(list){
+	for(var i = 0; i < list.length; i++){
+		Dashboards.log("Remove query "+list[i]);
+	}
+};
+
+wd.cdb.removeGroup = function(name){
+	Dashboards.log("Remove Group " +name);
+};

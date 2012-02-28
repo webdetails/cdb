@@ -19,8 +19,14 @@ wd.cdb.Query = function (label,type,definition) {
     this.getLabel = function() {
       return _label;
     };
+    this.setLabel = function(label){
+    	_label = label;
+    };
     this.getType = function() {
       return _type;
+    };
+    this.setType = function(type){
+    	_type = type;
     };
     this.toJSON = function() {
       return JSON.stringify({name: _label, group: _group, type: _type, definition: _query});
@@ -51,7 +57,11 @@ wd.cdb.QueryGroup = function(label) {
         _queries = {};
 
     this.getLabel = function() {
-      return _label;
+      	return _label;
+    };
+    
+    this.setLabel = function(label){
+    	_label = label;
     };
 
     this.addQuery = function(dataAccess) {
@@ -62,19 +72,19 @@ wd.cdb.QueryGroup = function(label) {
         return _queries[label];
     }
     this.listQueries = function() {
-      return _queries;
+      	return _queries;
     };
     this.toJSON = function() {
-      return JSON.stringify({label: _label, queries: _queries.map(function(e){return e.getLabel();})});
+      	return JSON.stringify({label: _label, queries: _queries.map(function(e){return e.getLabel();})});
     }
 
     this.save = function() {
-      var q, query
-      for (q in _queries) if (_queries.hasOwnProperty(q)) {
-        query = _queries[q];
-        wd.ctools.persistence.saveObject(null,"Query",query);
-      }
-      $.getJSON("../../connector?method=exportCda&group=" + _label,function(){console.log("Saved to CDA")});
+		var q, query
+		for (q in _queries) if (_queries.hasOwnProperty(q)) {
+			query = _queries[q];
+			wd.ctools.persistence.saveObject(null,"Query",query);
+		}
+		$.getJSON("../../connector?method=exportCda&group=" + _label,function(){console.log("Saved to CDA")});
     }
 }
 
@@ -115,5 +125,10 @@ wd.cdb.QueryManager = (function() {
 
     myself.deleteGroup = function(label) {
     };
+    
+    myself.listGroups = function(){
+    	return _groups;
+    };
+    
     return myself;
 }());

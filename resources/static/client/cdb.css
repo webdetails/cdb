@@ -468,10 +468,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cad3d6', end
    ========================================================================== */
 .WDh1 button {
 	background:  none;	
-	width: 120px;
+	width: 125px;
 	border: none;
 	color: #b3bfc4;
 	height: 30px;
+	padding-bottom: 2px;
 } 
 
 .WDh1 button:hover {
@@ -496,6 +497,7 @@ button {
 	border: 1px solid #829299;
 	font-size: 12px;
 	background-color: #ffffff;
+	padding-bottom: 2px;
 }
 button:hover {
 	border: 1px solid transparent;
@@ -560,6 +562,7 @@ button:disabled {
 
 /**** Chosen Select *****/
 /* All Chosen elements */
+
 .chzn-container{
 	width: 295px !important;
 	font-size: 14px;
@@ -613,7 +616,7 @@ button:disabled {
 .chzn-drop  .chzn-results .no-results {
 }
 
-/* Single Select */
+
 .chzn-container-single .chzn-single{
 	background: white;
 	border: solid 1px #829299;
@@ -634,7 +637,7 @@ button:disabled {
 
 .chzn-container-single .chzn-single span{
 }
-.chzn-container-single .chzn-single div{ /* Arrow container */
+.chzn-container-single .chzn-single div{ 
 	border-radius: 0px;
 	-webkit-border-radius: 0px;
 	background: none;
@@ -648,10 +651,10 @@ button:disabled {
 
 
 .chzn-container-single .chzn-single div b,
-  .chzn-container-single .chzn-single-with-drop div b{ /* Arrow */
+  .chzn-container-single .chzn-single-with-drop div b{ 
   	background: url('img/selector.png') 70px 0;
   }
-.chzn-container-single:hover .chzn-single div b{ /* Arrow */
+.chzn-container-single:hover .chzn-single div b{ 
   background: url('img/selector.png') 47px 0;
   }
 .chzn-container-single .chzn-single.chzn-single-with-drop{
@@ -690,6 +693,12 @@ button:disabled {
 .saveButton button {
 	background: none;
 	margin-right: 5px;
+}
+
+
+.removeButton button:hover,
+.saveButton button:hover {
+	background: #848f95;
 }
 
 .proceedButton {
@@ -741,13 +750,13 @@ button:disabled {
 	font-size: 14px;
 	color: #05282C;
 	border: solid 1px #829299;
-	background: url('img/writeUnfocus.png') no-repeat;
-	background-position: 14px 1px;
+	background: url('img/writeUnfocus.png') no-repeat right center;
 	padding-left: 5px;
+	background-attachment: fixed;
 }
 
 .WDinput input:focus {
-	background: url('img/writeFocus.png') no-repeat;
+	background: url('img/writeFocus.png') no-repeat right center;
 	background-position: 14px 1px;
 	border: 1px solid #0f1414;
 }
@@ -760,19 +769,17 @@ button:disabled {
 	font-weight: bold;
 	height: 17px;
 	min-width: 150px;
-	width:  auto;
+	width:  150xp;
 	margin: 4px;
 	background: none;
 }
 
 .WDinput.groupName input:hover{
-	background: url('img/writeUnfocus.png') no-repeat;
-	background-position: -267px -3px;
+	background: url('img/writeUnfocus.png') no-repeat right center;
 }
 
 .WDinput.groupName input:focus {
-	background: url('img/writeFocus.png') no-repeat;
-	background-position: -267px -3px;
+	background: url('img/writeFocus.png') no-repeat right center;
 	border: 1px solid #0f1414;
 }
 
@@ -782,7 +789,7 @@ button:disabled {
 
 
 .group {
-	margin-bottom: 5px;
+	margin-bottom: 8px;
 }
 
 .groupHeader {
@@ -850,8 +857,10 @@ button .label{
 .queryName.toEdit input,
 .queryName.toEdit input:hover {
 	font-size: 12px;
-	background: transparent url('img/writeUnfocus.png') no-repeat -187px;
-	border: 1px solid #829299;
+	background: transparent url('img/writeUnfocus.png') no-repeat right center;
+	border-top: 1px solid #829299;
+	border-left: 1px solid #829299;
+	border-bottom: 1px solid #829299;
 }
 
 .queryName input{
@@ -865,17 +874,18 @@ button .label{
 .queryName input:hover {
 	font-size: 12px;
 	border: 1px solid transparent;
-	background:  transparent url('img/writeUnfocus.png') no-repeat -187px;
+	background:  transparent url('img/writeUnfocus.png') no-repeat right center;
 }
 
 .queryName input:focus {
 	font-size: 12px;
 	border: 1px solid #0F1414;
-	background:  transparent url('img/writeFocus.png') no-repeat -187px;
+	background:  transparent url('img/writeFocus.png') no-repeat right center;
 }
 
 .query > div {
 	display: inline-block;
+	vertical-align: top;
 }
 
 .query button {
@@ -1003,7 +1013,8 @@ button .label{
 .removeSelectionButton, 
 .selectAndRemoveQueries,
 .removeEntireGroup,
-.openSelectionButton {
+.openSelectionButton,
+.confirmButtons {
 	margin: 5px;
 	
 }
@@ -1049,7 +1060,9 @@ button .label{
 }
 
 
-
+.confirmButtons > div {
+	display: inline-block;
+}
 
 .removeSelectionButton button,
 .openSelectionButton button,
@@ -1058,4 +1071,48 @@ button .label{
 	text-align: center;
 }
 
+.openSelectionButton button {
+	color: white;
+	background: #006e2c;
+}
 
+.openSelectionButton button:hover {
+	background: #25962c;
+}
+
+.openSelectionButton button:active {
+	background: #25962c;
+}
+
+.confirmSelectionButton {
+	margin-left: 10px;
+}
+
+.confirmSelectionButton button {
+	color: white;
+	background: #ac1315;
+	width: 170px;
+}
+
+.confirmSelectionButton button:hover {
+	background: #e20916;
+}
+
+.confirmSelectionButton button:active {
+	background: #e20916;
+}
+
+.cancelSelectionButton button {
+	color: #0F1414;
+	background: #CAD3D6;
+}	
+
+.cancelSelectionButton button:hover {
+	color: white;
+	background: #848f95;
+}
+
+.cancelSelectionButton button:active {
+	color: white;
+	background: #848f95;
+}

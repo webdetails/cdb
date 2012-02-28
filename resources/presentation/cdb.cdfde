@@ -3,6 +3,29 @@
   "title": "cToolsTemplate",
   "rows": [
    {
+    "id": "134e8784-966e-d306-cf0d-2d4b880576e2",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "jqueryShortcuts",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     },
+     {
+      "name": "resourceFile",
+      "value": "static/client/jquery.shortcuts.js",
+      "type": "ResourceFile"
+     }
+    ]
+   },
+   {
     "id": "90e4de02-e5cd-eeab-85be-f22d7fa9240d",
     "type": "LayoutResourceFile",
     "typeDesc": "Resource",
@@ -2811,6 +2834,190 @@
     ]
    },
    {
+    "id": "c69b53c7-b140-f1da-557f-b99589d9c4c1",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "39efb379-d8a2-57e9-7f9f-cfdae8bebb59",
+    "properties": [
+     {
+      "name": "name",
+      "value": "confirmButtons",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "confirmButtons",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "f531c9e3-b102-7013-fb1d-ba1b02f7b6f7",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "c69b53c7-b140-f1da-557f-b99589d9c4c1",
+    "properties": [
+     {
+      "name": "name",
+      "value": "cancelSelectionButton",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": "2",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "cancelSelectionButton",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "86fced0d-31f7-ed67-fcd5-4464c4672b67",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "c69b53c7-b140-f1da-557f-b99589d9c4c1",
+    "properties": [
+     {
+      "name": "name",
+      "value": "confirmSelectionButton",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": "4",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "confirmSelectionButton",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
     "id": "ae20a0e5-f4cb-92cf-c207-c11230d9b188",
     "type": "LayoutRow",
     "typeDesc": "Row",
@@ -3192,7 +3399,7 @@
      },
      {
       "name": "expression",
-      "value": "function(event){\n    var $exportEnv = $(\"#openEnvironment\");\n    var left = $(this).parent().parent().position().left + 120;\n    var top = $(this).parent().position().top -1;\n    \n\n    function clickBox(event){\n        event.stopPropagation();\n    }\n    function clickDoc (){\n        $exportEnv.animate({\n            height: 'toggle'\n        }, 400, function(){\n            $(document).unbind(\"click\",clickDoc);\n            $exportEnv.unbind(\"click\", clickBox);\n        });\n    }\n\n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(clickBox);\n    $(document).click(clickDoc);\n    \n    event.stopPropagation();\n}",
+      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(this).parent().parent().position().left + 120;\n    var top = $(this).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    \n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    if($exportEnv.css('display') != 'none'){\n        wd.cdb.clickDocExportEnv();\n    }\n    \n    $openEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $openEnv.css('top',top+'px').css('left',left+'px');\n    \n    $openEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocOpenEnv);\n    \n    \n    event.stopPropagation();\n}",
       "type": "JavaScript"
      },
      {
@@ -3245,7 +3452,7 @@
      },
      {
       "name": "label",
-      "value": "New",
+      "value": "New Query",
       "type": "String"
      },
      {
@@ -3484,7 +3691,7 @@
      },
      {
       "name": "expression",
-      "value": "function(event){\n    var $exportEnv = $(\"#removeEnvironment\");\n    var left = $(this).parent().parent().position().left + 950 - 271;\n    var top = $(this).parent().position().top -1;\n    \n\n    function clickBox(event){\n        event.stopPropagation();\n    }\n    function clickDoc (){\n        $exportEnv.animate({\n            height: 'toggle'\n        }, 400, function(){\n            $(document).unbind(\"click\",clickDoc);\n            $exportEnv.unbind(\"click\", clickBox);\n        });\n    }\n\n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(clickBox);\n    $(document).click(clickDoc);\n    \n    event.stopPropagation();\n}",
+      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(this).parent().parent().position().left + 950 - 271;\n    var top = $(this).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    if($exportEnv.css('display') != 'none'){\n        wd.cdb.clickDocExportEnv();\n    }\n    \n    $removeEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $removeEnv.css('top',top+'px').css('left',left+'px');\n    \n    $removeEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocRemoveEnv);\n    \n\n    \n    event.stopPropagation();\n}",
       "type": "JavaScript"
      },
      {
@@ -3703,7 +3910,7 @@
      },
      {
       "name": "expression",
-      "value": "function(event){\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(this).parent().parent().position().left + 950 - 392;\n    var top = $(this).parent().position().top -1;\n    \n\n    function clickBox(event){\n        event.stopPropagation();\n    }\n    function clickDoc (){\n        $exportEnv.animate({\n            height: 'toggle'\n        }, 400, function(){\n            $(document).unbind(\"click\",clickDoc);\n            $exportEnv.unbind(\"click\", clickBox);\n        });\n    }\n\n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(clickBox);\n    $(document).click(clickDoc);\n    \n    event.stopPropagation();\n}",
+      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(this).parent().parent().position().left + 950 - 392;\n    var top = $(this).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    \n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocExportEnv);\n    \n    event.stopPropagation();\n}\n\n",
       "type": "JavaScript"
      },
      {
@@ -3937,7 +4144,7 @@
      },
      {
       "name": "postExecution",
-      "value": "function(){\n    var element = $(\"#\"+this.htmlObject).parent();\n    $(\"#\"+this.htmlObject+\" button\").mouseenter(\n            function(){\n                if(element.attr('state') == 'closed'){\n                    element.css('background-color','#CAD3D6').css('border-color','#CAD3D6');\n                    $(this).html('<span class=\"queryType\">'+$(this).text()+'</span>'+'<span class=\"editLabel\"> Edit </span>');            \n                }\n            }\n        ).mouseleave(\n            function(){\n                if(element.attr('state') == 'closed'){\n                    element.css('background-color','#FFFFFF').css('border-color','#848F95');\n                    $(this).html($(this).find('.queryType').text());\n                }\n            }\n        ).click(\n             function(){\n                element.css('background-color','#FFFFFF').css('border-color','#848F95');     \n            }   \n        );\n}",
+      "value": "function(){\n    var element = $(\"#\"+this.htmlObject).parent();\n    $(\"#\"+this.htmlObject+\" button\").mouseenter(\n            function(){\n                if(element.attr('state') == 'closed'){\n                    element.css('background-color','#CAD3D6').css('border-color','#CAD3D6');\n                    $(this).html('<span class=\"queryType\">'+$(this).text()+'</span>'+'<span class=\"editLabel\"> Edit Query </span>');            \n                }\n            }\n        ).mouseleave(\n            function(){\n                if(element.attr('state') == 'closed'){\n                    element.css('background-color','#FFFFFF').css('border-color','#848F95');\n                    $(this).html($(this).find('.queryType').text());\n                }\n            }\n        ).click(\n            function(){\n                if(element.attr('state') == 'closed'){\n                    element.css('background-color','#FFFFFF').css('border-color','#848F95'); \n                    $(this).html($(this).find('.queryType').text());\n                    $(this).attr('disabled','disabled');\n                }\n            }   \n        );\n}",
       "type": "JavaScript"
      },
      {
@@ -4255,6 +4462,79 @@
     ]
    },
    {
+    "id": "45fc4966-b7a3-abc7-e8c2-39e1ae2d9f1f",
+    "type": "ComponentsbuttonComponent",
+    "typeDesc": "Button Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "openSelectionButton",
+      "type": "Id"
+     },
+     {
+      "name": "label",
+      "value": "Open selected items",
+      "type": "String"
+     },
+     {
+      "name": "htmlObject",
+      "value": "openSelectionButton",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "tableStyle",
+      "value": "classic",
+      "type": "TableStyle"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "expression",
+      "value": "function(){\n    wd.cdb.openGroups(Dashboards.getParameterValue(render_availableGroups.parameter));\n    wd.cdb.clickDocOpenEnv();\n    Dashboards.setParameter(render_availableGroups.parameter,'');\n    render_availableGroups.update();\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "function(){\n    $(\"#\"+this.htmlObject+\" button\").html('<b>Open </b> selected items');\n}",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
     "id": "266971ec-6921-dc46-c0ee-e7285fab8fbb",
     "type": "ComponentsbuttonComponent",
     "typeDesc": "Button Component",
@@ -4287,7 +4567,7 @@
      },
      {
       "name": "expression",
-      "value": "",
+      "value": "function(){\n    $(this).parent().animate({height: 'toggle'},400,function(){});\n    $(\"#confirmButtons\").animate({height: 'toggle'},400,function(){});\n}",
       "type": "JavaScript"
      },
      {
@@ -4328,24 +4608,24 @@
     ]
    },
    {
-    "id": "45fc4966-b7a3-abc7-e8c2-39e1ae2d9f1f",
+    "id": "96fb06fb-12fc-9a86-bf28-b455fbe8c046",
     "type": "ComponentsbuttonComponent",
     "typeDesc": "Button Component",
     "parent": "OTHERCOMPONENTS",
     "properties": [
      {
       "name": "name",
-      "value": "openSelectionButton",
+      "value": "cancelSelectionButton",
       "type": "Id"
      },
      {
       "name": "label",
-      "value": "Open selected items",
+      "value": "Cancel",
       "type": "String"
      },
      {
       "name": "htmlObject",
-      "value": "openSelectionButton",
+      "value": "cancelSelectionButton",
       "type": "HtmlObject"
      },
      {
@@ -4360,7 +4640,7 @@
      },
      {
       "name": "expression",
-      "value": "",
+      "value": "function(){\n    Dashboards.setParameter(render_removeGroupOrQueries.parameter,'');\n    render_removeGroupOrQueries.update();\n    \n    Dashboards.setParameter(render_queriesToRemove.parameter,'');\n    render_queriesToRemove.update();\n    \n    $(this).parent().parent().animate({height: 'toggle'},400,function(){});\n    $(\"#removeSelectionButton\").animate({height: 'toggle'},400,function(){});\n}\n",
       "type": "JavaScript"
      },
      {
@@ -4375,7 +4655,80 @@
      },
      {
       "name": "postExecution",
-      "value": "function(){\n    $(\"#\"+this.htmlObject+\" button\").html('<b>Open </b> selected items');\n}",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "f3c6176e-29be-fac4-abe8-b214cd888d47",
+    "type": "ComponentsbuttonComponent",
+    "typeDesc": "Button Component",
+    "parent": "OTHERCOMPONENTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "confirmSelectionButton",
+      "type": "Id"
+     },
+     {
+      "name": "label",
+      "value": "Confirm",
+      "type": "String"
+     },
+     {
+      "name": "htmlObject",
+      "value": "confirmSelectionButton",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "tableStyle",
+      "value": "classic",
+      "type": "TableStyle"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "expression",
+      "value": "function(){\n    $(this).parent().parent().animate({height: 'toggle'},400,function(){});\n    $(\"#removeSelectionButton\").animate({height: 'toggle'},400,function(){});\n    \n    wd.cdb.clickDocRemoveEnv();\n    if(removeGroupOrQueriesParam == \"Remove Entire Group\"){\n        wd.cdb.removeGroup(\"dummy\"); //replace by correct group name\n    } else {\n        wd.cdb.removeQueries(queriesToRemoveParam);\n    }\n    \n    Dashboards.setParameter(render_removeGroupOrQueries.parameter,'');\n    Dashboards.update(render_removeGroupOrQueries);\n    \n    Dashboards.setParameter(render_queriesToRemove.parameter,'');\n    Dashboards.update(render_queriesToRemove);\n\n    \n    \n    \n    \n}\n",
+      "type": "JavaScript"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
       "type": "JavaScript"
      },
      {
@@ -4483,24 +4836,6 @@
       "name": "propertyValue",
       "value": "Insert Query Name...",
       "type": "String"
-     }
-    ]
-   },
-   {
-    "id": "dbfc8aa7-9dca-f94a-c66f-01a9e13b9b98",
-    "type": "ComponentsJavascriptParameter",
-    "typeDesc": "Custom Parameter",
-    "parent": "GENERIC",
-    "properties": [
-     {
-      "name": "name",
-      "value": "Dashboards.storage.groupsQueries",
-      "type": "Id"
-     },
-     {
-      "name": "javaScript",
-      "value": "{}",
-      "type": "JavaScript"
      }
     ]
    },
@@ -4731,7 +5066,7 @@
      },
      {
       "name": "postExecution",
-      "value": "function(){\n    $(\"#\"+this.htmlObject+\" input\").attr('maxLength','20').focus(function(){\n        if(!this.initiallyCleared){\n\t\t\tthis.initiallyCleared = true;\n\t\t\tthis.value = \"\";\n\t\t\t$(this).parent().removeClass('toEdit');\n\t\t}\n    });\n}",
+      "value": "function(){\n    $(\"#\"+this.htmlObject+\" input\").attr('maxLength','20').focus(function(){\n        if(!this.initiallyCleared){\n\t\t\tthis.initiallyCleared = true;\n\t\t\tthis.value = \"\";\n\t\t\t$(this).parent().removeClass('toEdit');\n\t\t}\n    }).keyup(function(event){\n      if (event.keyCode == 13) {\n        $(this).blur();\n      }\n    });\n}",
       "type": "JavaScript"
      },
      {
@@ -4794,7 +5129,7 @@
      },
      {
       "name": "postExecution",
-      "value": "function(){\n    $(\"#\"+this.htmlObject).find('input').css('background-position','-267px -3px').autoResize({\n    \textraSpace: 30,\n\t\tmaxWidth: 450,\n\t\tminWidth: 150,\n\t\tanimate: {\n\t\t\tduration: 50,\n\t\t\tcomplete: function(){}\n\t\t},\n\t\tonBeforeResize: function(){\n\t\t\tthis.previousSize = $(this).width();\n\t\t},\n\t\tonAfterResize: function(){\n\t\t\tvar currentSize = $(this).width();\n\t\t\tvar currentBackgroundPosition = parseInt($(this).css('background-position-x'));\n\t\t\t$(this).css('background-position-x', currentBackgroundPosition+(currentSize-this.previousSize)+'px');\n\t\t}\n\t}).attr('maxLength','40');\n}",
+      "value": "function(){\n    $(\"#\"+this.htmlObject).find('input').autoResize({\n    \textraSpace: 30,\n\t\tmaxWidth: 450,\n\t\tminWidth: 150,\n        width: 150,\n\t\tanimate: {\n\t\t\tduration: 50,\n\t\t\tcomplete: function(){}\n\t\t}\n\t}).attr('maxLength','40')\n    .keyup(function(event){\n      if (event.keyCode == 13) {\n        $(this).blur();\n      }\n    });\n}",
       "type": "JavaScript"
      },
      {
@@ -5223,7 +5558,25 @@
      },
      {
       "name": "javaScript",
-      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionEnvironment\").hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide()\n}",
+      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionEnvironment\").hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide();\n    $(\"#confirmButtons\").hide();\n}",
+      "type": "JavaScript"
+     }
+    ]
+   },
+   {
+    "id": "f6edd696-3828-c4db-4a6a-35d7226679b0",
+    "type": "ComponentsFunction",
+    "typeDesc": "Function",
+    "parent": "SCRIPT",
+    "properties": [
+     {
+      "name": "name",
+      "value": "Dashboards.postInit",
+      "type": "Id"
+     },
+     {
+      "name": "javaScript",
+      "value": "Dashboards.postInit = function(){\n    $.Shortcuts.add({\n        type: 'down',\n        mask: 'Shift+N',\n        enableInInput: false,\n        handler: function() {\n            wd.cdb.createGroup();\n        }\n    });\n    \n    $.Shortcuts.add({\n        type: 'down',\n        mask: 'Shift+O',\n        enableInInput: false,\n        handler: function() {\n            var $openEnv = $(\"#openEnvironment\");\n            var object = $(\"#\"+render_openDataGroupButton.htmlObject+\" button\");\n            var left = object.parent().parent().position().left + 120;\n            var top = object.parent().position().top -1;\n            \n        \n            function clickBox(event){\n                event.stopPropagation();\n            }\n            function clickDoc (){\n                $.Shortcuts.start();\n                $openEnv.animate({\n                    height: 'toggle'\n                }, 400, function(){\n                    $(document).unbind(\"click\",clickDoc);\n                    $openEnv.unbind(\"click\", clickBox);\n                });\n            }\n            $.Shortcuts.stop();\n            $openEnv.animate({\n                height: 'toggle'\n            }, 400, function(){\n                \n            });\n            $openEnv.css('top',top+'px').css('left',left+'px');\n            \n            $openEnv.click(clickBox);\n            $(document).click(clickDoc);\n            \n            event.stopPropagation();\n \n        }\n    });\n    \n\n    $.Shortcuts.start();\n}",
       "type": "JavaScript"
      }
     ]
