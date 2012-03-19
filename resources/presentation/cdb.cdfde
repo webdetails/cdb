@@ -3399,7 +3399,7 @@
      },
      {
       "name": "expression",
-      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(this).parent().parent().position().left + 120;\n    var top = $(this).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    \n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    if($exportEnv.css('display') != 'none'){\n        wd.cdb.clickDocExportEnv();\n    }\n    \n    $openEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $openEnv.css('top',top+'px').css('left',left+'px');\n    \n    $openEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocOpenEnv);\n    \n    \n    event.stopPropagation();\n}",
+      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(\"#\" + this.htmlObject).parent().parent().position().left + 120;\n    var top = $(\"#\" + this.htmlObject).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    \n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    if($exportEnv.css('display') != 'none'){\n        wd.cdb.clickDocExportEnv();\n    }\n    \n    $openEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $openEnv.css('top',top+'px').css('left',left+'px');\n    \n    $openEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocOpenEnv);\n    \n    \n    event.stopPropagation();\n}",
       "type": "JavaScript"
      },
      {
@@ -3691,7 +3691,7 @@
      },
      {
       "name": "expression",
-      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(this).parent().parent().position().left + 950 - 271;\n    var top = $(this).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    if($exportEnv.css('display') != 'none'){\n        wd.cdb.clickDocExportEnv();\n    }\n    \n    $removeEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $removeEnv.css('top',top+'px').css('left',left+'px');\n    \n    $removeEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocRemoveEnv);\n    \n\n    \n    event.stopPropagation();\n}",
+      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(\"#\" + this.htmlObject).parent().parent().position().left + 950 - 271;\n    var top = $(\"#\" + this.htmlObject).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    if($exportEnv.css('display') != 'none'){\n        wd.cdb.clickDocExportEnv();\n    }\n    \n    $removeEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $removeEnv.css('top',top+'px').css('left',left+'px');\n    \n    $removeEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocRemoveEnv);\n    \n\n    \n    event.stopPropagation();\n}",
       "type": "JavaScript"
      },
      {
@@ -3910,7 +3910,7 @@
      },
      {
       "name": "expression",
-      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(this).parent().parent().position().left + 950 - 392;\n    var top = $(this).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    \n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocExportEnv);\n    \n    event.stopPropagation();\n}\n\n",
+      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(\"#\" + this.htmlObject).parent().parent().position().left + 950 - 392;\n    var top = $(\"#\" + this.htmlObject).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    \n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocExportEnv);\n    \n    event.stopPropagation();\n}\n\n",
       "type": "JavaScript"
      },
      {
@@ -4782,6 +4782,11 @@
       "name": "propertyValue",
       "value": "contentHolder",
       "type": "String"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
      }
     ]
    },
@@ -4800,6 +4805,11 @@
       "name": "propertyValue",
       "value": "",
       "type": "String"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
      }
     ]
    },
@@ -4818,6 +4828,11 @@
       "name": "propertyValue",
       "value": "Untitled Group",
       "type": "String"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
      }
     ]
    },
@@ -4836,6 +4851,11 @@
       "name": "propertyValue",
       "value": "Insert Query Name...",
       "type": "String"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
      }
     ]
    },
@@ -4854,6 +4874,11 @@
       "name": "propertyValue",
       "value": "",
       "type": "String"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
      }
     ]
    },
@@ -4872,6 +4897,11 @@
       "name": "propertyValue",
       "value": "",
       "type": "String"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
      }
     ]
    },
@@ -4890,6 +4920,11 @@
       "name": "propertyValue",
       "value": "",
       "type": "String"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
      }
     ]
    },
@@ -4908,6 +4943,11 @@
       "name": "propertyValue",
       "value": "",
       "type": "String"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
      }
     ]
    },

@@ -15,6 +15,8 @@ wd.cdb.queryIndex = 0;
 
 wd.cdb.queryClipboardded = undefined;
 
+Dashboards.storage.groupsQueries = {}; 
+
 
 wd.cdb.cloneGroupNameInput = function(){
 	var groupName = 'group'+wd.cdb.groupIndex;
