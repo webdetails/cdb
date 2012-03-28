@@ -127,24 +127,27 @@ public class PersistenceEngine {
 
     public JSONObject query(String query) throws JSONException {
         JSONObject json = new JSONObject();
+        ODatabaseDocumentTx db = null;
         try {
             json.put("result", Boolean.TRUE);
 
-            ODatabaseDocumentTx db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
+            db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
 
 
             List<ODocument> result = db.query(new OSQLSynchQuery<ODocument>(query));
             JSONArray arr = new JSONArray();
             for (ODocument resDoc : result) {
                 arr.put(new JSONObject(resDoc.toJSON()));
-            }
-
+            }            
             json.put("object", arr);
         } catch (ODatabaseException ode) {
             json.put("result", Boolean.FALSE);
             json.put("errorMessage", "DatabaseException: Review query");
             logger.error(getExceptionDescription(ode));
 
+        } finally {
+          if (db != null)
+            db.close();
         }
 
         return json;
@@ -163,11 +166,11 @@ public class PersistenceEngine {
     public JSONObject get(String id) throws JSONException {
 
         JSONObject json = new JSONObject();
-
+        ODatabaseDocumentTx db = null;
         try {
             json.put("result", Boolean.TRUE);
 
-            ODatabaseDocumentTx db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
+            db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
 
 
             List<ODocument> result = db.query(new OSQLSynchQuery<ODocument>("select FROM " + id));
@@ -184,7 +187,7 @@ public class PersistenceEngine {
             JSONObject resultDoc = new JSONObject(doc.toJSON());
 
             json.put("object", resultDoc);
-
+            
 
         } catch (ODatabaseException orne) {
 
@@ -196,6 +199,9 @@ public class PersistenceEngine {
                 logger.error(getExceptionDescription(orne));
                 throw orne;
             }
+        } finally {
+          if (db != null)
+            db.close();
         }
 
         return json;
@@ -207,14 +213,13 @@ public class PersistenceEngine {
     }
 
     public JSONObject delete(String id) throws JSONException {
-
-
+      
         JSONObject json = new JSONObject();
-
+        ODatabaseDocumentTx db = null;
         try {
             json.put("result", Boolean.TRUE);
 
-            ODatabaseDocumentTx db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
+            db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
 
 
             List<ODocument> result = db.query(new OSQLSynchQuery<ODocument>("select FROM " + id));
@@ -244,6 +249,9 @@ public class PersistenceEngine {
                 logger.error(getExceptionDescription(orne));
                 throw orne;
             }
+        } finally {
+          if (db != null)
+            db.close();
         }
         return json;
     }
@@ -257,12 +265,13 @@ public class PersistenceEngine {
 
     public JSONObject store(String id, String className, String inputData) throws JSONException {
         JSONObject json = new JSONObject();
+        ODatabaseDocumentTx db = null;
         try {
 
             json.put("result", Boolean.TRUE);
 
             JSONObject data = new JSONObject(inputData);
-            ODatabaseDocumentTx db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
+            db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
             ODocument doc;
 
             if (id == null || id.length() == 0) {
@@ -298,8 +307,6 @@ public class PersistenceEngine {
                 json.put("id", newId.toString());
             }
 
-            db.close();
-
             return json;
         } catch (ODatabaseException orne) {
 
@@ -312,6 +319,9 @@ public class PersistenceEngine {
 
             logger.error(getExceptionDescription(orne));
             throw orne;
+        } finally {
+          if (db != null)
+            db.close();
         }
     }
 
