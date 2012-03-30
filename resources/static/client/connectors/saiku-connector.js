@@ -55,13 +55,12 @@ SaikuConnector = function() {
   this.getLabel = function() {
     return _name;
   }
-  this.newQuery = function($ph, group, name, callback) {
+  this.newQuery = function($ph, query, callback) {
     function cb(schema, cube, jndi, mdx){
-      var query = new wd.cdb.Query(name,"Saiku",{catalog: schema, cube: cube, jndi: jndi, query: mdx});
-      query.setGroup(group);
+      query.setDefinition({catalog: schema, cube: cube, jndi: jndi, query: mdx});
       callback(query);
     };
-    openSaiku($ph, "cdb", "saiku" , group + "-" + name + ".saiku", cb, "new");
+    openSaiku($ph, "cdb", "saiku" , query.getGroup() + "-" + query.getLabel() + ".saiku", cb, "new");
   };
   this.editQuery = function(placeholder,query, callback) {
     function cb(schema, cube, jndi, mdx){
@@ -96,9 +95,9 @@ SaikuConnector = function() {
           doc.loadXML(text); 
         }
         queryObj.setDefinition({
-          catalog: Dashboards.schemas[$('Query', doc).attr('catalog')],
+          catalog: Dashboards.schemas[$('Query', doc).attr('catalog')].schema,
           cube: $('Query', doc).attr('cube'),
-          jndi: $('Query', doc).attr('connection'),
+          jndi: Dashboards.schemas[$('Query', doc).attr('catalog')].jndi,
           query: $('MDX',doc).text()
         });        
         (new wnd.SavedQuery({

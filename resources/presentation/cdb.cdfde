@@ -4298,7 +4298,7 @@
      },
      {
       "name": "expression",
-      "value": "",
+      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      target = $(\"#code\"),\n      params = {},\n      url = \"export?\";\n      \n    params.id = query.getLabel();\n    params.group = query.getGroup();\n    params.method = \"export\";\n    params.exporter = window.exportTypeParam;\n    target.empty().text(url + $.param(params));\n}",
       "type": "JavaScript"
      },
      {
@@ -5621,7 +5621,7 @@
      },
      {
       "name": "javaScript",
-      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionEnvironment\").hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide();\n    $(\"#confirmButtons\").hide();\n    wd.cdb.QueryManager.loadGroupList();\n    $.getJSON('olaputils',{operation: 'GetOlapCubes'},function(resp){\n      var schemas = {},\n        catalogs = resp.catalogs,\n        i,cat;\n      for (i = 0; i < catalogs.length; i++) {\n          cat = catalogs[i];\n          schemas[cat.name] = cat.schema;\n      }\n      Dashboards.schemas = schemas;\n    });\n    $.getJSON('export',{method: 'listExporters'},function(resp){\n      var exporters = {},exp;\n      for (i = 0; i < resp.length; i++) {\n          exp = resp[i];\n          exporters[exp.id] = exp;\n      }\n      Dashboards.exporters = exporters;\n    })\n}",
+      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionEnvironment\").hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide();\n    $(\"#confirmButtons\").hide();\n    wd.cdb.QueryManager.loadGroupList();\n    $.getJSON('olaputils',{operation: 'GetOlapCubes'},function(resp){\n      var schemas = {},\n        catalogs = resp.catalogs,\n        i,cat;\n      for (i = 0; i < catalogs.length; i++) {\n          cat = catalogs[i];\n          schemas[cat.name] = cat;\n      }\n      Dashboards.schemas = schemas;\n    });\n    $.getJSON('export',{method: 'listExporters'},function(resp){\n      var exporters = {},exp;\n      for (i = 0; i < resp.length; i++) {\n          exp = resp[i];\n          exporters[exp.id] = exp;\n      }\n      Dashboards.exporters = exporters;\n    })\n}",
       "type": "JavaScript"
      }
     ]

@@ -217,12 +217,8 @@ wd.cdb.cloneQueryTypeSelector = function(groupName, queryObj){
 	var clone = render_queryTypeSelector.clone(paramMap,{},objectPlaceHolderMap);
 	clone.htmlObject = queryName+'Type';
 	clone.name = 'render_'+queryName+'TypeSelector';
-	clone.postChange = function(){
-		var storage = Dashboards.storage.groupsQueries;
-		storage[groupName].queries[queryName].type = Dashboards.getParameterValue(queryName+'TypeParam');
-		
-		Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
-		Dashboards.saveStorage();
+	clone.postChange = function(value){
+                queryObj.setType(value);
 	};
 	Dashboards.addComponents([clone]);
 	window[clone.name] = clone;
@@ -368,7 +364,7 @@ wd.cdb.cloneCancelButton = function(groupName, queryObj){
 };
 
 
-wd.cdb.cloneProceedButton = function(groupName, queryObj){
+wd.cdb.cloneProceedButton = function(groupName, queryObj,isNew){
         var queryName = queryObj.getLabel().replace(/ /g, '');
 	var objectPlaceHolderMap = {
 		'dummyProceedButton': (queryName+'ProceedButton') 
@@ -380,7 +376,7 @@ wd.cdb.cloneProceedButton = function(groupName, queryObj){
 
 
 	clone.expression = function(){
-          wd.cdb.showQueryEditor(groupName,queryObj,function(){wd.cdb.setEditMode(queryObj)});
+          wd.cdb.showQueryEditor(groupName,queryObj,function(){wd.cdb.setEditMode(queryObj)},isNew);
 	}	
 	Dashboards.addComponents([clone]);
 	window[clone.name] = clone;
@@ -428,22 +424,32 @@ wd.cdb.setEditMode = function(queryObj) {
   
 };
 
-wd.cdb.showQueryEditor = function(groupName,queryObj,callback) {
+wd.cdb.showQueryEditor = function(groupName,queryObj,callback,isNew) {
   var queryName = queryObj.getLabel().replace(/ /g, '');
   var queryState = wd.cdb.getQueryState(queryName).replace(/ /g, '');
   if( queryState === 'closed' || queryState === 'new'){
     var yy = $('#'+queryName).position().top+$('#'+queryName).height()+6+'px';
     $('#editionEnvironment').css('top',yy);
     $('#editionEnvironment').show().animate({height: '300px'}, 500, callback);
-    wd.cdb.connectors.ConnectorEngine.getConnector("Saiku").editQuery($("#editionEnvironment"),queryObj,function(){
-      console.log('done!');
-    });
+    var connector = wd.cdb.connectors.ConnectorEngine.getConnector(queryObj.getType());
+    if (isNew) {
+      connector.newQuery($("#editionEnvironment"),queryObj,function(){
+        console.log('done!');
+      });
+    } else {
+      connector.editQuery($("#editionEnvironment"),queryObj,function(){
+        console.log('done!');
+      });
+    }
   }
 };
 
 wd.cdb.addQuery = function(groupName,queryObj){
+        var isNew = false;
         if (!queryObj) {
-          queryObj = new wd.cdb.Query();
+          isNew = true;
+          queryObj = new wd.cdb.Query("New Query");
+          queryObj.setGroup(groupName);
         }
 	var holder = $("#"+groupName+'Queries');
 	
@@ -480,7 +486,7 @@ wd.cdb.addQuery = function(groupName,queryObj){
 	Dashboards.update(wd.cdb.cloneActiveTypeButton(groupName, queryObj));
 	Dashboards.update(wd.cdb.cloneCopyButton(groupName, queryObj));
 	Dashboards.update(wd.cdb.cloneExportButton(groupName, queryObj));	
-	Dashboards.update(wd.cdb.cloneProceedButton(groupName, queryObj));
+	Dashboards.update(wd.cdb.cloneProceedButton(groupName, queryObj,isNew));
 	Dashboards.update(wd.cdb.cloneOkButton(groupName, queryObj));
 	Dashboards.update(wd.cdb.cloneCancelButton(groupName, queryObj));
 	
