@@ -2,7 +2,7 @@ wd = wd || {};
 wd.ctools = wd.ctools || {};
 wd.ctools.persistence = (function(){
   var myself = {},
-      persistenceUrl = webAppPath + "/cdb/storage";
+      persistenceUrl = webAppPath + "/content/cdb/storage";
 
   myself.query = function(query,callback) {
     var params = {

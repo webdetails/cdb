@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-import static java.lang.Math.PI;
 
 /**
  *
@@ -18,7 +17,6 @@ public class StaticRExporter extends AbstractExporter {
 
   @Override
   public String export(String group, String id, String url) {
-    double foo = PI * 3;
     return "";
   }
 

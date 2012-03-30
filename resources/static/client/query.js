@@ -1,6 +1,8 @@
 /**
  * @constructor
  */
+
+wd.cdb.TypeAlreadySetException = function(){};
 wd.cdb.Query = function (label,type,definition) {
     var _label = label,
       _group,
@@ -26,6 +28,7 @@ wd.cdb.Query = function (label,type,definition) {
       return _type;
     };
     this.setType = function(type){
+        if(_type) throw new wd.cdb.TypeAlreadySetException; 
     	_type = type;
     };
     this.toJSON = function() {
@@ -47,6 +50,12 @@ wd.cdb.Query = function (label,type,definition) {
     this.setKey = function(key) {
       _id = key;
     };
+
+    this.duplicate = function() {
+      var that = new wd.cdb.Query(this.getLabel() + "Copy",this.getType(),this.getDefinition());
+      that.setGroup(this.getGroup());
+      return that;
+    }
 }
 
 /**
@@ -84,7 +93,7 @@ wd.cdb.QueryGroup = function(label) {
 			query = _queries[q];
 			wd.ctools.persistence.saveObject(null,"Query",query);
 		}
-		$.getJSON("../../connector?method=exportCda&group=" + _label,function(){console.log("Saved to CDA")});
+		$.getJSON("connector?method=exportCda&group=" + _label,function(){console.log("Saved to CDA")});
     }
 }
 
@@ -96,6 +105,7 @@ wd.cdb.QueryManager = (function() {
       if (!myself.getGroup(label)) {
         myself.addGroup(new wd.cdb.QueryGroup(label));
       }
+      return myself.getGroup(label);
     };
 
     myself.getGroup = function(label) {
@@ -128,6 +138,16 @@ wd.cdb.QueryManager = (function() {
     
     myself.listGroups = function(){
     	return _groups;
+    };
+    
+    myself.loadGroupList = function() {
+      $.getJSON('query?method=listGroups',{},function(response){
+        var groups = response.object,
+            i;
+        for (i = 0; i < groups.length;i++) {
+          myself.newGroup(groups[i].name);
+        }
+      });
     };
     
     return myself;

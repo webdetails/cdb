@@ -1,7 +1,7 @@
 (function() {
 SaikuConnector = function() {
   var _name = 'Saiku',
-      saikuPath = webAppPath + "/content/saiku-ui/index.html?";
+      saikuPath = webAppPath + "/saiku-ui/index.html?";
   function openSaiku(placeholder, solution,path,action, callback, mode) {
     var params = $.extend({
         biplugin: true
@@ -74,48 +74,6 @@ SaikuConnector = function() {
   };
   this.viewQuery = function(placeholder,query) {
   };
-
-  this.saveQuery = function(placeholder, queryObj, callback) {
-    var filename = queryObj.getGroup() + '-' + queryObj.getLabel() + '.saiku',
-        solution = 'cdb',
-        path = 'saiku',
-        overwrite = true,
-        wnd = placeholder.find("iframe").get(0).contentWindow,
-        query = wnd.Saiku.tabs._tabs[0].content.query,
-        parser = new DOMParser(),
-        doc;
-    query.action.get("/xml", {
-      success: function(model, response) {
-        console.log('success');
-        if (window.DOMParser) {
-          parser=new DOMParser();
-          doc = parser.parseFromString(response.xml,"text/xml");
-        } else {
-          doc=new ActiveXObject("Microsoft.XMLDOM");
-          doc.async=false;
-          doc.loadXML(text); 
-        }
-        queryObj.setDefinition({
-          catalog: Dashboards.schemas[$('Query', doc).attr('catalog')],
-          cube: $('Query', doc).attr('cube'),
-          jndi: $('Query', doc).attr('connection'),
-          query: $('MDX',doc).text()
-        });        
-        (new wnd.SavedQuery({
-          name: filename,
-          newname: query.get('name'),
-          xml: response.xml,
-          solution: 'cdb',
-          path: 'saiku',
-          action: filename,
-          overwrite: 'true'
-        })).save({ success: function() {
-          wnd.puc.refresh_repo();
-          callback(queryObj);
-        }});
-      }
-    });
-  }
 }
 
 wd.cdb.connectors.ConnectorEngine.registerConnector(new SaikuConnector());

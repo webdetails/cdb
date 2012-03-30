@@ -3,6 +3,29 @@
   "title": "cToolsTemplate",
   "rows": [
    {
+    "id": "d1340f05-ad9e-42c1-c8b9-d99430c3ae08",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "cdb",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     },
+     {
+      "name": "resourceFile",
+      "value": "static/client/cdb.js",
+      "type": "ResourceFile"
+     }
+    ]
+   },
+   {
     "id": "134e8784-966e-d306-cf0d-2d4b880576e2",
     "type": "LayoutResourceFile",
     "typeDesc": "Resource",
@@ -56,7 +79,7 @@
     "properties": [
      {
       "name": "name",
-      "value": "cdb",
+      "value": "saiku_interface",
       "type": "Id"
      },
      {
@@ -66,7 +89,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/cdb.js",
+      "value": "static/client/saiku-interface.js",
       "type": "ResourceFile"
      }
     ]
@@ -102,7 +125,7 @@
     "properties": [
      {
       "name": "name",
-      "value": "cdbSaiku",
+      "value": "cdbConnectors",
       "type": "Id"
      },
      {
@@ -112,7 +135,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/saiku-interface.js",
+      "value": "static/client/connectors/connectors.js",
       "type": "ResourceFile"
      }
     ]
@@ -125,7 +148,7 @@
     "properties": [
      {
       "name": "name",
-      "value": "cdbConnectors",
+      "value": "saiku_connector",
       "type": "Id"
      },
      {
@@ -135,7 +158,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/connectors/connectors.js",
+      "value": "static/client/connectors/saiku-connector.js",
       "type": "ResourceFile"
      }
     ]
@@ -3326,7 +3349,7 @@
      },
      {
       "name": "expression",
-      "value": "function(){\n    wd.cdb.createGroup();\n}",
+      "value": "function(){\n    wd.cdb.createGroup.apply(this,arguments);\n}",
       "type": "JavaScript"
      },
      {
@@ -3399,7 +3422,7 @@
      },
      {
       "name": "expression",
-      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(\"#\" + this.htmlObject).parent().parent().position().left + 120;\n    var top = $(\"#\" + this.htmlObject).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    \n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    if($exportEnv.css('display') != 'none'){\n        wd.cdb.clickDocExportEnv();\n    }\n    \n    $openEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $openEnv.css('top',top+'px').css('left',left+'px');\n    \n    $openEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocOpenEnv);\n    \n    \n    event.stopPropagation();\n}",
+      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(\"#\" + this.htmlObject).parent().parent().position().left + 120;\n    var top = $(\"#\" + this.htmlObject).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    \n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    if($exportEnv.css('display') != 'none'){\n        wd.cdb.clickDocExportEnv();\n    }\n    \n    $openEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $openEnv.css('top',top+'px').css('left',left+'px');\n    \n    Dashboards.update(render_availableGroups);\n    $openEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocOpenEnv);\n    \n    \n    event.stopPropagation();\n}",
       "type": "JavaScript"
      },
      {
@@ -3910,7 +3933,7 @@
      },
      {
       "name": "expression",
-      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(\"#\" + this.htmlObject).parent().parent().position().left + 950 - 392;\n    var top = $(\"#\" + this.htmlObject).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    \n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocExportEnv);\n    \n    event.stopPropagation();\n}\n\n",
+      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(\"#\" + this.htmlObject).parent().parent().position().left + 950 - 392;\n    var top = $(\"#\" + this.htmlObject).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    \n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocExportEnv);\n    window.exportingQuery = this.queryObj;\n    event.stopPropagation();\n}\n\n",
       "type": "JavaScript"
      },
      {
@@ -3935,7 +3958,7 @@
      },
      {
       "name": "postChange",
-      "value": "",
+      "value": "function(val){\n    var save = $(\"#saveToFile\"),\n        copy = $(\"#copyToClipboard\"),\n        exporter = Dashboards.exporters[val];\n    if(exporter.modes.inline) {\n        copy.removeAttr(\"disabled\");    \n    } else {\n        copy.attr(\"disabled\",'disabled');\n    }\n    if(exporter.modes.attachment) {\n        save.removeAttr(\"disabled\");    \n    } else {\n        save.attr(\"disabled\",'disabled');\n    }\n}",
       "type": "JavaScript"
      },
      {
@@ -4202,7 +4225,7 @@
      },
      {
       "name": "expression",
-      "value": "",
+      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      target = $(\"#download\"),\n      params = {},\n      url = \"export?\";\n    if (!target.length) {\n        target = $(\"<iframe id='download'>\").appendTo(document.body);\n    };\n    params.id = query.getLabel();\n    params.group = query.getGroup();\n    params.method = \"export\";\n    params.exporter = window.exportTypeParam;\n    params.toFile = true;\n    params.filename = \"foo.bar\";\n    target.attr(\"src\", url + $.param(params));\n}",
       "type": "JavaScript"
      },
      {
@@ -4494,7 +4517,7 @@
      },
      {
       "name": "expression",
-      "value": "function(){\n    wd.cdb.openGroups(Dashboards.getParameterValue(render_availableGroups.parameter));\n    wd.cdb.clickDocOpenEnv();\n    Dashboards.setParameter(render_availableGroups.parameter,'');\n    render_availableGroups.update();\n}",
+      "value": "function(){\n    wd.cdb.openGroups(Dashboards.getParameterValue(render_availableGroups.parameter));\n    wd.cdb.clickDocOpenEnv();\n    Dashboards.setParameter(render_availableGroups.parameter,'');\n    Dashboards.update(render_availableGroups);\n}",
       "type": "JavaScript"
      },
      {
@@ -5028,7 +5051,7 @@
      },
      {
       "name": "preExecution",
-      "value": "",
+      "value": "function() {\n    \n    this.valuesArray = Object.keys(wd.cdb.connectors.ConnectorEngine.listConnectors()).map(\n        function(e){\n          return [e,e];\n        });\n}",
       "type": "JavaScript"
      },
      {
@@ -5227,12 +5250,12 @@
      },
      {
       "name": "valuesArray",
-      "value": "[[\"R\",\"R\"],[\"Python\",\"Python\"],[\"Ubber\",\"Ubber\"],[\"Quasimodo\",\"Quasimodo\"]]",
+      "value": "[]",
       "type": "ValuesArray"
      },
      {
       "name": "valueAsId",
-      "value": "true",
+      "value": "false",
       "type": "Boolean"
      },
      {
@@ -5247,7 +5270,7 @@
      },
      {
       "name": "preExecution",
-      "value": "",
+      "value": "function f () {\n    var labels = Object.keys(Dashboards.exporters);\n    this.valuesArray = labels.map(function(e){\n      return [e,Dashboards.exporters[e].label];\n    });\n}",
       "type": "JavaScript"
      },
      {
@@ -5262,7 +5285,7 @@
      },
      {
       "name": "postChange",
-      "value": "",
+      "value": "function(exporter){\n var $save = $(\"#saveToFile button\"),\n     $copy = $(\"#copyToClipboard button\"),\n     exp = Dashboards.exporters[exporter];\n if (exp.modes.inline) {\n    $copy.removeAttr(\"disabled\");\n } else {\n    $copy.attr(\"disabled\", \"disabled\");\n }\n  if (exp.modes.attachment) {\n    $save.removeAttr(\"disabled\");\n } else {\n    $save.attr(\"disabled\", \"disabled\");\n }\n}",
       "type": "JavaScript"
      },
      {
@@ -5516,7 +5539,7 @@
      },
      {
       "name": "valuesArray",
-      "value": "[[\"Group1\",\"Group1\"],[\"Group2\",\"Group2\"],[\"Group3\",\"Group3\"]]",
+      "value": "[]",
       "type": "ValuesArray"
      },
      {
@@ -5541,7 +5564,7 @@
      },
      {
       "name": "preExecution",
-      "value": "",
+      "value": "function f () {\n    var labels = Object.keys(wd.cdb.QueryManager.listGroups());\n    this.valuesArray = labels.map(function(e){\n      return [e,e];\n    });\n}",
       "type": "JavaScript"
      },
      {
@@ -5598,7 +5621,7 @@
      },
      {
       "name": "javaScript",
-      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionEnvironment\").hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide();\n    $(\"#confirmButtons\").hide();\n}",
+      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionEnvironment\").hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide();\n    $(\"#confirmButtons\").hide();\n    wd.cdb.QueryManager.loadGroupList();\n    $.getJSON('olaputils',{operation: 'GetOlapCubes'},function(resp){\n      var schemas = {},\n        catalogs = resp.catalogs,\n        i,cat;\n      for (i = 0; i < catalogs.length; i++) {\n          cat = catalogs[i];\n          schemas[cat.name] = cat.schema;\n      }\n      Dashboards.schemas = schemas;\n    });\n    $.getJSON('export',{method: 'listExporters'},function(resp){\n      var exporters = {},exp;\n      for (i = 0; i < resp.length; i++) {\n          exp = resp[i];\n          exporters[exp.id] = exp;\n      }\n      Dashboards.exporters = exporters;\n    })\n}",
       "type": "JavaScript"
      }
     ]
@@ -5624,93 +5647,7 @@
   ]
  },
  "datasources": {
-  "rows": [
-   {
-    "id": "SCRIPTING",
-    "name": "SCRIPTING Queries",
-    "type": "Label",
-    "typeDesc": "<i>Group</i>",
-    "parent": "UnIqEiD",
-    "properties": [
-     {
-      "name": "Group",
-      "value": "SCRIPTING Queries",
-      "type": "Label"
-     }
-    ]
-   },
-   {
-    "id": "fff00cb6-391b-b8b6-9bd2-49a1e9b4d3eb",
-    "type": "Componentsscriptable_scripting",
-    "typeDesc": "scriptable over scripting",
-    "meta": "CDA",
-    "meta_conntype": "scripting.scripting",
-    "meta_datype": "scriptable",
-    "parent": "SCRIPTING",
-    "properties": [
-     {
-      "name": "name",
-      "value": "tableQuery",
-      "type": "Id"
-     },
-     {
-      "name": "language",
-      "value": "beanshell",
-      "type": "String"
-     },
-     {
-      "name": "initscript",
-      "value": "",
-      "type": "String"
-     },
-     {
-      "name": "access",
-      "value": "public",
-      "type": "Access"
-     },
-     {
-      "name": "parameters",
-      "value": "[]",
-      "type": "CdaParameters"
-     },
-     {
-      "name": "output",
-      "value": "[]",
-      "type": "IndexArray"
-     },
-     {
-      "name": "outputMode",
-      "value": "include",
-      "type": "OutputMode"
-     },
-     {
-      "name": "cdacolumns",
-      "value": "[]",
-      "type": "CdaColumnsArray"
-     },
-     {
-      "name": "cdacalculatedcolumns",
-      "value": "[]",
-      "type": "CdaCalculatedColumnsArray"
-     },
-     {
-      "name": "query",
-      "value": "import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;\n\nString[] columnNames = new String[]{\n\"Col1\",\n\"Col2\",\n\"Col3\",\n\"Col4\",\n\"Col5\"\n};\n\n\nClass[] columnTypes = new Class[]{\nString.class\n,Float.class\n,Float.class\n,Float.class\n,String.class\n};\n\nTypedTableModel model = new TypedTableModel(columnNames, columnTypes);\nmodel.addRow(new Object[]{ new String(\"Row 1\")\n,new Float(\"-34\") ,new Float(\"12\"), new Float(\"-32\"), new String(\"12,3,45,21,14,2\")\n});\n\n\nmodel.addRow(new Object[]{ new String(\"Row 2\")\n,new Float(\"2\") ,new Float(\"-47\"), new Float(\"-29\"), new String(\"12,3,45,21,14,2\")\n});\n\n\nmodel.addRow(new Object[]{ new String(\"Row 3\")\n,new Float(\"101\") ,new Float(\"26\"), new Float(\"-4\"), new String(\"12,3,45,21,14,2\")\n});\n\nmodel.addRow(new Object[]{ new String(\"Row 4\")\n,new Float(\"-16\") ,new Float(\"5\"), new Float(\"-17\"), new String(\"12,3,45,21,14,2\")\n});\n\nmodel.addRow(new Object[]{ new String(\"Row 5\")\n,new Float(\"88\") ,new Float(\"-80\"), new Float(\"24\"), new String(\"12,3,45,21,14,2\")\n});\n\nmodel.addRow(new Object[]{ new String(\"Row 6\")\n,new Float(\"-27\") ,new Float(\"41\"), new Float(\"76\"), new String(\"12,3,45,21,14,2\")\n});\n\nreturn model;",
-      "type": "SqlQuery"
-     },
-     {
-      "name": "cache",
-      "value": "true",
-      "type": "Boolean"
-     },
-     {
-      "name": "cacheDuration",
-      "value": 3600,
-      "type": "Integer"
-     }
-    ]
-   }
-  ]
+  "rows": []
  },
  "filename": "/system/cdb/presentation/cdb.cdfde"
 }

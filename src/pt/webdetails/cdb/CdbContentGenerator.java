@@ -12,6 +12,7 @@ import javax.servlet.ServletRequestWrapper;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import pt.webdetails.cdb.exporters.ExporterEngine;
 import pt.webdetails.cdb.connector.ConnectorEngine;
+import pt.webdetails.cdb.query.QueryEngine;
 import pt.webdetails.cpf.InterPluginComms;
 import pt.webdetails.cpf.InvalidOperationException;
 import pt.webdetails.cpf.SimpleContentGenerator;
@@ -27,7 +28,7 @@ import pt.webdetails.cpf.persistence.PersistenceEngine;
 public class CdbContentGenerator extends SimpleContentGenerator {
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
-  public void console(OutputStream out) throws IOException {
+  public void home(OutputStream out) throws IOException {
     IParameterProvider pathParams = parameterProviders.get("path");
     ServletRequestWrapper wrapper = (ServletRequestWrapper) pathParams.getParameter("httprequest");
     String root = wrapper.getServerName() + ":" + wrapper.getServerPort();
@@ -89,6 +90,18 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     }
   }
 
+  @Exposed(accessLevel = AccessLevel.PUBLIC)
+  public void query(OutputStream out) throws IOException {
+    IParameterProvider pathParams = parameterProviders.get("path");
+    IParameterProvider requestParams = parameterProviders.get("request");
+    QueryEngine engine = QueryEngine.getInstance();
+    try {
+      engine.process(requestParams, pathParams, out);
+    } catch (Exception e) {
+      logger.error(e);
+    }
+  }  
+  
   @Exposed(accessLevel = AccessLevel.PUBLIC)
   public void olaputils(OutputStream out) {
     OlapUtils utils = new OlapUtils();
