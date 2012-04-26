@@ -69,10 +69,6 @@ SaikuConnector = function() {
     };
     openSaiku(placeholder, "cdb", "saiku" , query.getGroup() + "-" + query.getLabel() + ".saiku", cb, "edit");    
   };
-  this.deleteQuery = function(query) {
-  };
-  this.viewQuery = function(placeholder,query) {
-  };
 
   this.saveQuery = function(placeholder, queryObj, callback) {
     var filename = queryObj.getGroup() + '-' + queryObj.getLabel() + '.saiku',

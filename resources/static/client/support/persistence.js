@@ -34,5 +34,18 @@ wd.ctools.persistence = (function(){
     });
   };
 
+  myself.deleteObject = function(key, type) {
+    var params = {
+      method: "delete",
+      "class": type,
+      rid: key
+    };
+
+    $.getJSON(persistenceUrl,params,function(response){
+      if(response.id)
+      obj.setKey(response.id);
+    });
+
+  }
   return myself;
 }());

@@ -14,6 +14,14 @@ import pt.webdetails.cda.connections.Connection;
  */
 public interface Connector {
 
-    DataAccess exportCdaDataAccess(JSONObject query);
-    Connection exportCdaConnection(JSONObject query);
+  public DataAccess exportCdaDataAccess(JSONObject query);
+
+  public Connection exportCdaConnection(JSONObject query);
+
+  public void copyQuery(String oldGroup, String oldName, String oldPath, String newPath);
+
+  public void moveQuery(String oldGroup, String oldName, String oldPath, String newPath);
+
+  public void deleteQuery(String group, String name);
+
 }
