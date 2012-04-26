@@ -3,6 +3,29 @@
   "title": "cToolsTemplate",
   "rows": [
    {
+    "id": "d1433c8c-a62b-507f-ada1-c013b851f169",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "ctools_utils",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     },
+     {
+      "name": "resourceFile",
+      "value": "static/client/support/utils.js",
+      "type": "ResourceFile"
+     }
+    ]
+   },
+   {
     "id": "d1340f05-ad9e-42c1-c8b9-d99430c3ae08",
     "type": "LayoutResourceFile",
     "typeDesc": "Resource",
@@ -3568,7 +3591,7 @@
      },
      {
       "name": "expression",
-      "value": "wd.cdb.pasteQuery(this.queryHolder)",
+      "value": "function() {\n  wd.cdb.pasteQuery(this.queryHolder)\n}",
       "type": "JavaScript"
      },
      {
@@ -4736,7 +4759,7 @@
      },
      {
       "name": "expression",
-      "value": "function(){\n    $(this).parent().parent().animate({height: 'toggle'},400,function(){});\n    $(\"#removeSelectionButton\").animate({height: 'toggle'},400,function(){});\n    \n    wd.cdb.clickDocRemoveEnv();\n    if(removeGroupOrQueriesParam == \"Remove Entire Group\"){\n        wd.cdb.removeGroup(\"dummy\"); //replace by correct group name\n    } else {\n        wd.cdb.removeQueries(queriesToRemoveParam);\n    }\n    \n    Dashboards.setParameter(render_removeGroupOrQueries.parameter,'');\n    Dashboards.update(render_removeGroupOrQueries);\n    \n    Dashboards.setParameter(render_queriesToRemove.parameter,'');\n    Dashboards.update(render_queriesToRemove);\n\n    \n    \n    \n    \n}\n",
+      "value": "function(){\n    $(this).parent().parent().animate({height: 'toggle'},400,function(){});\n    $(\"#removeSelectionButton\").animate({height: 'toggle'},400,function(){});\n    \n    wd.cdb.clickDocRemoveEnv();\n    if(removeGroupOrQueriesParam == \"Remove Entire Group\"){\n        wd.cdb.removeGroup(\"dummy\"); //replace by correct group name\n    } else {\n        wd.cdb.removeQueries(this.groupName, queriesToRemoveParam);\n    }\n    \n    Dashboards.setParameter(render_removeGroupOrQueries.parameter,'');\n    Dashboards.update(render_removeGroupOrQueries);\n    \n    Dashboards.setParameter(render_queriesToRemove.parameter,'');\n    Dashboards.update(render_queriesToRemove);\n\n    \n    \n    \n    \n}\n",
       "type": "JavaScript"
      },
      {

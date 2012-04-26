@@ -4,11 +4,12 @@
 
 wd.cdb.TypeAlreadySetException = function(){};
 wd.cdb.Query = function (label,type,definition) {
+  "use strict";
   var _label = label,
       _group,
       _query = definition,
       _type = type,
-      _id
+      _id,
       _guid = wd.ctools.utils.createGUID();
 
   function updateBackend() {
