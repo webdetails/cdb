@@ -58,7 +58,7 @@ public class RepositoryUtils {
       ISolutionRepository solutionRepository = PentahoSystem.get(ISolutionRepository.class, PentahoSessionHolder.getSession());
       byte[] data = solutionRepository.getResourceAsBytes(fullPath, true, 0);
       solutionRepository.publish(PentahoSystem.getApplicationContext().getSolutionPath(""), newPath, newFileName, data, true);
-      if (deleteOld) {
+      if (deleteOld && !(newPath.equals(path) && newFileName.equals(fileName) )) {
         solutionRepository.removeSolutionFile(fullPath);
       }
     } catch (Exception e) {

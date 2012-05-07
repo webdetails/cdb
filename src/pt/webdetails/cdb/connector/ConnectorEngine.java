@@ -85,56 +85,60 @@ public class ConnectorEngine {
       String group = requestParams.getStringParameter("group", "");
       exportCda(group);
     } else if ("moveQuery".equals(method) || "copyQuery".equals(method)) {
-      String oldName = requestParams.getStringParameter("oldName", ""),
-              newName = requestParams.getStringParameter("newName", ""),
-              oldGroup = requestParams.getStringParameter("oldGroup", ""),
-              newGroup = requestParams.getStringParameter("newGroup", "");
+      String id = requestParams.getStringParameter("id", ""),
+              newName = requestParams.getStringParameter("name", ""),
+              newGroup = requestParams.getStringParameter("group", "");
       if ("moveQuery".equals(method)) {
-        moveQuery(oldGroup, oldName, newGroup, newName);
+        moveQuery(id, newGroup, newName);
       } else {
-        copyQuery(oldGroup, oldName, newGroup, newName);
+        copyQuery(id, newGroup, newName);
       }
     } else if ("deleteQuery".equals(method)) {
-      String name = requestParams.getStringParameter("name", ""),
-              group = requestParams.getStringParameter("group", "");
-      deleteQuery(group, name);
+      String id = requestParams.getStringParameter("id", "");
+      deleteQuery(id);
     } else {
       logger.error("Unsupported method");
     }
   }
 
-  public void moveQuery(String oldGroup, String oldName, String newGroup, String newName) {
+  public void moveQuery(String id, String newGroup, String newName) {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
 
-      JSONObject response = eng.query("select type from Query where group = \"" + oldGroup + "\" and name = \"" + oldName + "\"");
+      JSONObject response = eng.query("select * from Query where @rid = " + id);
       JSONObject query = (JSONObject) ((JSONArray) response.get("object")).get(0);
-      String type = query.get("type").toString();
+      String type = query.get("type").toString(),
+              oldName = query.get("name").toString(),
+              oldGroup = query.get("group").toString();
       getConnector(type).moveQuery(oldGroup, oldName, newGroup, newName);
     } catch (Exception e) {
       logger.error(e);
     }
   }
 
-  public void copyQuery(String oldGroup, String oldName, String newGroup, String newName) {
+  public void copyQuery(String id, String newGroup, String newName) {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
 
-      JSONObject response = eng.query("select type from Query where group = \"" + oldGroup + "\" and name = \"" + oldName + "\"");
+      JSONObject response = eng.query("select * from Query where @rid = " + id);
       JSONObject query = (JSONObject) ((JSONArray) response.get("object")).get(0);
-      String type = query.get("type").toString();
+      String type = query.get("type").toString(),
+              oldName = query.get("name").toString(),
+              oldGroup = query.get("group").toString();
       getConnector(type).copyQuery(oldGroup, oldName, newGroup, newName);
     } catch (Exception e) {
       logger.error(e);
     }
   }
 
-  public void deleteQuery(String group, String name) {
+  public void deleteQuery(String id) {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
-      JSONObject response = eng.query("select type from Query where group = \"" + group + "\" and name = \"" + name + "\"");
+      JSONObject response = eng.query("select type from Query where @rid = " + id);
       JSONObject query = (JSONObject) ((JSONArray) response.get("object")).get(0);
-      String type = query.get("type").toString();
+      String type = query.get("type").toString(),
+              name = query.get("name").toString(),
+              group = query.get("group").toString();
       getConnector(type).deleteQuery(group, name);
     } catch (Exception e) {
       logger.error(e);

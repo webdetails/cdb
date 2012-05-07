@@ -991,7 +991,7 @@ button .label{
 
 .saveToFile,
 .copyToClipboard {
-	margin: 15px 5px 5px 5px;
+	margin: 0px 5px;
 	width: 185px;
 }
 
@@ -1116,3 +1116,42 @@ button .label{
 	color: white;
 	background: #848f95;
 }
+
+
+#editionPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #dee8ec;
+  overflow: hidden;
+}
+
+#editionPopup .query {
+  position: relative;
+  height: 28px;
+}
+#editionPopup .query .queryOkButton, 
+#editionPopup .query .queryCancelButton {
+  position: absolute;
+  top: 0px;
+}
+#editionPopup .query .queryOkButton  {
+  right: 3px;
+} 
+
+#editionPopup .query .queryCancelButton {
+  right: 93px; 
+}
+
+.exportCodeContainer {
+  font-family: Courier;
+  margin:5px;
+  word-wrap: break-word;  
+}
+
+
