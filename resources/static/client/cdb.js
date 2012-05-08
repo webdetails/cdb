@@ -77,11 +77,10 @@ wd.cdb.cloneRemoveGroupButton = function(groupName){
   Dashboards.addComponents([clone]);
   window[clone.name] = clone;
 
-  var queries = Object.keys(wd.cdb.QueryManager.getGroup(groupName).listQueries()).map(function(e){return [e,e];}),
-      originalExpr = clone.expression;
+  var originalExpr = clone.expression;
 
   clone.expression = function() {
-      
+      queries = Object.keys(wd.cdb.QueryManager.getGroup(groupName).listQueries()).map(function(e){return [e,e];}); 
       render_queriesToRemove.valuesArray = queries;
       Dashboards.update(render_queriesToRemove);
       originalExpr.apply(this,arguments);
@@ -503,7 +502,7 @@ wd.cdb.showQueryEditor = function(groupName,queryObj,callback,isNew) {
       $("#"+queryGuid+'ActiveTypeButton button').removeAttr('disabled').width('487px');
     }
     
-    $("#body").hide();
+    $("#body").show();
     $('#editionPopup').animate({
         height: '0px'
       }, 500, function() {
