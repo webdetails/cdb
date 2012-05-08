@@ -1322,7 +1322,7 @@
      },
      {
       "name": "cssClass",
-      "value": "",
+      "value": "groupContent",
       "type": "String"
      },
      {
@@ -2111,12 +2111,12 @@
     "properties": [
      {
       "name": "name",
-      "value": "editionEnvironment",
+      "value": "editionPopup",
       "type": "Id"
      },
      {
       "name": "height",
-      "value": "0",
+      "value": "",
       "type": "Integer"
      },
      {
@@ -2142,6 +2142,39 @@
     ]
    },
    {
+    "id": "0307c02b-33ac-2489-7a42-b8c077c79eef",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "e62df17f-99b4-3a19-590b-f9c4fedf6263",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<div class='editionTitle WDdataCell WDdataCellHeader query'>\n  <span class='title'>Query Editor</span>\n  <div id='globalOkButton' class='queryOkButton'></div>\n  <div id='globalCancelButton' class='queryCancelButton'></div>    \n</div>\n\n<div class='editionWrapper'>\n  <div id='editionEnvironment'></div>    \n</div> ",
+      "type": "Html"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
     "id": "2a25d536-eb88-7827-23ec-5bcc62062af6",
     "type": "LayoutRow",
     "typeDesc": "Row",
@@ -2154,7 +2187,7 @@
      },
      {
       "name": "height",
-      "value": "600",
+      "value": "",
       "type": "Integer"
      },
      {
@@ -2362,44 +2395,6 @@
     ]
    },
    {
-    "id": "905af271-0d51-cc78-8847-013f891f1445",
-    "type": "LayoutRow",
-    "typeDesc": "Row",
-    "parent": "de6174d3-7f95-ea71-71df-ca560e368934",
-    "properties": [
-     {
-      "name": "name",
-      "value": "code",
-      "type": "Id"
-     },
-     {
-      "name": "height",
-      "value": "500",
-      "type": "Integer"
-     },
-     {
-      "name": "backgroundColor",
-      "value": "",
-      "type": "Color"
-     },
-     {
-      "name": "roundCorners",
-      "value": "",
-      "type": "RoundCorners"
-     },
-     {
-      "name": "cssClass",
-      "value": "",
-      "type": "String"
-     },
-     {
-      "name": "textAlign",
-      "value": "",
-      "type": "TextAlign"
-     }
-    ]
-   },
-   {
     "id": "c93f1588-0cfb-ff59-b356-94c977f1fd47",
     "type": "LayoutRow",
     "typeDesc": "Row",
@@ -2580,6 +2575,77 @@
       "name": "textAlign",
       "value": "",
       "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "905af271-0d51-cc78-8847-013f891f1445",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "de6174d3-7f95-ea71-71df-ca560e368934",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "exportCodeContainer",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "336de354-bd2d-caef-72f3-275e8decb9bd",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "905af271-0d51-cc78-8847-013f891f1445",
+    "properties": [
+     {
+      "name": "name",
+      "value": "code",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<textarea readonly='readonly' id='code' ></textarea> ",
+      "type": "Html"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
      }
     ]
    },
@@ -3413,79 +3479,6 @@
     ]
    },
    {
-    "id": "59f0e868-7c33-3b4d-78e6-b73d8fc258ff",
-    "type": "ComponentsbuttonComponent",
-    "typeDesc": "Button Component",
-    "parent": "OTHERCOMPONENTS",
-    "properties": [
-     {
-      "name": "name",
-      "value": "openDataGroupButton",
-      "type": "Id"
-     },
-     {
-      "name": "label",
-      "value": "Open Data Group",
-      "type": "String"
-     },
-     {
-      "name": "htmlObject",
-      "value": "openDataGroupObj",
-      "type": "HtmlObject"
-     },
-     {
-      "name": "tableStyle",
-      "value": "classic",
-      "type": "TableStyle"
-     },
-     {
-      "name": "listeners",
-      "value": "[]",
-      "type": "Listeners"
-     },
-     {
-      "name": "expression",
-      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(\"#\" + this.htmlObject).parent().parent().position().left + 120;\n    var top = $(\"#\" + this.htmlObject).parent().position().top -1;\n    \n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    \n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    if($exportEnv.css('display') != 'none'){\n        wd.cdb.clickDocExportEnv();\n    }\n    \n    $openEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $openEnv.css('top',top+'px').css('left',left+'px');\n    \n    Dashboards.update(render_availableGroups);\n    $openEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocOpenEnv);\n    \n    \n    event.stopPropagation();\n}",
-      "type": "JavaScript"
-     },
-     {
-      "name": "executeAtStart",
-      "value": "true",
-      "type": "Boolean"
-     },
-     {
-      "name": "preExecution",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
-      "name": "postExecution",
-      "value": "function(){\n    $(\"#\"+this.htmlObject+\" button\").html('<b><u>O</u>pen </b>Data Group');\n}",
-      "type": "JavaScript"
-     },
-     {
-      "name": "preChange",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
-      "name": "postChange",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
-      "name": "refreshPeriod",
-      "value": "",
-      "type": "Integer"
-     },
-     {
-      "name": "tooltip",
-      "value": "",
-      "type": "Html"
-     }
-    ]
-   },
-   {
     "id": "b9464d1a-8a62-38ce-756b-7d787dac1178",
     "type": "ComponentsbuttonComponent",
     "typeDesc": "Button Component",
@@ -4014,7 +4007,7 @@
      },
      {
       "name": "htmlObject",
-      "value": "dummyOkButton",
+      "value": "globalOkButton",
       "type": "HtmlObject"
      },
      {
@@ -4034,7 +4027,7 @@
      },
      {
       "name": "executeAtStart",
-      "value": "false",
+      "value": "true",
       "type": "Boolean"
      },
      {
@@ -4087,7 +4080,7 @@
      },
      {
       "name": "htmlObject",
-      "value": "dummyCancelButton",
+      "value": "globalCancelButton",
       "type": "HtmlObject"
      },
      {
@@ -4107,7 +4100,7 @@
      },
      {
       "name": "executeAtStart",
-      "value": "false",
+      "value": "true",
       "type": "Boolean"
      },
      {
@@ -4321,7 +4314,7 @@
      },
      {
       "name": "expression",
-      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      target = $(\"#code\"),\n      params = {},\n      url = \"export?\";\n      \n    params.id = query.getLabel();\n    params.group = query.getGroup();\n    params.method = \"export\";\n    params.exporter = window.exportTypeParam;\n    target.empty().text(url + $.param(params));\n}",
+      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      target = $(\"#code\"),\n      params = {},\n      url = \"export\";\n\n  params.id = query.getLabel();\n  params.group = query.getGroup();\n  params.method = \"export\";\n  params.exporter = window.exportTypeParam;\n  $.ajax(url, {\n      dataType: 'text',\n      data:params,\n      success: function(response){\n        target.empty().text(response).focus().select();\n      }\n  });\n}",
       "type": "JavaScript"
      },
      {
@@ -5152,7 +5145,7 @@
      },
      {
       "name": "postExecution",
-      "value": "function(){\n    $(\"#\"+this.htmlObject+\" input\").attr('maxLength','20').focus(function(){\n        if(!this.initiallyCleared){\n\t\t\tthis.initiallyCleared = true;\n\t\t\tthis.value = \"\";\n\t\t\t$(this).parent().removeClass('toEdit');\n\t\t}\n    }).keyup(function(event){\n      if (event.keyCode == 13) {\n        $(this).blur();\n      }\n    });\n}",
+      "value": "function(){\n    $(\"#\"+this.htmlObject+\" input\").attr('maxLength','20').focus(function(){\n        if(!this.initiallyCleared){\n\t\t\tthis.initiallyCleared = true;\n\t\t\t$(this).parent().removeClass('toEdit');\n\t\t}\n    }).keyup(function(event){\n      if (event.keyCode == 13) {\n        $(this).blur();\n      }\n    });\n}",
       "type": "JavaScript"
      },
      {
@@ -5644,7 +5637,7 @@
      },
      {
       "name": "javaScript",
-      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionEnvironment\").hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide();\n    $(\"#confirmButtons\").hide();\n    wd.cdb.QueryManager.loadGroupList();\n    $.getJSON('olaputils',{operation: 'GetOlapCubes'},function(resp){\n      var schemas = {},\n        catalogs = resp.catalogs,\n        i,cat;\n      for (i = 0; i < catalogs.length; i++) {\n          cat = catalogs[i];\n          schemas[cat.name] = cat;\n      }\n      Dashboards.schemas = schemas;\n    });\n    $.getJSON('export',{method: 'listExporters'},function(resp){\n      var exporters = {},exp;\n      for (i = 0; i < resp.length; i++) {\n          exp = resp[i];\n          exporters[exp.id] = exp;\n      }\n      Dashboards.exporters = exporters;\n    })\n}",
+      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionPopup\").css('height','0').hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide();\n    $(\"#confirmButtons\").hide();\n    wd.cdb.QueryManager.loadGroupList(function(manager){\n         var names = [];\n          $.each(manager.listGroups(),function(i,e){\n            names.push(e.getLabel());\n         });\n        wd.cdb.openGroups(names);\n    });\n    $.getJSON('olaputils',{operation: 'GetOlapCubes'},function(resp){\n      var schemas = {},\n        catalogs = resp.catalogs,\n        i,cat;\n      for (i = 0; i < catalogs.length; i++) {\n          cat = catalogs[i];\n          schemas[cat.name] = cat;\n      }\n      Dashboards.schemas = schemas;\n    });\n    $.getJSON('export',{method: 'listExporters'},function(resp){\n      var exporters = {},exp;\n      for (i = 0; i < resp.length; i++) {\n          exp = resp[i];\n          exporters[exp.id] = exp;\n      }\n      Dashboards.exporters = exporters;\n    })\n}",
       "type": "JavaScript"
      }
     ]
