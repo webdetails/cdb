@@ -10,7 +10,7 @@ var wd = wd || {};
 
 wd.cdb = wd.cbd || {};
 
-wd.cdb.groupIndex = 0;
+wd.cdb.groupIndex = 1;
 wd.cdb.queryIndex = 0;
 
 wd.cdb.queryClipboard = undefined;
@@ -28,7 +28,8 @@ wd.cdb.cloneGroupNameInput = function(name){
     'groupNameParam' : (groupName+'NameParam')
   };
   
-  Dashboards.setParameter(groupName+'NameParam',groupName);
+
+  Dashboards.setParameter(groupName+'NameParam',  name); //Dashboards.storage.groupsQueries[name].name);
   
   var clone = render_groupNameInput.clone(paramMap,{},objectPlaceHolderMap);
   clone.htmlObject = groupName+'Name';
@@ -125,7 +126,7 @@ wd.cdb.clonePasteQueryButton = function(groupName){
 };
 
 wd.cdb.createGroup = function(){
-  var groupName = 'group'+(++wd.cdb.groupIndex);
+  var groupName = 'Untitled'+(wd.cdb.groupIndex);
         var group = wd.cdb.QueryManager.newGroup(groupName);
   wd.cdb.showGroup(group);
   
@@ -150,6 +151,7 @@ wd.cdb.showGroup = function(newGroup) {
       groupName = newGroup.getLabel(),
       group = dummyGroup.clone();
   
+	
   group.attr('id',groupName);
   
   //header
@@ -193,6 +195,8 @@ wd.cdb.showGroup = function(newGroup) {
       // Animation complete.
     });
   });
+  wd.cdb.groupIndex++;
+  
 };
 
 wd.cdb.cloneQueryNameInput = function(groupName, queryObj){
@@ -531,7 +535,7 @@ wd.cdb.addQuery = function(groupName,queryObj){
   var isNew = false;
   if (!queryObj) {
     isNew = true;
-    queryObj = new wd.cdb.Query("New Query");
+    queryObj = new wd.cdb.Query("Untitled Query");
     queryObj.setGroup(groupName);
   }
   var holder = $("#"+groupName+'Queries');

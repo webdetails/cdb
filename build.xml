@@ -123,6 +123,9 @@
     <echo file="${stage.dir}/${plugin.name}/VERSION.txt">${distribution.version}</echo>
 
 
+	<replace file="${stage.dir}/${plugin.name}/presentation/cdb.cdfde" token="v.12.1a" value="v ${project.revision}"/> 
+
+
     <!-- create a zip file -->
     <zip zipfile="${dist.dir}/${plugin.zipfile}"
          basedir="${stage.dir}"
