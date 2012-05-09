@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin title="Pentaho Data Browser" loader="DEFAULT">
+     <lifecycle-listener class="pt.webdetails.cdb.CdbLifeCycleListener"/>
   <static-paths>
     <static-path url="/cdb/static" localFolder="static"/>
   </static-paths>
