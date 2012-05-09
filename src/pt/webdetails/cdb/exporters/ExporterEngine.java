@@ -23,7 +23,7 @@ import org.pentaho.platform.api.repository.ISolutionRepository;
 import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 import pt.webdetails.cdb.ExporterNotFoundException;
-import pt.webdetails.cpf.InterPluginComms;
+import pt.webdetails.cpf.InterPluginCall;
 
 /**
  *
@@ -143,7 +143,8 @@ public class ExporterEngine {
     params.put("dataAccessId", id);
     params.put("outputType", outputType);
 
-    return InterPluginComms.callPlugin("cda", "doQuery", params);
+    InterPluginCall pluginCall = new InterPluginCall(InterPluginCall.CDA, "doQuery", params);
+    return pluginCall.call();           
   }
 
   private Document getConfigFile() {
