@@ -13,7 +13,7 @@ import org.pentaho.platform.api.engine.IParameterProvider;
 import pt.webdetails.cdb.exporters.ExporterEngine;
 import pt.webdetails.cdb.connector.ConnectorEngine;
 import pt.webdetails.cdb.query.QueryEngine;
-import pt.webdetails.cpf.InterPluginComms;
+import pt.webdetails.cpf.InterPluginCall;
 import pt.webdetails.cpf.InvalidOperationException;
 import pt.webdetails.cpf.SimpleContentGenerator;
 import pt.webdetails.cpf.annotations.AccessLevel;
@@ -40,7 +40,14 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     params.put("absolute", "true");
     params.put("root", root);
     params.put("debug","true");
-    out.write(InterPluginComms.callPlugin("pentaho-cdf-dd", "Render", params).getBytes("utf-8"));
+    
+    InterPluginCall pluginCall = new InterPluginCall(InterPluginCall.CDE, "Render", params);
+    pluginCall.setResponse(getResponse());
+    pluginCall.setOutputStream(out);
+    pluginCall.run();
+    
+    
+//    out.write(InterPluginComms.callPlugin("pentaho-cdf-dd", "Render", params).getBytes("utf-8"));
   }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)

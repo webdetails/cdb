@@ -23,7 +23,7 @@ public class DynamicRExporter extends AbstractExporter {
           + "  id <- paste(\"&id=\",id,sep=\"\");\n"
           + "  outputType <- \"&outputType=csv\";\n"
           + "  completeUrl <- paste(url, group, id, outputType, \"&userid=\",user,\"&password=\",password,sep=\"\");\n"
-          + "  return(read.csv2(completeUrl));\n"
+          + "  return(read.csv2(URLencode(completeUrl)));\n"
           + "}\n\n";
 
   @Override

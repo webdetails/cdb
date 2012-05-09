@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pentaho.platform.api.engine.IParameterProvider;
@@ -22,50 +24,59 @@ import pt.webdetails.cpf.annotations.Exposed;
  */
 public class SimpleContentGenerator extends BaseContentGenerator {
 
-    protected Log logger = LogFactory.getLog(this.getClass());
+  protected Log logger = LogFactory.getLog(this.getClass());
 
-    @Override
-    public void createContent() {
-        IParameterProvider pathParams = parameterProviders.get("path"),
-                requestParams = parameterProviders.get("request");
-        final IContentItem contentItem = outputHandler.getOutputContentItem("response", "content", "", instanceId, "text/html");
+  @Override
+  public void createContent() {
+    IParameterProvider pathParams = parameterProviders.get("path"),
+            requestParams = parameterProviders.get("request");
+    final IContentItem contentItem = outputHandler.getOutputContentItem("response", "content", "", instanceId, "text/html");
 
-        try {
-            final OutputStream out = contentItem.getOutputStream(null);
-            final Class[] params = {OutputStream.class};
+    try {
+      final OutputStream out = contentItem.getOutputStream(null);
+      final Class[] params = {OutputStream.class};
 
-            final String method = pathParams.getStringParameter("path", null).split("/")[1].toLowerCase();
+      final String method = pathParams.getStringParameter("path", null).split("/")[1].toLowerCase();
 
-            try {
-                final Method mthd = this.getClass().getMethod(method, params);
-                boolean exposed = mthd.isAnnotationPresent(Exposed.class);
-                boolean accessible = exposed && mthd.getAnnotation(Exposed.class).accessLevel() == AccessLevel.PUBLIC;
-                if (accessible) {
-                    mthd.invoke(this, out);
-                } else {
-                    throw new IllegalAccessException("Method " + method + " has the wrong access level");
-                }
-            } catch (NoSuchMethodException e) {
-                logger.warn("could't locate method: " + method);
-            } catch (InvocationTargetException e) {
-                logger.error(e.toString());
-
-            } catch (IllegalAccessException e) {
-                logger.warn(e.toString());
-
-            } catch (IllegalArgumentException e) {
-
-                logger.error(e.toString());
-            }
-        } catch (SecurityException e) {
-            logger.warn(e.toString());
-        } catch (IOException e) {
-            logger.error(e.toString());
+      try {
+        final Method mthd = this.getClass().getMethod(method, params);
+        boolean exposed = mthd.isAnnotationPresent(Exposed.class);
+        boolean accessible = exposed && mthd.getAnnotation(Exposed.class).accessLevel() == AccessLevel.PUBLIC;
+        if (accessible) {
+          mthd.invoke(this, out);
+        } else {
+          throw new IllegalAccessException("Method " + method + " has the wrong access level");
         }
-    }
+      } catch (NoSuchMethodException e) {
+        logger.warn("could't locate method: " + method);
+      } catch (InvocationTargetException e) {
+        logger.error(e.toString());
 
-    @Override
-    public Log getLogger() {
-        return logger;
+      } catch (IllegalAccessException e) {
+        logger.warn(e.toString());
+
+      } catch (IllegalArgumentException e) {
+
+        logger.error(e.toString());
+      }
+    } catch (SecurityException e) {
+      logger.warn(e.toString());
+    } catch (IOException e) {
+      logger.error(e.toString());
     }
+  }
+
+  protected ServletResponse getResponse() {
+    return (ServletResponse) parameterProviders.get("path").getParameter("httpresponse");
+  }
+
+  protected ServletRequest getRequest() {
+    return (ServletRequest) parameterProviders.get("path").getParameter("httprequest");
+  }
+
+  @Override
+  public Log getLogger() {
+    return logger;
+  }
+
 }
