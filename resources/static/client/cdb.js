@@ -83,7 +83,9 @@ wd.cdb.cloneRemoveGroupButton = function(groupName){
   clone.expression = function() {
       queries = Object.keys(wd.cdb.QueryManager.getGroup(groupName).listQueries()).map(function(e){return [e,e];}); 
       render_queriesToRemove.valuesArray = queries;
+      render_confirmSelectionButton.groupName = groupName;
       Dashboards.update(render_queriesToRemove);
+      Dashboards.update(render_removeGroupOrQueries);
       originalExpr.apply(this,arguments);
     };
 

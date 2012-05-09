@@ -104,6 +104,10 @@ wd.cdb.Query = function (label,type,definition) {
   };
 
   this.deleteSelf = function() {
+    /* We should only request deletion for queries that have actually been added server-side */
+    if (!this.getKey()) {
+      return;
+    }
     var params = {
       method: 'deleteQuery',
       id: this.getKey(),
