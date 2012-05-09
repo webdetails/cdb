@@ -192,7 +192,7 @@ wd.cdb.QueryManager = (function() {
     };
 
     myself.loadGroup = function(label,callback) {
-      wd.ctools.persistence.query("select * from Query where group = \"" + label +"\"",function(results){
+      wd.ctools.persistence.query("select * from Query where group = \"" + label +"\" and userid = \"" + Dashboards.context.user + "\"",function(results){
         if(results) {
           var group = new wd.cdb.QueryGroup(label), query, q, queryData;
           myself.addGroup(group);

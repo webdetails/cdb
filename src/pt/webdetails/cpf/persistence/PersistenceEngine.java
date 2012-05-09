@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.platform.api.engine.IPentahoSession;
+import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import pt.webdetails.cpf.InvalidOperationException;
 import pt.webdetails.cpf.Util;
 
@@ -276,6 +277,7 @@ public class PersistenceEngine {
 
             if (id == null || id.length() == 0) {
                 doc = new ODocument(db, className);
+                doc.field("userid", PentahoSessionHolder.getSession().getName());
             } else {
                 List<ODocument> result = db.query(new OSQLSynchQuery<ODocument>("select FROM " + id));
 

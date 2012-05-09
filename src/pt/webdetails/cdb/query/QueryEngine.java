@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.pentaho.platform.api.engine.IParameterProvider;
+import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import pt.webdetails.cdb.connector.ConnectorEngine;
 import pt.webdetails.cpf.persistence.PersistenceEngine;
 
@@ -34,7 +35,7 @@ public class QueryEngine {
     JSONObject response;
     PersistenceEngine pe = PersistenceEngine.getInstance();
     try {
-      response = pe.query("select distinct(group) as name from Query");
+      response = pe.query("select distinct(group) as name from Query where userid = '" +  PentahoSessionHolder.getSession().getName()  + "'");
     } catch (JSONException e) {
       return null;
     }
