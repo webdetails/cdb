@@ -442,9 +442,9 @@ wd.cdb.showQueryEditor = function(groupName,queryObj,callback,isNew) {
       $ph.animate({ height: '0px'}, 500, function() {
         $ph.hide();
       });
+      wd.cdb.saveGroup(groupName);
     });
     wd.cdb.setQueryState(queryObj,'closed');
-    wd.cdb.saveGroup(groupName);
       wd.cdb.setClosedMode(queryObj);
   };
 
