@@ -410,7 +410,10 @@ wd.cdb.showQueryEditor = function(groupName,queryObj,callback,isNew) {
   }
 
   render_cancelQueryButton.expression = function(){
-    if(wd.cdb.getQueryState(queryGuid) == 'edition no-edited'){
+    if(!queryObj.getDefinition()) {
+      wd.cdb.QueryManager.getGroup(groupName).deleteQuery(queryObj.getLabel());
+      $("#" + queryGuid).remove();
+    } else if(wd.cdb.getQueryState(queryGuid) == 'edition no-edited'){
       wd.cdb.setQueryState(queryObj,'new');
       wd.cdb.setNewMode(queryObj);
       
