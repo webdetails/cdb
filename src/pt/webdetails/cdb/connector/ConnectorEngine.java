@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.pentaho.platform.api.engine.IParameterProvider;
+import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import pt.webdetails.cda.connections.Connection;
 import pt.webdetails.cda.dataaccess.DataAccess;
 import pt.webdetails.cda.settings.CdaSettings;
@@ -55,7 +56,9 @@ public class ConnectorEngine {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
 
-      JSONObject response = eng.query("select * from Query where group = \"" + groupId + "\"");
+      JSONObject response = eng.query("select * from Query where group = \"" + 
+              groupId + "\" and userid = \"" + 
+              PentahoSessionHolder.getSession().getName() + "\"");
       JSONArray queries = (JSONArray) response.get("object");
       CdaSettings cda = new CdaSettings(groupId, null);
       for (int i = 0; i < queries.length(); i++) {
@@ -65,6 +68,11 @@ public class ConnectorEngine {
           Connector conn = ConnectorEngine.getInstance().getConnector(type);
 
           Connection connection = conn.exportCdaConnection(query);
+          if (connection == null) {
+            logger.error("Connection is null. Something is wrong with query " + 
+                    query.getString("name") +". Ignoring.");
+            continue;
+          }
           cda.addConnection(connection);
           DataAccess dataAccess = conn.exportCdaDataAccess(query);
           cda.addDataAccess(dataAccess);
