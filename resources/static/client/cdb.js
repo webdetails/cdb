@@ -137,13 +137,6 @@ wd.cdb.saveGroup = function(groupName){
   wd.cdb.QueryManager.getGroup(groupName).save();
 };
 
-wd.cdb.removeGroup = function(groupName){
-  var storage = Dashboards.storage.groupsQueries;
-  delete storage[groupName];
-
-  Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
-  Dashboards.saveStorage();
-};  
 
 wd.cdb.showGroup = function(newGroup) {
   var objectPlaceholder = $("#"+placeHolderName),
@@ -290,83 +283,6 @@ wd.cdb.cloneExportButton = function(groupName, queryObj){
         clone.queryObj = queryObj;
   Dashboards.addComponents([clone]);
   window[clone.name] = clone;
-  
-  return clone;
-};
-
-wd.cdb.cloneOkButton = function(groupName, queryObj){
-  var queryGuid = queryObj.getGUID(),
-      guidParam = queryGuid.replace(/-/g, '_'),
-      objectPlaceHolderMap = {
-        'dummyOkButton': (queryGuid+'OkButton') 
-      };
-  
-  var clone = render_okQueryButton.clone({},{},objectPlaceHolderMap);
-  clone.htmlObject = queryGuid+'OkButton';
-  clone.name = 'render_'+guidParam+'OkButton';
-  
-  clone.expression = function(){
-    var connector = wd.cdb.connectors.ConnectorEngine.getConnector(queryObj.getType()),
-        $ph =  $('#editionPopup');
-    connector.saveQuery($('#editionEnvironment'),queryObj,function(){
-      $("#body").show();
-      $ph.animate({ height: '0px'}, 500, function() {
-        $ph.hide();
-      });
-      $("#"+queryGuid+'OkButton').hide();
-      $("#"+queryGuid+'CancelButton').hide();
-      $("#"+queryGuid+"CopyButton").css('margin','4px 1px 4px 8px');
-      $("#"+queryGuid+"ExportButton").css('margin','4px 4px 4px 1px');
-      $("#"+queryGuid+'ActiveTypeButton button').removeAttr('disabled').width('487px');
-      wd.cdb.setQueryState(queryObj,'closed');
-      wd.cdb.saveGroup(groupName);
-    });
-  }
-  
-  Dashboards.addComponents([clone]);
-  window[clone.name] = clone;
-  
-  return clone;
-};
-
-wd.cdb.cloneCancelButton = function(groupName, queryObj){
-  var queryGuid = queryObj.getGUID(),
-      guidParam = queryGuid.replace(/-/g, '_'),
-      objectPlaceHolderMap = {
-        'dummyCancelButton': (queryGuid+'CancelButton') 
-      };
-  
-  var clone = render_cancelQueryButton.clone({},{},objectPlaceHolderMap);
-  clone.htmlObject = queryGuid+'CancelButton';
-  clone.name = 'render_'+guidParam+'CancelButton';
-  
-  clone.expression = function(){
-    if(wd.cdb.getQueryState(queryGuid) == 'edition no-edited'){
-      wd.cdb.setQueryState(queryObj,'new');
-      wd.cdb.setNewMode(queryObj);
-      
-    } else if(wd.cdb.getQueryState(queryGuid) == 'edition edited'){
-      wd.cdb.setQueryState(queryObj,'closed');
-      wd.cdb.setClosedMode(queryObj);
-      //cancel changes
-          
-      $("#"+queryGuid+'ActiveTypeButton button').removeAttr('disabled').width('487px');
-    }
-    
-    $('#editionPopup').animate({
-        height: '0px'
-      }, 500, function() {
-        $('#editionPopup').hide();
-      }
-    );
-  
-    
-  }
-  
-  Dashboards.addComponents([clone]);
-  window[clone.name] = clone;
-  
-  
   
   return clone;
 };
@@ -573,8 +489,6 @@ wd.cdb.addQuery = function(groupName,queryObj){
   Dashboards.update(wd.cdb.cloneCopyButton(groupName, queryObj));
   Dashboards.update(wd.cdb.cloneExportButton(groupName, queryObj)); 
   Dashboards.update(wd.cdb.cloneProceedButton(groupName, queryObj,isNew));
-  Dashboards.update(wd.cdb.cloneOkButton(groupName, queryObj));
-  Dashboards.update(wd.cdb.cloneCancelButton(groupName, queryObj));
   
   $("#"+queryGuid+"ActiveTypeButton button").css('width','295px');
 
