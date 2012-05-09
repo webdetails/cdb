@@ -4606,7 +4606,7 @@
      },
      {
       "name": "expression",
-      "value": "function(){\n    $(this).parent().animate({height: 'toggle'},400,function(){});\n    $(\"#confirmButtons\").animate({height: 'toggle'},400,function(){});\n}",
+      "value": "function(evt){\n    $(evt.target).parent().animate({height: 'toggle'},400,function(){});\n    $(\"#confirmButtons\").animate({height: 'toggle'},400,function(){});\n}",
       "type": "JavaScript"
      },
      {
@@ -4679,7 +4679,7 @@
      },
      {
       "name": "expression",
-      "value": "function(){\n    Dashboards.setParameter(render_removeGroupOrQueries.parameter,'');\n    render_removeGroupOrQueries.update();\n    \n    Dashboards.setParameter(render_queriesToRemove.parameter,'');\n    render_queriesToRemove.update();\n    \n    $(this).parent().parent().animate({height: 'toggle'},400,function(){});\n    $(\"#removeSelectionButton\").animate({height: 'toggle'},400,function(){});\n}\n",
+      "value": "function(){\n    Dashboards.setParameter(render_removeGroupOrQueries.parameter,'');\n    render_removeGroupOrQueries.update();\n    \n    Dashboards.setParameter(render_queriesToRemove.parameter,'');\n    render_queriesToRemove.update();\n    \n    $(\"#confirmButtons\").animate({height: 'toggle'},400,function(){});\n    $(\"#removeSelectionButton\").animate({height: 'toggle'},400,function(){});\n}\n",
       "type": "JavaScript"
      },
      {
@@ -4752,7 +4752,7 @@
      },
      {
       "name": "expression",
-      "value": "function(){\n    $(this).parent().parent().animate({height: 'toggle'},400,function(){});\n    $(\"#removeSelectionButton\").animate({height: 'toggle'},400,function(){});\n    \n    wd.cdb.clickDocRemoveEnv();\n    if(removeGroupOrQueriesParam == \"Remove Entire Group\"){\n        wd.cdb.removeGroup(\"dummy\"); //replace by correct group name\n    } else {\n        wd.cdb.removeQueries(this.groupName, queriesToRemoveParam);\n    }\n    \n    Dashboards.setParameter(render_removeGroupOrQueries.parameter,'');\n    Dashboards.update(render_removeGroupOrQueries);\n    \n    Dashboards.setParameter(render_queriesToRemove.parameter,'');\n    Dashboards.update(render_queriesToRemove);\n\n    \n    \n    \n    \n}\n",
+      "value": "function(evt){\n    $(\"#confirmButtons\").animate({height: 'toggle'},400,function(){});\n    $(\"#removeSelectionButton\").animate({height: 'toggle'},400,function(){});\n    \n    wd.cdb.clickDocRemoveEnv();\n    if(removeGroupOrQueriesParam == \"Remove Entire Group\"){\n        wd.cdb.removeGroup(this.groupName); //replace by correct group name\n    } else {\n        wd.cdb.removeQueries(this.groupName, queriesToRemoveParam);\n    }\n    \n    Dashboards.setParameter(render_removeGroupOrQueries.parameter,'');\n    Dashboards.update(render_removeGroupOrQueries);\n    \n    Dashboards.setParameter(render_queriesToRemove.parameter,'');\n    Dashboards.update(render_queriesToRemove);\n\n    \n    \n    \n    \n}\n",
       "type": "JavaScript"
      },
      {
@@ -5384,7 +5384,7 @@
      },
      {
       "name": "preExecution",
-      "value": "function(){\n    this.previousParam = \"Remove Entire Group\";\n}",
+      "value": "function(){\n    this.previousParam = \"Remove Entire Group\";\n    Dashboards.setParameter(this.parameter,\"Remove Entire Group\");\n}",
       "type": "JavaScript"
      },
      {
@@ -5399,7 +5399,7 @@
      },
      {
       "name": "postChange",
-      "value": "function(){\n    if(Dashboards.getParameterValue(this.parameter) != this.previousParam){\n        if(Dashboards.getParameterValue(this.parameter) == \"Remove Entire Group\"){\n            $(\"#queriesToRemove\").animate({\n                height: 'toggle'\n            },500,function(){});\n        } else if(Dashboards.getParameterValue(this.parameter) == \"Select and Remove Queries\"){\n            $(\"#queriesToRemove\").animate({\n                height: 'toggle'\n            },500,function(){});\n        }\n        this.previousParam = Dashboards.getParameterValue(this.parameter);\n    }\n    \n}",
+      "value": "function(){\n    if(Dashboards.getParameterValue(this.parameter) != this.previousParam){\n        if(Dashboards.getParameterValue(this.parameter) == \"Remove Entire Group\"){\n            $(\"#queriesToRemove\").animate({\n                height: 'toggle'\n            },500,function(){});\n        } else if(Dashboards.getParameterValue(this.parameter) == \"Select and Remove Queries\"){\n            $(\"#queriesToRemove\").animate({\n                height: 'toggle'\n            },500,function(){});\n        }\n        this.previousParam = Dashboards.getParameterValue(this.parameter);\n    }\n}",
       "type": "JavaScript"
      },
      {
@@ -5637,7 +5637,7 @@
      },
      {
       "name": "javaScript",
-      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionPopup\").css('height','0').hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide();\n    $(\"#confirmButtons\").hide();\n    wd.cdb.QueryManager.loadGroupList(function(manager){\n         var names = [];\n          $.each(manager.listGroups(),function(i,e){\n            names.push(e.getLabel());\n         });\n        wd.cdb.openGroups(names);\n        if (names.length == 0)\n            wd.cdb.createGroup();\n    });\n    $.getJSON('olaputils',{operation: 'GetOlapCubes'},function(resp){\n      var schemas = {},\n        catalogs = resp.catalogs,\n        i,cat;\n      for (i = 0; i < catalogs.length; i++) {\n          cat = catalogs[i];\n          schemas[cat.name] = cat;\n      }\n      Dashboards.schemas = schemas;\n    });\n    $.getJSON('export',{method: 'listExporters'},function(resp){\n      var exporters = {},exp;\n      for (i = 0; i < resp.length; i++) {\n          exp = resp[i];\n          exporters[exp.id] = exp;\n      }\n      Dashboards.exporters = exporters;\n    })\n}",
+      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionPopup\").css('height','0').hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide();\n    $(\"#confirmButtons\").hide();\n    wd.cdb.QueryManager.loadGroupList(function(manager){\n         var names = [];\n          $.each(manager.listGroups(),function(i,e){\n            names.push(e.getLabel());\n         });\n        wd.cdb.openGroups(names);\n          if (names.length === 0) {\n            wd.cdb.createGroup();\n          }\n    });\n    $.getJSON('olaputils',{operation: 'GetOlapCubes'},function(resp){\n      var schemas = {},\n        catalogs = resp.catalogs,\n        i,cat;\n      for (i = 0; i < catalogs.length; i++) {\n          cat = catalogs[i];\n          schemas[cat.name] = cat;\n      }\n      Dashboards.schemas = schemas;\n    });\n    $.getJSON('export',{method: 'listExporters'},function(resp){\n      var exporters = {},exp;\n      for (i = 0; i < resp.length; i++) {\n          exp = resp[i];\n          exporters[exp.id] = exp;\n      }\n      Dashboards.exporters = exporters;\n    })\n}",
       "type": "JavaScript"
      }
     ]
