@@ -15,6 +15,10 @@ import java.util.zip.ZipOutputStream;
  */
 public class StaticPythonExporter extends AbstractExporter {
 
+  public StaticPythonExporter() {
+    this.fileExportExtension = "zip";
+  }
+
   @Override
   public String export(String group, String id, String url) {
     return "";

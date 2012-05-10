@@ -18,6 +18,9 @@ public interface Exporter {
 
   public String export(String group, String id, String url, Map<String,String> params);
 
+  
+  public String getFilename(String group, String id, String url);
+
   public void binaryExport(String group, String id, String url, OutputStream out) throws IOException ;
 
   public void binaryExport(String group, String id, String url, Map<String,String> params, OutputStream out) throws IOException ;

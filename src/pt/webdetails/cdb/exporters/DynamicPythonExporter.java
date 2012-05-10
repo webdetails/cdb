@@ -10,13 +10,17 @@ package pt.webdetails.cdb.exporters;
  */
 public class DynamicPythonExporter extends AbstractExporter {
 
+    public DynamicPythonExporter() {
+    this.fileExportExtension = "py";
+  }
+    
   static final private String LOAD_CDB = "def readCdb(url, group, id):\n"
           + "  import csv, getpass, urllib\n"
-          + "  user = \"&userid=\" + raw_input(\"User: \")\n"
-          + "  password = \"&password=\" + getpass.getpass()\n"
+          + "  user = \"&userid=\" + urllib.quote(raw_input(\"User: \"))\n"
+          + "  password = \"&password=\" + urllib.quote(getpass.getpass())\n"
           + "  base_path = \"/pentaho/content/cdb/doQuery?outputType=csv\"\n"
-          + "  file = \"&group=\" + group\n"
-          + "  data_id = \"&id=\" + id\n"
+          + "  file = \"&group=\" + urllib.quote(group)\n"
+          + "  data_id = \"&id=\" + urllib.quote(id)\n"
           + "  complete_url = url + base_path + file + data_id + user + password\n"
           + "  print complete_url\n"
           + "  csv_file = open(urllib.urlretrieve(complete_url)[0])\n"

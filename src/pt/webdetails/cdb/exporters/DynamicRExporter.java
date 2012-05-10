@@ -13,6 +13,10 @@ import java.io.OutputStream;
  */
 public class DynamicRExporter extends AbstractExporter {
 
+  public DynamicRExporter() {
+    this.fileExportExtension = "r";
+  }
+  
   static final private String LOAD_CDB = "readCdb <- function(server,group,id) {\n"
           + "  cat(\"User: \");\n"
           + "  user <- readline();\n"

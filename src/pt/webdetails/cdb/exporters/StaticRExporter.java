@@ -15,6 +15,10 @@ import java.util.zip.ZipOutputStream;
  */
 public class StaticRExporter extends AbstractExporter {
 
+  public StaticRExporter() {
+    this.fileExportExtension = "zip";
+  }
+
   @Override
   public String export(String group, String id, String url) {
     return "";
@@ -23,7 +27,7 @@ public class StaticRExporter extends AbstractExporter {
   @Override
   public void binaryExport(String group, String id, String url, OutputStream out) throws IOException {
     String code = "cdbData <- read.csv2(\"" + id + ".csv\")\n";
-    ZipOutputStream zos =  new ZipOutputStream(out);
+    ZipOutputStream zos = new ZipOutputStream(out);
     zos.putNextEntry(new ZipEntry(group + "/"));
     zos.putNextEntry(new ZipEntry(group + "/" + id + ".R"));
     zos.write(code.getBytes("utf-8"));

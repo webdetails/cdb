@@ -13,10 +13,12 @@ import java.io.OutputStream;
  */
 public class CsvExporter extends AbstractExporter {
 
+  public CsvExporter() {
+    this.fileExportExtension = "csv";
+  }
   @Override
   public String export(String group, String id, String url) {
     return ExporterEngine.exportCda(group, id, "csv");
   }
-
 
 }

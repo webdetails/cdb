@@ -53,19 +53,20 @@ public class ExporterEngine {
         out.write(exporters.getBytes("utf-8"));
       } else if ("export".equals(method)) {
         ServletRequestWrapper wrapper = (ServletRequestWrapper) pathParams.getParameter("httprequest");
-        String exporter = requestParams.getStringParameter("exporter", ""),
+        String exporterName = requestParams.getStringParameter("exporter", ""),
                 group = requestParams.getStringParameter("group", ""),
                 id = requestParams.getStringParameter("id", ""),
                 filename = requestParams.getStringParameter("filename", "default"),
                 url = wrapper.getScheme() + "://" + wrapper.getServerName() + ":" + wrapper.getServerPort();
 
         boolean toFile = requestParams.getStringParameter("toFile", "false").equals("true");
+        Exporter exporter = getExporter(exporterName);
         if (toFile) {
           HttpServletResponse response = (HttpServletResponse) pathParams.getParameter("httpresponse");
-          response.setHeader("content-disposition", "attachment; filename=" + filename);
-          exportToFile(exporter, group, id, url, out);
+          response.setHeader("content-disposition", "attachment; filename=" + exporter.getFilename(group, id, url));
+          exporter.binaryExport(group, id, url, out);
         } else {
-          export(exporter, group, id, url, out);
+          out.write(exporter.export(group, id, url).getBytes("utf-8"));
         }
         /*} catch (ExporterRuntimeException e) {
         logger.error(e);

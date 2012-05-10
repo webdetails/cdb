@@ -14,6 +14,7 @@ import java.util.Map;
  */
 public abstract class AbstractExporter implements Exporter {
 
+  protected String fileExportExtension; 
   AbstractExporter() {
   }
 
@@ -31,5 +32,8 @@ public abstract class AbstractExporter implements Exporter {
   public void binaryExport(String group, String id, String url, OutputStream out) throws IOException {
     out.write(export(group, id, url).getBytes("utf-8"));
   }
-
+  @Override
+  public String getFilename(String group, String id, String url) {
+    return group + "-" + id + "." + fileExportExtension;
+  }
 }
