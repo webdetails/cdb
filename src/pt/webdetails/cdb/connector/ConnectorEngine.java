@@ -80,7 +80,7 @@ public class ConnectorEngine {
           logger.error(e);
         }
       }
-      RepositoryUtils.writeSolutionFile("cdb/queries", groupId + ".cda", cda.asXML());
+      RepositoryUtils.writeSolutionFile("cdb/queries", PentahoSessionHolder.getSession().getName() + "." + groupId + ".cda", cda.asXML());
     } catch (Exception e) {
       logger.error(e);
     }

@@ -18,7 +18,7 @@ wd.cdb.queryClipboard = undefined;
 Dashboards.storage.groupsQueries = {}; 
 
 
-wd.cdb.cloneGroupNameInput = function(name){
+wd.cdb.cloneGroupNameInput = function(name, description){
   var groupName = name;
   var objectPlaceHolderMap = {
     'dummyGroupName': (groupName+'Name') 
@@ -29,17 +29,15 @@ wd.cdb.cloneGroupNameInput = function(name){
   };
   
 
-  Dashboards.setParameter(groupName+'NameParam',  name); //Dashboards.storage.groupsQueries[name].name);
+  Dashboards.setParameter(groupName+'NameParam',  description); 
   
   var clone = render_groupNameInput.clone(paramMap,{},objectPlaceHolderMap);
   clone.htmlObject = groupName+'Name';
   clone.name = 'render_'+groupName+'NameInput';
   clone.postChange = function() {
-    var storage = Dashboards.storage.groupsQueries;
-    storage[groupName].name = Dashboards.getParameterValue(groupName+'NameParam');
-    
-    Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
-    Dashboards.saveStorage();
+    var affectedGroup = wd.cdb.QueryManager.getGroup(groupName);
+    affectedGroup.setDescription(Dashboards.getParameterValue(this.parameter));
+    affectedGroup.save();
   };
   Dashboards.addComponents([clone]);
   window[clone.name] = clone;
@@ -81,13 +79,13 @@ wd.cdb.cloneRemoveGroupButton = function(groupName){
   var originalExpr = clone.expression;
 
   clone.expression = function() {
-      queries = Object.keys(wd.cdb.QueryManager.getGroup(groupName).listQueries()).map(function(e){return [e,e];}); 
-      render_queriesToRemove.valuesArray = queries;
-      render_confirmSelectionButton.groupName = groupName;
-      Dashboards.update(render_queriesToRemove);
-      Dashboards.update(render_removeGroupOrQueries);
-      originalExpr.apply(this,arguments);
-    };
+    queries = Object.keys(wd.cdb.QueryManager.getGroup(groupName).listQueries()).map(function(e){return [e,e];}); 
+    render_queriesToRemove.valuesArray = queries;
+    render_confirmSelectionButton.groupName = groupName;
+    Dashboards.update(render_queriesToRemove);
+    Dashboards.update(render_removeGroupOrQueries);
+    originalExpr.apply(this,arguments);
+  };
 
   render_confirmSelectionButton.groupName = groupName;
   return clone;
@@ -128,8 +126,12 @@ wd.cdb.clonePasteQueryButton = function(groupName){
 };
 
 wd.cdb.createGroup = function(){
-  var groupName = 'Untitled'+(wd.cdb.groupIndex);
-        var group = wd.cdb.QueryManager.newGroup(groupName);
+  var groupName = 'group'+(wd.cdb.groupIndex);
+  while (wd.cdb.QueryManager.getGroup(groupName)) {
+  	groupName = 'group'+(++wd.cdb.groupIndex);  
+  }
+  
+  var group = wd.cdb.QueryManager.newGroup(groupName, 'Untitled Group');
   wd.cdb.showGroup(group);
   
 };
@@ -144,6 +146,7 @@ wd.cdb.showGroup = function(newGroup) {
   var objectPlaceholder = $("#"+placeHolderName),
       dummyGroup = $("#dummyGroup"),
       groupName = newGroup.getLabel(),
+      groupDescription = newGroup.getDescription(),
       group = dummyGroup.clone();
   
 	
@@ -161,9 +164,9 @@ wd.cdb.showGroup = function(newGroup) {
   
   objectPlaceholder.append(group);
   
-  wd.cdb.createGroupElement(groupName,'Untitled Group'+wd.cdb.groupIndex);
+  wd.cdb.createGroupElement(groupName,groupDescription);
   
-  Dashboards.update(wd.cdb.cloneGroupNameInput(groupName));
+  Dashboards.update(wd.cdb.cloneGroupNameInput(groupName, groupDescription));
 //  Dashboards.update(wd.cdb.cloneSaveGroupButton(groupName));  
   Dashboards.update(wd.cdb.cloneRemoveGroupButton(groupName));
   Dashboards.update(wd.cdb.cloneAddQueryButton(groupName));
@@ -457,6 +460,7 @@ wd.cdb.addQuery = function(groupName,queryObj){
   if (!queryObj) {
     isNew = true;
     queryObj = new wd.cdb.Query("Untitled Query", groupName);
+    queryObj.setGroupName(wd.cdb.QueryManager.getGroup(groupName).getDescription());
   }
   var holder = $("#"+groupName+'Queries');
   
@@ -509,7 +513,9 @@ wd.cdb.addQuery = function(groupName,queryObj){
 };
 
 wd.cdb.pasteQuery = function(groupName){
-  wd.cdb.addQuery(groupName,wd.cdb.queryClipboard.duplicate(groupName));
+	var group = wd.cdb.QueryManager.getGroup(groupName);
+  	wd.cdb.addQuery(groupName,wd.cdb.queryClipboard.duplicate(groupName, group.getDescription()));
+  	group.save();
 };
 
 
@@ -533,7 +539,7 @@ wd.cdb.getIndexFromGroupName = function(groupName){
 };
 
 wd.cdb.createGroupElement = function(groupName, name){
-  var storage = Dashboards.storage.groupsQueries;
+/*  var storage = Dashboards.storage.groupsQueries;
   storage[groupName] = {
     'name': name,
     'queries': {}
@@ -541,10 +547,11 @@ wd.cdb.createGroupElement = function(groupName, name){
   
   Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
   Dashboards.saveStorage();
+  */
 };
 
 wd.cdb.createQueryElement = function(groupName, queryName){
-  var storage = Dashboards.storage.groupsQueries;
+/*  var storage = Dashboards.storage.groupsQueries;
   storage[groupName].queries[queryName] = {
     'name': 'none',
     'type': 'none',
@@ -553,6 +560,7 @@ wd.cdb.createQueryElement = function(groupName, queryName){
   
   Dashboards.setParameter('Dashboards.storage.groupsQueries',storage);
   Dashboards.saveStorage();
+  */
 };
 
 

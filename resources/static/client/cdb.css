@@ -309,6 +309,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cad3d6', end
 }
 
 
+.collapsed{
+	color: #819298;
+}
+
 /* Data Cells */
 .WDdataCell2 {
 	background: #ffffff; /* Old browsers */
