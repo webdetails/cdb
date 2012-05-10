@@ -456,8 +456,7 @@ wd.cdb.addQuery = function(groupName,queryObj){
   var isNew = false;
   if (!queryObj) {
     isNew = true;
-    queryObj = new wd.cdb.Query("Untitled Query");
-    queryObj.setGroup(groupName);
+    queryObj = new wd.cdb.Query("Untitled Query", groupName);
   }
   var holder = $("#"+groupName+'Queries');
   

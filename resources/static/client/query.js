@@ -3,15 +3,17 @@
  */
 
 wd.cdb.TypeAlreadySetException = function(){};
-wd.cdb.Query = function (label,type,definition) {
+wd.cdb.Query = function (label, group, type, guid, definition) {
   "use strict";
   var myself = this,
       _label = label,
-      _group,
+      _group = group,
       _query = definition,
       _type = type,
       _id,
-      _guid = wd.ctools.utils.createGUID();
+      _guid = guid || wd.ctools.utils.createGUID();
+
+
 
   var updateBackend = function() {
     /* We only want to notify the backend of changes
@@ -31,7 +33,7 @@ wd.cdb.Query = function (label,type,definition) {
     }
   }
 
-  var copyBackend = function(newName, newGroup) {
+  var copyBackend = function(newGuid) {
     /* We only want to notify the backend of changes
      * to queries it already knows about, and the id
      * is the only way of knowing that's the case.
@@ -40,8 +42,7 @@ wd.cdb.Query = function (label,type,definition) {
       var params = {
         method: 'copyQuery',
         id: myself.getKey(),
-        name: newName,
-        group: newGroup
+        newguid: newGuid
       };
       $.getJSON(webAppPath + "/content/cdb/connector", $.param(params),function(response){
         wd.ctools.persistence.saveObject(null, "Query", myself);
@@ -72,7 +73,7 @@ wd.cdb.Query = function (label,type,definition) {
     _type = type;
   };
   this.toJSON = function() {
-    return JSON.stringify({name: _label, group: _group, type: _type, definition: _query});
+    return JSON.stringify({name: _label, group: _group, type: _type, definition: _query, guid: _guid});
   };
 
   this.getGroup = function() {
@@ -97,9 +98,9 @@ wd.cdb.Query = function (label,type,definition) {
   };
 
   this.duplicate = function(newGroup) {
-    var that = new wd.cdb.Query(this.getLabel() + " (Copy)",this.getType(),this.getDefinition());
-    that.setGroup(newGroup);
-    copyBackend(that.getLabel(),that.getGroup());
+    var that = new wd.cdb.Query(this.getLabel() + " (Copy)", newGroup, this.getType(),wd.ctools.utils.createGUID(),this.getDefinition());
+    wd.ctools.persistence.saveObject(null,"Query",that);
+    copyBackend(that.getGUID());
     return that;
   };
 
@@ -116,6 +117,10 @@ wd.cdb.Query = function (label,type,definition) {
     $.getJSON(webAppPath + "/content/cdb/connector", $.param(params),function(response){
       wd.ctools.persistence.deleteObject(myself.getKey(), "Query");
     });
+  }
+
+  if(group){
+    wd.cdb.QueryManager.getGroup(group).addQuery(this);
   }
 }
 
@@ -202,9 +207,8 @@ wd.cdb.QueryManager = (function() {
           myself.addGroup(group);
           for (q in results.object) if (results.object.hasOwnProperty(q)) {
             queryData = results.object[q];
-            query = new wd.cdb.Query(queryData.name, queryData.type, queryData.definition);
+            query = new wd.cdb.Query(queryData.name, queryData.group, queryData.type, queryData.guid, queryData.definition);
             query.setKey(queryData["@rid"]);
-            query.setGroup(queryData.group);
             group.addQuery(query);
           }
           callback(group);
