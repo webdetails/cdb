@@ -18,10 +18,7 @@ public interface Connector {
 
   public Connection exportCdaConnection(JSONObject query);
 
-  public void copyQuery(String oldGroup, String oldName, String oldPath, String newPath);
+  public void copyQuery(String oldGuid, String newGuid);
 
-  public void moveQuery(String oldGroup, String oldName, String oldPath, String newPath);
-
-  public void deleteQuery(String group, String name);
-
+  public void deleteQuery(String guid);
 }

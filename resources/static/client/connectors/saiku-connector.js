@@ -67,11 +67,11 @@ SaikuConnector = function() {
       query.setDefinition({catalog: schema, cube: cube, jndi: jndi, query: mdx});
       callback(query);
     };
-    openSaiku(placeholder, "cdb", "saiku" , query.getGroup() + "-" + query.getLabel() + ".saiku", cb, "edit");    
+    openSaiku(placeholder, "cdb", "saiku" , query.getGUID() + ".saiku", cb, "edit");    
   };
 
   this.saveQuery = function(placeholder, queryObj, callback) {
-    var filename = queryObj.getGroup() + '-' + queryObj.getLabel() + '.saiku',
+    var filename = queryObj.getGUID() + '.saiku',
         solution = 'cdb',
         path = 'saiku',
         overwrite = true,

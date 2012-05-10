@@ -56,9 +56,9 @@ public class ConnectorEngine {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
 
-      JSONObject response = eng.query("select * from Query where group = \"" + 
-              groupId + "\" and userid = \"" + 
-              PentahoSessionHolder.getSession().getName() + "\"");
+      JSONObject response = eng.query("select * from Query where group = \""
+              + groupId + "\" and userid = \""
+              + PentahoSessionHolder.getSession().getName() + "\"");
       JSONArray queries = (JSONArray) response.get("object");
       CdaSettings cda = new CdaSettings(groupId, null);
       for (int i = 0; i < queries.length(); i++) {
@@ -69,8 +69,8 @@ public class ConnectorEngine {
 
           Connection connection = conn.exportCdaConnection(query);
           if (connection == null) {
-            logger.error("Connection is null. Something is wrong with query " + 
-                    query.getString("name") +". Ignoring.");
+            logger.error("Connection is null. Something is wrong with query "
+                    + query.getString("name") + ". Ignoring.");
             continue;
           }
           cda.addConnection(connection);
@@ -92,15 +92,10 @@ public class ConnectorEngine {
     if ("exportCda".equals(method)) {
       String group = requestParams.getStringParameter("group", "");
       exportCda(group);
-    } else if ("moveQuery".equals(method) || "copyQuery".equals(method)) {
+    } else if ("copyQuery".equals(method)) {
       String id = requestParams.getStringParameter("id", ""),
-              newName = requestParams.getStringParameter("name", ""),
-              newGroup = requestParams.getStringParameter("group", "");
-      if ("moveQuery".equals(method)) {
-        moveQuery(id, newGroup, newName);
-      } else {
-        copyQuery(id, newGroup, newName);
-      }
+              newGuid = requestParams.getStringParameter("newguid", "");
+      copyQuery(id, newGuid);
     } else if ("deleteQuery".equals(method)) {
       String id = requestParams.getStringParameter("id", "");
       deleteQuery(id);
@@ -109,31 +104,15 @@ public class ConnectorEngine {
     }
   }
 
-  public void moveQuery(String id, String newGroup, String newName) {
+  public void copyQuery(String id, String newGuid) {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
 
       JSONObject response = eng.query("select * from Query where @rid = " + id);
       JSONObject query = (JSONObject) ((JSONArray) response.get("object")).get(0);
       String type = query.get("type").toString(),
-              oldName = query.get("name").toString(),
-              oldGroup = query.get("group").toString();
-      getConnector(type).moveQuery(oldGroup, oldName, newGroup, newName);
-    } catch (Exception e) {
-      logger.error(e);
-    }
-  }
-
-  public void copyQuery(String id, String newGroup, String newName) {
-    PersistenceEngine eng = PersistenceEngine.getInstance();
-    try {
-
-      JSONObject response = eng.query("select * from Query where @rid = " + id);
-      JSONObject query = (JSONObject) ((JSONArray) response.get("object")).get(0);
-      String type = query.get("type").toString(),
-              oldName = query.get("name").toString(),
-              oldGroup = query.get("group").toString();
-      getConnector(type).copyQuery(oldGroup, oldName, newGroup, newName);
+              oldGuid = query.get("guid").toString();
+      getConnector(type).copyQuery(oldGuid, newGuid);
     } catch (Exception e) {
       logger.error(e);
     }
@@ -145,9 +124,8 @@ public class ConnectorEngine {
       JSONObject response = eng.query("select type from Query where @rid = " + id);
       JSONObject query = (JSONObject) ((JSONArray) response.get("object")).get(0);
       String type = query.get("type").toString(),
-              name = query.get("name").toString(),
-              group = query.get("group").toString();
-      getConnector(type).deleteQuery(group, name);
+              guid = query.get("guid").toString();
+      getConnector(type).deleteQuery(guid);
     } catch (Exception e) {
       logger.error(e);
     }

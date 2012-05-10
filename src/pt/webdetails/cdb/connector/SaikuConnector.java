@@ -69,6 +69,13 @@ public class SaikuConnector implements Connector {
   }
 
   @Override
+  public void deleteQuery(String guid) {
+    String fileName = guid + ".saiku";
+    RepositoryUtils.deleteSolutionFile(path, fileName);
+
+  }
+
+  @Override
   public void deleteQuery(String group, String name) {
     String fileName = group + "-" + name + ".saiku";
     RepositoryUtils.deleteSolutionFile(path, fileName);
