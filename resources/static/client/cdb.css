@@ -1158,4 +1158,18 @@ button .label{
   word-wrap: break-word;  
 }
 
+.groupName {
+  width: 170px;
+  margin: 0px auto;
+}
 
+.groupName input {
+
+}
+
+#code {
+
+  min-height: 250px;
+  width: 368px;
+  font-family: Courier, sans-serif;
+}

@@ -153,7 +153,7 @@ wd.cdb.showGroup = function(newGroup) {
   group.attr('id',groupName);
   
   //header
-  group.find('#dummyGroupName').attr('id',groupName+'Name');
+  group.find('#dummyGroupName').attr('id',groupName+'Name').click(function(){return false;});
   group.find('#dummyGroupSave').attr('id',groupName+'Save');
   group.find('#dummyGroupRemove').attr('id',groupName+'Remove');
   
