@@ -8,6 +8,7 @@ wd.cdb.Query = function (label,type,definition) {
   var myself = this,
       _label = label,
       _group,
+      _groupName,
       _query = definition,
       _type = type,
       _id,
@@ -23,7 +24,8 @@ wd.cdb.Query = function (label,type,definition) {
         method: 'moveQuery',
         id: myself.getKey(),
         name: myself.getLabel(),
-        group: myself.getGroup()
+        group: myself.getGroup(),
+        groupName: myself.getGroupName()
       };
       $.getJSON(webAppPath + "/content/cdb/connector", $.param(params),function(response){
         wd.ctools.persistence.saveObject(null, "Query", myself);
@@ -72,15 +74,27 @@ wd.cdb.Query = function (label,type,definition) {
     _type = type;
   };
   this.toJSON = function() {
-    return JSON.stringify({name: _label, group: _group, type: _type, definition: _query});
+    return JSON.stringify({name: _label, group: _group, groupName: _groupName, type: _type, definition: _query});
   };
 
   this.getGroup = function() {
     return _group;
   };
-  this.setGroup = function(group) {
+
+  this.getGroupName = function() {
+    return _groupName;
+  };
+
+
+  this.setGroupName = function(groupName) {
+    _groupName = groupName;
+  };
+
+
+  this.setGroup = function(group, groupName) {
     _group = group;
-    wd.cdb.QueryManager.newGroup(group);
+    _groupName = groupName;
+    wd.cdb.QueryManager.newGroup(group, groupName);
     wd.cdb.QueryManager.getGroup(group).addQuery(this);
     updateBackend();
   };
@@ -96,9 +110,9 @@ wd.cdb.Query = function (label,type,definition) {
     _id = key;
   };
 
-  this.duplicate = function(newGroup) {
+  this.duplicate = function(newGroup, newGroupName) {
     var that = new wd.cdb.Query(this.getLabel() + " (Copy)",this.getType(),this.getDefinition());
-    that.setGroup(newGroup);
+    that.setGroup(newGroup, newGroupName);
     copyBackend(that.getLabel(),that.getGroup());
     return that;
   };
@@ -122,8 +136,9 @@ wd.cdb.Query = function (label,type,definition) {
 /**
  * @constructor
  */
-wd.cdb.QueryGroup = function(label) {
+wd.cdb.QueryGroup = function(label, description) {
   var _label = label,
+	  _description = description,
       _queries = {};
 
   this.getLabel = function() {
@@ -132,6 +147,22 @@ wd.cdb.QueryGroup = function(label) {
   
   this.setLabel = function(label){
     _label = label;
+  };
+
+  this.getDescription = function() {
+  	  if (_description)
+	      return _description;
+	  else
+		return _label;
+  };
+  
+  this.setDescription = function(description){
+    _description = description;
+  for (q in _queries) if (_queries.hasOwnProperty(q)) {
+    query = _queries[q];
+	query.setGroupName(description);
+  }
+    
   };
 
   this.addQuery = function(dataAccess) {
@@ -147,7 +178,7 @@ wd.cdb.QueryGroup = function(label) {
   };
 
   this.toJSON = function() {
-      return JSON.stringify({label: _label, queries: _queries.map(function(e){return e.getLabel();})});
+      return JSON.stringify({label: _label, description: _description, queries: _queries.map(function(e){return e.getLabel();})});
   };
 
   this.save = function() {
@@ -180,9 +211,9 @@ wd.cdb.QueryManager = (function() {
     var myself = {};
     var _groups = {};
 
-    myself.newGroup = function(label) {
+    myself.newGroup = function(label, description) {
       if (!myself.getGroup(label)) {
-        myself.addGroup(new wd.cdb.QueryGroup(label));
+        myself.addGroup(new wd.cdb.QueryGroup(label, description));
       }
       return myself.getGroup(label);
     };
@@ -195,16 +226,17 @@ wd.cdb.QueryManager = (function() {
         _groups[group.getLabel()] = group;
     };
 
-    myself.loadGroup = function(label,callback) {
-      wd.ctools.persistence.query("select * from Query where group = \"" + label +"\" and userid = \"" + Dashboards.context.user + "\"",function(results){
+    myself.loadGroup = function(group,callback) {
+      wd.ctools.persistence.query("select * from Query where group = \"" + group.getLabel() +"\" and userid = \"" + Dashboards.context.user + "\"",function(results){
         if(results) {
-          var group = new wd.cdb.QueryGroup(label), query, q, queryData;
+          var query, q, queryData;
           myself.addGroup(group);
           for (q in results.object) if (results.object.hasOwnProperty(q)) {
             queryData = results.object[q];
             query = new wd.cdb.Query(queryData.name, queryData.type, queryData.definition);
             query.setKey(queryData["@rid"]);
             query.setGroup(queryData.group);
+            query.setGroupName(group.getDescription());
             group.addQuery(query);
           }
           callback(group);
@@ -226,7 +258,8 @@ wd.cdb.QueryManager = (function() {
         var groups = response.object,
             i;
         for (i = 0; i < groups.length;i++) {
-          myself.newGroup(groups[i].name);
+        	if (groups[i].name)
+	          myself.newGroup(groups[i].name, groups[i].groupName);
         }
         if (callback && typeof callback == 'function') {
           callback(myself);

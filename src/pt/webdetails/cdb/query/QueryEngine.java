@@ -35,7 +35,7 @@ public class QueryEngine {
     JSONObject response;
     PersistenceEngine pe = PersistenceEngine.getInstance();
     try {
-      response = pe.query("select distinct(group) as name from Query where userid = '" +  PentahoSessionHolder.getSession().getName()  + "'");
+      response = pe.query("select distinct(group) as name, groupName from Query where userid = '" +  PentahoSessionHolder.getSession().getName()  + "' order by groupName");
     } catch (JSONException e) {
       return null;
     }
