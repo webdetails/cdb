@@ -1152,9 +1152,11 @@ button .label{
   right: 93px; 
 }
 
-.exportCodeContainer {
+textarea#code {
   font-family: Courier;
   margin:5px;
+  width: 368px;
+  resize: none;
   word-wrap: break-word;  
 }
 
