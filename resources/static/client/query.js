@@ -172,11 +172,11 @@ wd.cdb.QueryGroup = function(label, description) {
   };
 
   this.addQuery = function(dataAccess) {
-      _queries[dataAccess.getLabel()] = dataAccess;
+      _queries[dataAccess.getGUID()] = dataAccess;
   };
 
-  this.getQuery = function(label) {
-      return _queries[label];
+  this.getQuery = function(guid) {
+      return _queries[guid];
   }
 
   this.listQueries = function() {
@@ -184,7 +184,7 @@ wd.cdb.QueryGroup = function(label, description) {
   };
 
   this.toJSON = function() {
-      return JSON.stringify({label: _label, description: _description, queries: _queries.map(function(e){return e.getLabel();})});
+      return JSON.stringify({label: _label, description: _description, queries: _queries.map(function(e){return {guid: e.getGUID, label: e.getLabel()};})});
   };
 
   this.save = function() {
@@ -197,12 +197,18 @@ wd.cdb.QueryGroup = function(label, description) {
   $.getJSON("connector?method=exportCda&group=" + _label,function(){console.log("Saved to CDA")});
   };
 
-  this.deleteQuery = function(queryName) {
-    var query = this.getQuery(queryName);
+  this.deleteQuery = function(queryGuid) {
+    var query = this.getQuery(queryGuid);
 
-    delete _queries[queryName];
+    delete _queries[queryGuid];
     query.deleteSelf();
   }
+
+	this.deleteQueryByObj = function(queryObj) {
+		delete _queries[queryObj.getGUID()];
+		queryObj.deleteSelf();	
+	}
+
 
   this.deleteSelf = function() {
     var query;

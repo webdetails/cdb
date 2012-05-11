@@ -79,7 +79,15 @@ wd.cdb.cloneRemoveGroupButton = function(groupName){
   var originalExpr = clone.expression;
 
   clone.expression = function() {
-    queries = Object.keys(wd.cdb.QueryManager.getGroup(groupName).listQueries()).map(function(e){return [e,e];}); 
+
+    var queriesOriginal = wd.cdb.QueryManager.getGroup(groupName).listQueries();
+    var queries = [];
+    for (q in queriesOriginal) 
+      if (queriesOriginal.hasOwnProperty(q)) {
+        query = queriesOriginal[q];
+	    queries.push([query.getGUID(), query.getLabel()]);
+      }
+    
     render_queriesToRemove.valuesArray = queries;
     render_confirmSelectionButton.groupName = groupName;
     Dashboards.update(render_queriesToRemove);
@@ -416,7 +424,7 @@ wd.cdb.showQueryEditor = function(groupName,queryObj,callback,isNew) {
 
   render_cancelQueryButton.expression = function(){
     if(!queryObj.getDefinition()) {
-      wd.cdb.QueryManager.getGroup(groupName).deleteQuery(queryObj.getLabel());
+      wd.cdb.QueryManager.getGroup(groupName).deleteQueryByObj(queryObj);
       $("#" + queryGuid).remove();
     } else if(wd.cdb.getQueryState(queryGuid) == 'edition no-edited'){
       wd.cdb.setQueryState(queryObj,'new');
