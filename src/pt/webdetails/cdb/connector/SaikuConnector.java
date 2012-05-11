@@ -55,29 +55,15 @@ public class SaikuConnector implements Connector {
   }
 
   @Override
-  public void copyQuery(String oldGroup, String oldName, String newGroup, String newName) {
-    String newFileName = newGroup + "-" + newName + ".saiku",
-            oldFileName = oldGroup + "-" + oldName + ".saiku";
+  public void copyQuery(String oldGuid, String newGuid) {
+    String newFileName = newGuid + ".saiku",
+            oldFileName = oldGuid + ".saiku";
     RepositoryUtils.copySolutionFile(path, oldFileName, path, newFileName);
-  }
-
-  @Override
-  public void moveQuery(String oldGroup, String oldName, String newGroup, String newName) {
-    String newFileName = newGroup + "-" + newName + ".saiku",
-            oldFileName = oldGroup + "-" + oldName + ".saiku";
-    RepositoryUtils.moveSolutionFile(path, oldFileName, path, newFileName);
   }
 
   @Override
   public void deleteQuery(String guid) {
     String fileName = guid + ".saiku";
-    RepositoryUtils.deleteSolutionFile(path, fileName);
-
-  }
-
-  @Override
-  public void deleteQuery(String group, String name) {
-    String fileName = group + "-" + name + ".saiku";
     RepositoryUtils.deleteSolutionFile(path, fileName);
 
   }
