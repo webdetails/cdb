@@ -7,6 +7,7 @@ package pt.webdetails.cpf.persistence;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentPool;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
 import com.orientechnologies.orient.core.exception.ODatabaseException;
+import com.orientechnologies.orient.core.exception.OQueryParsingException;
 import com.orientechnologies.orient.core.exception.ORecordNotFoundException;
 import com.orientechnologies.orient.core.id.ORID;
 import com.orientechnologies.orient.core.record.impl.ODocument;
@@ -58,6 +59,22 @@ public class PersistenceEngine {
         try {
             logger.info("Creating PersistenceEngine instance");
             initialize();
+            
+            ODatabaseDocumentTx db = null;
+            try {              
+              db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
+              List<ODocument> result = db.query(new OSQLSynchQuery<ODocument>("SELECT FROM Query LIMIT 1"));
+            } catch (OQueryParsingException ode) {
+              logger.warn("Got exception trying to get queries. Creating document class");
+              ODocument doc = new ODocument(db, "Query");
+              doc.save();
+            } finally {
+              if (db != null)
+                db.close();
+            }
+            
+            
+            
         } catch (Exception ex) {
             logger.fatal("Could not create PersistenceEngine: " + Util.getExceptionDescription(ex)); //$NON-NLS-1$
             return;
@@ -133,8 +150,6 @@ public class PersistenceEngine {
             json.put("result", Boolean.TRUE);
 
             db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
-
-
             List<ODocument> result = db.query(new OSQLSynchQuery<ODocument>(query));
             JSONArray arr = new JSONArray();
             for (ODocument resDoc : result) {
