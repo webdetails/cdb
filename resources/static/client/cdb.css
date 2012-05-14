@@ -1039,7 +1039,7 @@ button .label{
 }
 
 .boxshadow .queriesToRemove .pentaho-toggle-button button {
-	width: 240px;
+	width: 240px; 
 	margin-left: 20px;
 	text-align: left;
 	border: none;
@@ -1154,10 +1154,13 @@ button .label{
 
 textarea#code {
   font-family: Courier;
-  margin:5px;
   width: 368px;
   resize: none;
   word-wrap: break-word;  
+  min-height: 250px;
+  width: 368px;
+  font-family: Courier, sans-serif;
+  margin: 0;
 }
 
 .groupName {
@@ -1165,13 +1168,15 @@ textarea#code {
   margin: 0px auto;
 }
 
-.groupName input {
-
+#codeholder {
+  margin:5px;
+}
+#buttonholder {
+  margin-bottom: 5px;
 }
 
-#code {
-
-  min-height: 250px;
-  width: 368px;
-  font-family: Courier, sans-serif;
+.boxshadow .pentaho-toggle-button-down button[name=render_removeGroupOrQueries] { 
+  background: #ac1315;
+  color: white;
 }
+
