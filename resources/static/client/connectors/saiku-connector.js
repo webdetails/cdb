@@ -1,6 +1,7 @@
 (function() {
 SaikuConnector = function() {
   var _name = 'Saiku',
+      _label = 'MDX Query via Saiku'
       saikuPath = webAppPath + "/content/saiku-ui/index.html?";
   function openSaiku(placeholder, solution,path,action, callback, mode) {
     var params = $.extend({
@@ -52,8 +53,11 @@ SaikuConnector = function() {
     });
   }
 
-  this.getLabel = function() {
+  this.getName = function() {
     return _name;
+  }
+  this.getLabel = function() {
+    return _label;
   }
   this.newQuery = function($ph, query, callback) {
     function cb(schema, cube, jndi, mdx){

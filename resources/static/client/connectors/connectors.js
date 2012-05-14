@@ -11,7 +11,7 @@ wd.cdb.connectors.ConnectorEngine = (function() {
   var myself = {};
   var _connectors = {};
   myself.registerConnector = function(connector) {
-    _connectors[connector.getLabel()] = connector;
+    _connectors[connector.getName()] = connector;
   };
   myself.getConnector = function(type) {
     return _connectors[type];
