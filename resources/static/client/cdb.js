@@ -220,7 +220,9 @@ wd.cdb.cloneQueryNameInput = function(groupName, queryObj){
   clone.htmlObject = queryGuid + 'Name';
   clone.name = 'render_'+guidParam+'NameInput';
   clone.postChange = function(value){
-    queryObj.setLabel(value);
+    queryObj.setLabel(value, function() {
+      wd.cdb.QueryManager.getGroup(groupName).save();
+    });
   };
   Dashboards.addComponents([clone]);
   window[clone.name] = clone;

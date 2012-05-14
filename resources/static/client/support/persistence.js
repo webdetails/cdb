@@ -5,6 +5,7 @@ wd.ctools.persistence = (function(){
       persistenceUrl = webAppPath + "/content/cdb/storage";
 
   myself.query = function(query,callback) {
+    throw "UnsupportedOperation";
     var params = {
       method: "query",
       query: query
@@ -15,7 +16,7 @@ wd.ctools.persistence = (function(){
     });
   };
 
-  myself.saveObject = function(key,type,obj) {
+  myself.saveObject = function(key,type,obj, callback) {
     var params = {
       method: "store",
       "class": type,
@@ -29,8 +30,9 @@ wd.ctools.persistence = (function(){
     }
 
     $.getJSON(persistenceUrl,params,function(response){
-      if(response.id)
-      obj.setKey(response.id);
+      if(response.id) obj.setKey(response.id);
+      if(callback && typeof callback == "function") callback(obj);
+      
     });
   };
 

@@ -16,22 +16,13 @@ wd.cdb.Query = function (label, group, type, guid, definition) {
 
 
 
-  var updateBackend = function() {
+  var updateBackend = function(callback) {
     /* We only want to notify the backend of changes
      * to queries it already knows about, and the id
      * is the only way of knowing that's the case.
      */
     if (_id) {
-      var params = {
-        method: 'moveQuery',
-        id: myself.getKey(),
-        name: myself.getLabel(),
-        group: myself.getGroup(),
-        groupName: myself.getGroupName()
-      };
-      $.getJSON(webAppPath + "/content/cdb/connector", $.param(params),function(response){
-        wd.ctools.persistence.saveObject(null, "Query", myself);
-      });
+      wd.ctools.persistence.saveObject(null, "Query", myself, callback);
     }
   }
 
@@ -63,9 +54,9 @@ wd.cdb.Query = function (label, group, type, guid, definition) {
   this.getLabel = function() {
     return _label;
   };
-  this.setLabel = function(label){
+  this.setLabel = function(label,callback){
     _label = label;
-    updateBackend();
+    updateBackend(callback);
   };
   this.getType = function() {
     return _type;
@@ -239,7 +230,7 @@ wd.cdb.QueryManager = (function() {
     };
 
     myself.loadGroup = function(group,callback) {
-      wd.ctools.persistence.query("select * from Query where group = \"" + group.getLabel() +"\" and userid = \"" + Dashboards.context.user + "\"",function(results){
+      $.getJSON("query",{method:"loadGroup",group: group.getLabel()}, function(results){
         if(results) {
           var query, q, queryData;
           myself.addGroup(group);
