@@ -429,7 +429,7 @@
      },
      {
       "name": "html",
-      "value": "v.12.1a ",
+      "value": "v TRUNK-SNAPSHOT ",
       "type": "Html"
      },
      {
@@ -2402,7 +2402,7 @@
     "properties": [
      {
       "name": "name",
-      "value": "",
+      "value": "buttonholder",
       "type": "Id"
      },
      {
@@ -2586,7 +2586,7 @@
     "properties": [
      {
       "name": "name",
-      "value": "",
+      "value": "codeholder",
       "type": "Id"
      },
      {
@@ -3949,7 +3949,7 @@
      },
      {
       "name": "expression",
-      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(\"#\" + this.htmlObject).parent().parent().position().left + 950 - 392;\n    var top = $(\"#\" + this.htmlObject).parent().position().top -1;\n    $(\"#code\").val('').css({display:\"none\"});\n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    \n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocExportEnv);\n    window.exportingQuery = this.queryObj;\n    event.stopPropagation();\n}\n\n",
+      "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(\"#\" + this.htmlObject).parent().parent().position().left + 950 - 392;\n    var top = $(\"#\" + this.htmlObject).parent().position().top -1;\n    $(\"#code\").val('');\n    $(\"#codeholder\").hide();\n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    \n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocExportEnv);\n    window.exportingQuery = this.queryObj;\n    event.stopPropagation();\n}\n\n",
       "type": "JavaScript"
      },
      {
@@ -4294,7 +4294,7 @@
      },
      {
       "name": "label",
-      "value": "Copy to clipboard",
+      "value": "Preview",
       "type": "String"
      },
      {
@@ -4314,7 +4314,7 @@
      },
      {
       "name": "expression",
-      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      target = $(\"#code\"),\n      params = {},\n      url = \"export\";\n\n  params.id = query.getLabel();\n  params.group = Dashboards.context.user + \".\" + query.getGroup();\n  params.method = \"export\";\n  params.exporter = window.exportTypeParam;\n  $.ajax(url, {\n      dataType: 'text',\n      data:params,\n      success: function(response){\n        target.val(response).css({'height':'auto','min-height':'300px'}).slideDown(400).focus().select();\n      }\n  });\n}\n",
+      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      target = $(\"#code\"),\n      params = {},\n      url = \"export\";\n\n  params.id = query.getLabel();\n  params.group = Dashboards.context.user + \".\" + query.getGroup();\n  params.method = \"export\";\n  params.exporter = window.exportTypeParam;\n  $.ajax(url, {\n      dataType: 'text',\n      data:params,\n      success: function(response){\n        $(\"#codeholder\").slideDown(400);\n        target.val(response).focus().select();\n      }\n  });\n}\n",
       "type": "JavaScript"
      },
      {
@@ -5047,12 +5047,12 @@
      },
      {
       "name": "valuesArray",
-      "value": "[[\"Saiku1\",\"Saiku1\"],[\"Saiku2\",\"Saiku2\"],[\"Saiku3\",\"Saiku3\"]]",
+      "value": "[]",
       "type": "ValuesArray"
      },
      {
       "name": "valueAsId",
-      "value": "true",
+      "value": "false",
       "type": "Boolean"
      },
      {
@@ -5067,7 +5067,7 @@
      },
      {
       "name": "preExecution",
-      "value": "function() {\n    \n    this.valuesArray = Object.keys(wd.cdb.connectors.ConnectorEngine.listConnectors()).map(\n        function(e){\n          return [e,e];\n        });\n}",
+      "value": "function() {\n    var valuesArray = []\n    this.valuesArray = valuesArray;\n    $.each(wd.cdb.connectors.ConnectorEngine.listConnectors(), function(i,e) {\n        valuesArray.push([i,e.getLabel()]);\n    }); \n}",
       "type": "JavaScript"
      },
      {
@@ -5301,7 +5301,7 @@
      },
      {
       "name": "postChange",
-      "value": "function(exporter){\n var $save = $(\"#saveToFile button\"),\n     $copy = $(\"#copyToClipboard button\"),\n     exp = Dashboards.exporters[exporter];\n if (exp.modes.inline) {\n    $copy.removeAttr(\"disabled\");\n } else {\n    $copy.attr(\"disabled\", \"disabled\");\n }\n  if (exp.modes.attachment) {\n    $save.removeAttr(\"disabled\");\n } else {\n    $save.attr(\"disabled\", \"disabled\");\n }\n $(\"#code\").val(\"\");\n $(\"#code\").slideUp(400);\n}",
+      "value": "function(exporter){\n var $save = $(\"#saveToFile button\"),\n     $copy = $(\"#copyToClipboard button\"),\n     exp = Dashboards.exporters[exporter];\n if (exp.modes.inline) {\n    $copy.removeAttr(\"disabled\");\n } else {\n    $copy.attr(\"disabled\", \"disabled\");\n }\n  if (exp.modes.attachment) {\n    $save.removeAttr(\"disabled\");\n } else {\n    $save.attr(\"disabled\", \"disabled\");\n }\n $(\"#code\").val(\"\");\n $(\"#codeholder\").slideUp(400);\n}",
       "type": "JavaScript"
      },
      {
@@ -5457,7 +5457,7 @@
      },
      {
       "name": "valuesArray",
-      "value": "[[\"Test1\",\"Test1\"],[\"Test2\",\"Test2\"],[\"Test3\",\"Test3\"],[\"Test4\",\"Test4\"]]",
+      "value": "[]",
       "type": "ValuesArray"
      },
      {
