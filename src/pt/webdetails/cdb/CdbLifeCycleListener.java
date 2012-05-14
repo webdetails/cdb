@@ -20,6 +20,7 @@ import org.pentaho.platform.engine.security.SecurityHelper;
 import org.springframework.security.Authentication;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.providers.anonymous.AnonymousAuthenticationToken;
+import pt.webdetails.cpf.persistence.PersistenceEngine;
 
 public class CdbLifeCycleListener implements IPluginLifecycleListener {
 
@@ -41,6 +42,8 @@ public class CdbLifeCycleListener implements IPluginLifecycleListener {
   @Override
   public void init() throws PluginLifecycleException {
       logger.debug("Init for CDB");
+      PersistenceEngine engine = PersistenceEngine.getInstance();
+      engine.initializeClass("Query");
   }
 
   @Override
