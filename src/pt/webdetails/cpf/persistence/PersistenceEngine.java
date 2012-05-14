@@ -52,42 +52,8 @@ public class PersistenceEngine {
 
   private enum Method {
 
-    
-    
-    <<<<<<< HEAD DELETE, GET, STORE, QUERY
+    HEAD, DELETE, GET, STORE, QUERY
   }
-  
-
-  =======
-    private PersistenceEngine() {
-    try {
-      logger.info("Creating PersistenceEngine instance");
-      initialize();
-
-      ODatabaseDocumentTx db = null;
-      try {
-        db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
-        List<ODocument> result = db.query(new OSQLSynchQuery<ODocument>("SELECT FROM Query LIMIT 1"));
-      } catch (OQueryParsingException ode) {
-        logger.warn("Got exception trying to get queries. Creating document class");
-        ODocument doc = new ODocument(db, "Query");
-        doc.save();
-      } finally {
-        if (db != null) {
-          db.close();
-        }
-      }
-
-
-
-    } catch (Exception ex) {
-      logger.fatal("Could not create PersistenceEngine: " + Util.getExceptionDescription(ex)); //$NON-NLS-1$
-      return;
-    }
-     >>> >>> > 98f
-    f5021195590ced6e18d5dae755b252c5b9a27
-
-  
 
   private PersistenceEngine() {
     try {
