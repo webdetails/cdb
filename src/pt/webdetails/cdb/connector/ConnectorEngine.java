@@ -5,6 +5,8 @@
 package pt.webdetails.cdb.connector;
 
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
@@ -56,9 +58,10 @@ public class ConnectorEngine {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
 
-      JSONObject response = eng.query("select * from Query where group = \""
-              + groupId + "\" and userid = \""
-              + PentahoSessionHolder.getSession().getName() + "\"");
+      Map<String,String> params = new HashMap<String,String>();
+      params.put("group",groupId);
+      params.put("user",PentahoSessionHolder.getSession().getName());
+      JSONObject response = eng.query("select * from Query where group = :group and userid = :user",params);
       JSONArray queries = (JSONArray) response.get("object");
       CdaSettings cda = new CdaSettings(groupId, null);
       for (int i = 0; i < queries.length(); i++) {
@@ -108,7 +111,9 @@ public class ConnectorEngine {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
 
-      JSONObject response = eng.query("select * from Query where @rid = " + id);
+      Map<String,String> params = new HashMap<String,String>();
+      params.put("id",id);
+      JSONObject response = eng.query("select * from Query where @rid = :id",params);
       JSONObject query = (JSONObject) ((JSONArray) response.get("object")).get(0);
       String type = query.get("type").toString(),
               oldGuid = query.get("guid").toString();
@@ -121,7 +126,9 @@ public class ConnectorEngine {
   public void deleteQuery(String id) {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
-      JSONObject response = eng.query("select type from Query where @rid = " + id);
+      Map<String,String> params = new HashMap<String,String>();
+      params.put("id",id);
+      JSONObject response = eng.query("select type from Query where @rid = :id",params);
       JSONObject query = (JSONObject) ((JSONArray) response.get("object")).get(0);
       String type = query.get("type").toString(),
               guid = query.get("guid").toString();

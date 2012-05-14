@@ -7,7 +7,6 @@ package pt.webdetails.cpf.persistence;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentPool;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
 import com.orientechnologies.orient.core.exception.ODatabaseException;
-import com.orientechnologies.orient.core.exception.OQueryParsingException;
 import com.orientechnologies.orient.core.exception.ORecordNotFoundException;
 import com.orientechnologies.orient.core.id.ORID;
 import com.orientechnologies.orient.core.record.impl.ODocument;
@@ -18,8 +17,10 @@ import org.apache.commons.logging.LogFactory;
 
 
 import com.orientechnologies.orient.server.OServerMain;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -109,9 +110,6 @@ public class PersistenceEngine {
         case GET:
           reply = get(requestParams, userSession);
           break;
-        case QUERY:
-          reply = query(requestParams, userSession);
-          break;
         case STORE:
           reply = store(requestParams, userSession);
           break;
@@ -127,16 +125,31 @@ public class PersistenceEngine {
     }
   }
 
-  public JSONObject query(String query) throws JSONException {
+  private List<ODocument> executeQuery(String query, Map<String, String> params) {
+    ODatabaseDocumentTx db =ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
+    try {
+      OSQLSynchQuery<ODocument> preparedQuery = new OSQLSynchQuery<ODocument>(query);
+      return db.command(preparedQuery).execute(params);
+    } catch (Exception e) {
+      logger.error(e);
+      return null;
+    } finally {
+      if (db != null) {
+        db.close();
+      }
+    }
+
+  }
+
+  public JSONObject query(String query, Map<String, String> params) throws JSONException {
+
+
     JSONObject json = new JSONObject();
-    ODatabaseDocumentTx db = null;
+
     try {
       json.put("result", Boolean.TRUE);
 
-      db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
-
-
-      List<ODocument> result = db.query(new OSQLSynchQuery<ODocument>(query));
+      List<ODocument> result = executeQuery(query, params);
       JSONArray arr = new JSONArray();
       for (ODocument resDoc : result) {
         arr.put(new JSONObject(resDoc.toJSON()));
@@ -148,15 +161,8 @@ public class PersistenceEngine {
       logger.error(getExceptionDescription(ode));
 
     } finally {
-      if (db != null) {
-        db.close();
-      }
     }
     return json;
-  }
-
-  private JSONObject query(IParameterProvider requestParams, IPentahoSession userSession) throws JSONException {
-    return query(requestParams.getStringParameter("query", ""));
   }
 
   private JSONObject get(IParameterProvider requestParams, IPentahoSession userSession) throws JSONException {
@@ -165,31 +171,23 @@ public class PersistenceEngine {
   }
 
   public JSONObject get(String id) throws JSONException {
+    JSONObject json = new JSONObject(), resultJson;
 
-    JSONObject json = new JSONObject();
-    ODatabaseDocumentTx db = null;
+
     try {
       json.put("result", Boolean.TRUE);
+      Map<String, String> params = new HashMap<String, String>();
+      params.put("id", id);
+      List<ODocument> result = executeQuery("select from :id", params);
 
-      db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
-
-
-      List<ODocument> result = db.query(new OSQLSynchQuery<ODocument>("select FROM " + id));
       ODocument doc;
 
       if (result.size() == 1) {
-        doc = result.get(0);
+        json.put("object", new JSONObject(result.get(0).toJSON()));
       } else {
         json.put("result", Boolean.FALSE);
         json.put("errorMessage", "Multiple elements found with id " + id);
-        return json;
       }
-
-      JSONObject resultDoc = new JSONObject(doc.toJSON());
-
-      json.put("object", resultDoc);
-
-
     } catch (ODatabaseException orne) {
 
       if (orne.getCause().getClass() == ORecordNotFoundException.class) {
@@ -199,10 +197,6 @@ public class PersistenceEngine {
       } else {
         logger.error(getExceptionDescription(orne));
         throw orne;
-      }
-    } finally {
-      if (db != null) {
-        db.close();
       }
     }
 
