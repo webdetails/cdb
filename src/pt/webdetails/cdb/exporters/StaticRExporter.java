@@ -21,12 +21,13 @@ public class StaticRExporter extends AbstractExporter {
 
   @Override
   public String export(String group, String id, String url) {
-    return "";
+    String code = "cdbData <- read.csv2(\"" + id + ".csv\")\n"; 
+    return code;
   }
 
   @Override
   public void binaryExport(String group, String id, String url, OutputStream out) throws IOException {
-    String code = "cdbData <- read.csv2(\"" + id + ".csv\")\n";
+    String code = "cdbData <- read.csv2(\"" + id + ".csv\")\n"; 
     ZipOutputStream zos = new ZipOutputStream(out);
     zos.putNextEntry(new ZipEntry(group + "/"));
     zos.putNextEntry(new ZipEntry(group + "/" + id + ".R"));

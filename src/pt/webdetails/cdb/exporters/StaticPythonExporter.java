@@ -21,7 +21,12 @@ public class StaticPythonExporter extends AbstractExporter {
 
   @Override
   public String export(String group, String id, String url) {
-    return "";
+    String src = "import csv, getpass, urllib\n"
+            + "csv_file = open(\"" + id + ".csv\")\n"
+            + "dialect = csv.Sniffer().sniff(csv_file.read(1024))\n"
+            + "csv_file.seek(0)\n"
+            + "cdbData = csv.reader(csv_file, dialect)\n";
+    return src;
   }
 
   @Override
