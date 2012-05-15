@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.platform.api.engine.IPentahoSession;
 import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
+import org.pentaho.platform.engine.security.SecurityHelper;
 import pt.webdetails.cpf.InvalidOperationException;
 import pt.webdetails.cpf.Util;
 
@@ -113,6 +114,9 @@ public class PersistenceEngine {
         case STORE:
           reply = store(requestParams, userSession);
           break;
+        case QUERY:
+          reply = query(requestParams, userSession);
+          break;
       }
 
       return reply.toString(JSON_INDENT);
@@ -126,10 +130,14 @@ public class PersistenceEngine {
   }
 
   private List<ODocument> executeQuery(String query, Map<String, String> params) {
-    ODatabaseDocumentTx db =ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
+    ODatabaseDocumentTx db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
     try {
       OSQLSynchQuery<ODocument> preparedQuery = new OSQLSynchQuery<ODocument>(query);
-      return db.command(preparedQuery).execute(params);
+      if (params == null) {
+        return db.command(preparedQuery).execute();
+      } else {
+        return db.command(preparedQuery).execute(params);
+      }
     } catch (Exception e) {
       logger.error(e);
       return null;
@@ -141,9 +149,15 @@ public class PersistenceEngine {
 
   }
 
+  private JSONObject query(IParameterProvider requestParams, IPentahoSession userSession) throws JSONException {
+    final String queryString = requestParams.getStringParameter("query", "");
+    return query(queryString, null);
+  }
+
   public JSONObject query(String query, Map<String, String> params) throws JSONException {
-
-
+    if (!SecurityHelper.isPentahoAdministrator(PentahoSessionHolder.getSession())) {
+      throw new SecurityException("Arbitrary querying is only available to admins");
+    }
     JSONObject json = new JSONObject();
 
     try {
@@ -160,7 +174,6 @@ public class PersistenceEngine {
       json.put("errorMessage", "DatabaseException: Review query");
       logger.error(getExceptionDescription(ode));
 
-    } finally {
     }
     return json;
   }
@@ -176,9 +189,11 @@ public class PersistenceEngine {
 
     try {
       json.put("result", Boolean.TRUE);
+      String user = PentahoSessionHolder.getSession().getName();
       Map<String, String> params = new HashMap<String, String>();
       params.put("id", id);
-      List<ODocument> result = executeQuery("select from :id", params);
+      params.put("user", user);
+      List<ODocument> result = executeQuery("select * from Query where @rid = :id and userid = :user", params);
 
       ODocument doc;
 
@@ -211,14 +226,14 @@ public class PersistenceEngine {
   public JSONObject delete(String id) throws JSONException {
 
     JSONObject json = new JSONObject();
-    ODatabaseDocumentTx db = null;
+    String user = PentahoSessionHolder.getSession().getName();
     try {
       json.put("result", Boolean.TRUE);
 
-      db = ODatabaseDocumentPool.global().acquire(DBURL, DBUSERNAME, DBPASSWORD);
-
-
-      List<ODocument> result = db.query(new OSQLSynchQuery<ODocument>("select FROM " + id));
+      Map<String, String> params = new HashMap<String, String>();
+      params.put("id", id);
+      params.put("user", user);
+      List<ODocument> result = executeQuery("select * from Query where @rid = :id and userid = :user", params);
       ODocument doc;
 
       if (result.size() == 1) {
@@ -245,10 +260,6 @@ public class PersistenceEngine {
         logger.error(getExceptionDescription(orne));
         throw orne;
       }
-    } finally {
-      if (db != null) {
-        db.close();
-      }
     }
     return json;
   }
@@ -273,6 +284,7 @@ public class PersistenceEngine {
   public JSONObject store(String id, String className, String inputData) throws JSONException {
     JSONObject json = new JSONObject();
     ODatabaseDocumentTx db = null;
+    String user = PentahoSessionHolder.getSession().getName();
     try {
 
       json.put("result", Boolean.TRUE);
@@ -283,12 +295,18 @@ public class PersistenceEngine {
 
       if (id == null || id.length() == 0) {
         doc = new ODocument(db, className);
-        doc.field("userid", PentahoSessionHolder.getSession().getName());
+        doc.field("userid", user);
       } else {
-        List<ODocument> result = db.query(new OSQLSynchQuery<ODocument>("select FROM " + id));
-
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("id", id);
+        List<ODocument> result = executeQuery("select * from Query where @rid = :id", params);
         if (result.size() == 1) {
           doc = result.get(0);
+          if (!doc.field("userid").toString().equals(user)) {
+            json.put("result", Boolean.FALSE);
+            json.put("errorMessage", "Object id " + id + " belongs to another user");
+            return json;
+          }
         } else if (result.size() == 0) {
           json.put("result", Boolean.FALSE);
           json.put("errorMessage", "No " + className + " found with id " + id);
