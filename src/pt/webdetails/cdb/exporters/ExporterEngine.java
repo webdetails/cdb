@@ -6,6 +6,7 @@ package pt.webdetails.cdb.exporters;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class ExporterEngine {
         Exporter exporter = getExporter(exporterName);
         if (toFile) {
           HttpServletResponse response = (HttpServletResponse) pathParams.getParameter("httpresponse");
-          response.setHeader("content-disposition", "attachment; filename=" + exporter.getFilename(group, id, url));
+          response.setHeader("content-disposition", "attachment; filename=" + URLEncoder.encode(exporter.getFilename(group, id, url), "utf-8"));
           exporter.binaryExport(group, id, url, out);
         } else {
           out.write(exporter.export(group, id, url).getBytes("utf-8"));
