@@ -115,6 +115,9 @@ public class PersistenceEngine {
           reply = store(requestParams, userSession);
           break;
         case QUERY:
+          if (!SecurityHelper.isPentahoAdministrator(PentahoSessionHolder.getSession())) {
+            throw new SecurityException("Arbitrary querying is only available to admins");
+          }          
           reply = query(requestParams, userSession);
           break;
       }
@@ -155,9 +158,6 @@ public class PersistenceEngine {
   }
 
   public JSONObject query(String query, Map<String, String> params) throws JSONException {
-    if (!SecurityHelper.isPentahoAdministrator(PentahoSessionHolder.getSession())) {
-      throw new SecurityException("Arbitrary querying is only available to admins");
-    }
     JSONObject json = new JSONObject();
 
     try {
