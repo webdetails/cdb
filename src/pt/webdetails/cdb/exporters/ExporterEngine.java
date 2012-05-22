@@ -64,7 +64,7 @@ public class ExporterEngine {
         Exporter exporter = getExporter(exporterName);
         if (toFile) {
           HttpServletResponse response = (HttpServletResponse) pathParams.getParameter("httpresponse");
-          response.setHeader("content-disposition", "attachment; filename=" + URLEncoder.encode(exporter.getFilename(group, id, url), "utf-8"));
+          response.setHeader("content-disposition", "attachment; filename=" + escapePath(exporter.getFilename(group, id, url)));
           exporter.binaryExport(group, id, url, out);
         } else {
           out.write(exporter.export(group, id, url).getBytes("utf-8"));
@@ -78,6 +78,9 @@ public class ExporterEngine {
     }
   }
 
+  private String escapePath(String path) {
+  return path.replaceAll("\\\\", "\\\\").replaceAll("\"","\\\"");
+  }
   public void export(String exporterName, String group, String id, String url, OutputStream out) throws ExporterRuntimeException, ExporterNotFoundException {
     Exporter exporter = getExporter(exporterName);
     try {
