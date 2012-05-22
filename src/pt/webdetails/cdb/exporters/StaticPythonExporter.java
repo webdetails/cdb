@@ -22,6 +22,8 @@ public class StaticPythonExporter extends AbstractExporter {
   @Override
   public String export(String group, String id, String url) {
     String src = "import csv, getpass, urllib\n"
+            + "# Open the CSV file, detect the format (commas or semicolons? etc),\n"
+            + "# rewind back to the start of the file, and parse it\n"
             + "csv_file = open(\"" + id + ".csv\")\n"
             + "dialect = csv.Sniffer().sniff(csv_file.read(1024))\n"
             + "csv_file.seek(0)\n"
@@ -32,6 +34,8 @@ public class StaticPythonExporter extends AbstractExporter {
   @Override
   public void binaryExport(String group, String id, String url, OutputStream out) throws IOException {
     String src = "import csv, getpass, urllib\n"
+            + "# Open the CSV file, detect the format (commas or semicolons? etc),\n"
+            + "# rewind back to the start of the file, and parse it\n"
             + "csv_file = open(\"" + id + ".csv\")\n"
             + "dialect = csv.Sniffer().sniff(csv_file.read(1024))\n"
             + "csv_file.seek(0)\n"
