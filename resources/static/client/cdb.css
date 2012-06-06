@@ -64,6 +64,7 @@ border: 0;
 /* Window Background */
 body{
   font-family: Gudea;
+	background: #dee8ec;
 }
 /* Dashboard Background / Blueprint Container */
 div.container  {
