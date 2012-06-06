@@ -59,9 +59,6 @@
     <fileset dir="${lib.dir}">
       <include name="**/*.jar" />
     </fileset>
-    <fileset dir="runtime-lib">
-      <include name="**/*.jar" />
-    </fileset>
   </path>
 
 
@@ -100,7 +97,15 @@
       <fileset dir="${dist.dir}">
         <include name="${ivy.artifact.id}-${project.revision}.jar"/>
       </fileset>
+
+	  <!-- UNCOMMENT THIS LINE AND DELETE ORIENT FROM RUNTIME-LIB ONCE WE'RE ABLE TO UPGRADE TO LATEST VERSION -->
+      <!--fileset dir="${lib.dir}">
+        <include name="orient*.jar"/>
+      </fileset-->
       <fileset dir="runtime-lib">
+        <include name="*.jar"/>
+      </fileset>
+      <fileset dir="${devlib.dir}">
         <include name="**/*.jar"/>
       </fileset>
     </copy>
