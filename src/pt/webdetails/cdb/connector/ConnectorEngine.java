@@ -17,7 +17,7 @@ import pt.webdetails.cda.connections.Connection;
 import pt.webdetails.cda.dataaccess.DataAccess;
 import pt.webdetails.cda.settings.CdaSettings;
 import pt.webdetails.cpf.persistence.PersistenceEngine;
-import pt.webdetails.cpf.repository.RepositoryUtils;
+import pt.webdetails.cpf.repository.RepositoryAccess;
 
 /**
  *
@@ -40,7 +40,7 @@ public class ConnectorEngine {
 
   protected Connector getConnector(String connectorName) throws ConnectorRuntimeException, ConnectorNotFoundException {
     try {
-      Class connectorClass = Class.forName("pt.webdetails.cdb.connector." + connectorName + "Connector");
+      Class<?> connectorClass = Class.forName("pt.webdetails.cdb.connector." + connectorName + "Connector");
       return (Connector) connectorClass.getConstructor().newInstance();
     } catch (ClassNotFoundException e) {
       throw new ConnectorNotFoundException(e);
@@ -83,7 +83,11 @@ public class ConnectorEngine {
           logger.error(e);
         }
       }
-      RepositoryUtils.writeSolutionFile("cdb/queries", PentahoSessionHolder.getSession().getName() + "." + groupId + ".cda", cda.asXML());
+      String fileName = PentahoSessionHolder.getSession().getName() + "." + groupId + ".cda";
+      RepositoryAccess repository = RepositoryAccess.getRepository();
+      repository.publishFile("cdb/queries/" + fileName, cda.asXML(), true);
+      
+      //RepositoryUtils.writeSolutionFile("cdb/queries", PentahoSessionHolder.getSession().getName() + "." + groupId + ".cda", cda.asXML());
     } catch (Exception e) {
       logger.error(e);
     }

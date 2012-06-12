@@ -4,7 +4,6 @@
  */
 package pt.webdetails.cdb;
 
-import pt.webdetails.cdb.exporters.*;
 
 /**
  *

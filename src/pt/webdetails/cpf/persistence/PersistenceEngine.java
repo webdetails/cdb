@@ -1,7 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 package pt.webdetails.cpf.persistence;
 
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentPool;
@@ -11,7 +11,6 @@ import com.orientechnologies.orient.core.exception.ORecordNotFoundException;
 import com.orientechnologies.orient.core.id.ORID;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
-import java.text.SimpleDateFormat;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -39,7 +38,6 @@ public class PersistenceEngine {
 
   private static final Log logger = LogFactory.getLog(PersistenceEngine.class);
   private static PersistenceEngine _instance;
-  private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
   private static final String DBURL = "remote:localhost/webdetails";
   private static final String DBUSERNAME = "admin";
   private static final String DBPASSWORD = "admin";
@@ -99,6 +97,7 @@ public class PersistenceEngine {
             + "</properties>" + "</orient-server>");
   }
 
+  //TODO: JSON response objects not consistent with CDC
   public String process(IParameterProvider requestParams, IPentahoSession userSession) throws InvalidOperationException {
     String methodString = requestParams.getStringParameter("method", "none");
     JSONObject reply = null;
@@ -184,8 +183,7 @@ public class PersistenceEngine {
   }
 
   public JSONObject get(String id) throws JSONException {
-    JSONObject json = new JSONObject(), resultJson;
-
+    JSONObject json = new JSONObject();
 
     try {
       json.put("result", Boolean.TRUE);
@@ -194,9 +192,7 @@ public class PersistenceEngine {
       params.put("id", id);
       params.put("user", user);
       List<ODocument> result = executeQuery("select * from Query where @rid = :id and userid = :user", params);
-
-      ODocument doc;
-
+      
       if (result.size() == 1) {
         json.put("object", new JSONObject(result.get(0).toJSON()));
       } else {
@@ -294,7 +290,7 @@ public class PersistenceEngine {
       ODocument doc;
 
       if (id == null || id.length() == 0) {
-        doc = new ODocument(db, className);
+        doc = new ODocument(className);
         doc.field("userid", user);
       } else {
         Map<String, String> params = new HashMap<String, String>();
@@ -319,9 +315,10 @@ public class PersistenceEngine {
       }
 
       // CREATE A NEW DOCUMENT AND FILL IT
-      Iterator keyIterator = data.keys();
+      @SuppressWarnings("unchecked")
+      Iterator<String> keyIterator = data.keys();
       while (keyIterator.hasNext()) {
-        String key = (String) keyIterator.next();
+        String key = keyIterator.next();
         doc.field(key, data.getString(key));
       }
 

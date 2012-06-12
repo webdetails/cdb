@@ -1,14 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 package pt.webdetails.cdb;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletRequestWrapper;
+
+import org.apache.commons.lang.StringUtils;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import pt.webdetails.cdb.exporters.ExporterEngine;
 import pt.webdetails.cdb.connector.ConnectorEngine;
@@ -26,6 +29,28 @@ import pt.webdetails.cpf.persistence.PersistenceEngine;
  * @author pdpi
  */
 public class CdbContentGenerator extends SimpleContentGenerator {
+
+  private static final long serialVersionUID = 1L;
+  
+  private static Map<String, Method> exposedMethods = new HashMap<String, Method>();
+  static{
+    //to keep case-insensitive methods
+    exposedMethods = getExposedMethods(CdbContentGenerator.class, true);
+  }
+  
+  @Override
+  protected Method getMethod(String methodName) throws NoSuchMethodException {
+    Method method = exposedMethods.get(StringUtils.lowerCase(methodName) );
+    if(method == null) {
+      throw new NoSuchMethodException();
+    }
+    return method;
+  }
+  
+  @Override
+  public String getPluginName() {
+    return "cdb";
+  }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
   public void home(OutputStream out) throws IOException {
@@ -46,78 +71,47 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     pluginCall.setOutputStream(out);
     pluginCall.run();
     
-    
-//    out.write(InterPluginComms.callPlugin("pentaho-cdf-dd", "Render", params).getBytes("utf-8"));
   }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
-  public void storage(OutputStream out) {
-    IParameterProvider pathParams = parameterProviders.get("path");
-    IParameterProvider requestParams = parameterProviders.get("request");
+  public void storage(OutputStream out) throws IOException, InvalidOperationException {
     PersistenceEngine engine = PersistenceEngine.getInstance();
-    try {
-      out.write(engine.process(requestParams, userSession).getBytes("utf-8"));
-    } catch (InvalidOperationException e) {
-      logger.error(e);
-    } catch (Exception e) {
-      logger.error(e);
-    }
+    writeOut(out, engine.process(getRequestParameters(), userSession));
   }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
   public void export(OutputStream out) {
-    IParameterProvider pathParams = parameterProviders.get("path");
-    IParameterProvider requestParams = parameterProviders.get("request");
     ExporterEngine engine = ExporterEngine.getInstance();
-    try {
-      engine.process(requestParams, pathParams, out);
-    } catch (Exception e) {
-      logger.error(e);
-    }
+    engine.process(getRequestParameters(), getPathParameters(), out);
   }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
-  public void doquery(OutputStream out) throws IOException {
-    IParameterProvider requestParams = parameterProviders.get("request");
+  public void doQuery(OutputStream out) throws IOException {
+    IParameterProvider requestParams = getRequestParameters();
+    
     String group = requestParams.getStringParameter("group", ""),
-            id = requestParams.getStringParameter("id", ""),
-            outputType = requestParams.getStringParameter("outputType", "json");
-    out.write(ExporterEngine.exportCda(group, id, outputType).getBytes("utf-8"));
+           id = requestParams.getStringParameter("id", ""),
+           outputType = requestParams.getStringParameter("outputType", "json");
+    
+    writeOut(out, ExporterEngine.exportCda(group, id, outputType));
   }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
   public void connector(OutputStream out) throws IOException {
-    IParameterProvider pathParams = parameterProviders.get("path");
-    IParameterProvider requestParams = parameterProviders.get("request");
     ConnectorEngine engine = ConnectorEngine.getInstance();
-    try {
-      engine.process(requestParams, pathParams, out);
-    } catch (Exception e) {
-      logger.error(e);
-    }
+    engine.process(getRequestParameters(), getPathParameters(), out);
   }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
   public void query(OutputStream out) throws IOException {
-    IParameterProvider pathParams = parameterProviders.get("path");
-    IParameterProvider requestParams = parameterProviders.get("request");
     QueryEngine engine = QueryEngine.getInstance();
-    try {
-      engine.process(requestParams, pathParams, out);
-    } catch (Exception e) {
-      logger.error(e);
-    }
+    engine.process(getRequestParameters(), getPathParameters(), out);
   }  
   
   @Exposed(accessLevel = AccessLevel.PUBLIC)
-  public void olaputils(OutputStream out) {
+  public void olapUtils(OutputStream out) throws IOException {
     OlapUtils utils = new OlapUtils();
-    IParameterProvider requestParams = parameterProviders.get("request");
-    try {
-      out.write(utils.process(requestParams).toString().getBytes("utf-8"));
-    } catch (IOException e) {
-      logger.error(e);
-    }
+    writeOut(out, utils.process(getRequestParameters()).toString());
   }
 
 }

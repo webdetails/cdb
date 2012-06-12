@@ -4,6 +4,10 @@
  */
 package pt.webdetails.cdb.connector;
 
+import java.io.IOException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 import pt.webdetails.cda.connections.Connection;
@@ -11,7 +15,8 @@ import pt.webdetails.cda.connections.mondrian.JndiConnection;
 import pt.webdetails.cda.connections.mondrian.MondrianJndiConnectionInfo;
 import pt.webdetails.cda.dataaccess.DataAccess;
 import pt.webdetails.cda.dataaccess.MdxDataAccess;
-import pt.webdetails.cpf.repository.RepositoryUtils;
+import pt.webdetails.cpf.Util;
+import pt.webdetails.cpf.repository.RepositoryAccess;
 
 /**
  *
@@ -19,6 +24,8 @@ import pt.webdetails.cpf.repository.RepositoryUtils;
  */
 public class SaikuConnector implements Connector {
 
+  private static final Log logger = LogFactory.getLog(SaikuConnector.class);
+  
   private static final String path = "cdb/saiku";
 
   @Override
@@ -57,15 +64,18 @@ public class SaikuConnector implements Connector {
   @Override
   public void copyQuery(String oldGuid, String newGuid) {
     String newFileName = newGuid + ".saiku",
-            oldFileName = oldGuid + ".saiku";
-    RepositoryUtils.copySolutionFile(path, oldFileName, path, newFileName);
+           oldFileName = oldGuid + ".saiku";
+    try {
+      RepositoryAccess.getRepository().copySolutionFile(Util.joinPath(path, oldFileName), Util.joinPath(path, newFileName));
+    } catch (IOException e) {
+      logger.error(e);
+    }
   }
 
   @Override
   public void deleteQuery(String guid) {
     String fileName = guid + ".saiku";
-    RepositoryUtils.deleteSolutionFile(path, fileName);
-
+    RepositoryAccess.getRepository().removeFile(path + "/" + fileName);
   }
 
 }
