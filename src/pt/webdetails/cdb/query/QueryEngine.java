@@ -13,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
-import pt.webdetails.cdb.connector.ConnectorEngine;
 import pt.webdetails.cpf.persistence.PersistenceEngine;
 
 /**

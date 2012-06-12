@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
 
-  <info organisation="pentaho" module="cgg" revision="${project.revision}"/>
+  <info organisation="webdetails" module="cdb" revision="${project.revision}"/>
 
   <configurations>
     <conf name="default"/>
@@ -39,10 +39,12 @@
     <!-- RUNTIME -->
     <dependency org="pentaho" name="cda" rev="TRUNK-SNAPSHOT" transitive="false" conf="default,runtime->default" />
     <!-- orient db (persistence) -->
-    <dependency org="com.orientechnologies" name="orient-commons" rev="1.0.1" transitive="false" conf="runtime,default->default"/>
-    <dependency org="com.orientechnologies" name="orientdb-core" rev="1.0.1" transitive="false" conf="runtime,default->default"/>
-    <dependency org="com.orientechnologies" name="orientdb-server" rev="1.0.1" transitive="false" conf="runtime,default->default" />
+    <dependency org="com.orientechnologies" name="orient-commons" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default"/>
+    <dependency org="com.orientechnologies" name="orientdb-core" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default"/>
+    <dependency org="com.orientechnologies" name="orientdb-server" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
+    <dependency org="com.orientechnologies" name="orientdb-client" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
+    <dependency org="com.orientechnologies" name="orientdb-enterprise" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
     
-  </dependencies>
+	</dependencies>
 
 </ivy-module>
