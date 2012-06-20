@@ -9,12 +9,10 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletRequest;
-import javax.servlet.ServletRequestWrapper;
 
 import org.apache.commons.lang.StringUtils;
 import org.pentaho.platform.api.engine.IParameterProvider;
@@ -60,9 +58,9 @@ public class CdbContentGenerator extends SimpleContentGenerator {
   @Exposed(accessLevel = AccessLevel.PUBLIC)
   public void home(OutputStream out) throws IOException {
 
-    IParameterProvider requestParams = parameterProviders.get("request");
-    IParameterProvider pathParams = parameterProviders.get("path");
-    ServletRequestWrapper wrapper = (ServletRequestWrapper) pathParams.getParameter("httprequest");
+    IParameterProvider requestParams = getRequestParameters();
+//    IParameterProvider pathParams = getPathParameters();
+    ServletRequest wrapper = getRequest();
     String root = wrapper.getServerName() + ":" + wrapper.getServerPort();
 
     Map<String, Object> params = new HashMap<String, Object>();
@@ -73,14 +71,7 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     params.put("root", root);
 
     //add request parameters
-    ServletRequest request = getRequest();
-    @SuppressWarnings("unchecked")//should always be String
-    Enumeration<String> originalParams = request.getParameterNames();
-    // Iterate and put the values there
-    while (originalParams.hasMoreElements()) {
-      String originalParam = originalParams.nextElement();
-      params.put(originalParam, request.getParameter(originalParam));
-    }
+    copyParametersFromProvider(params, requestParams);
 
     if (requestParams.hasParameter("mode") && requestParams.getStringParameter("mode", "Render").equals("edit")) {
 
