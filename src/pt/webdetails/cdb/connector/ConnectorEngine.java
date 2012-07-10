@@ -58,7 +58,7 @@ public class ConnectorEngine {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
 
-      Map<String,String> params = new HashMap<String,String>();
+      Map<String,Object> params = new HashMap<String,Object>();
       params.put("group",groupId);
       params.put("user",PentahoSessionHolder.getSession().getName());
       JSONObject response = eng.query("select * from Query where group = :group and userid = :user",params);
@@ -115,7 +115,7 @@ public class ConnectorEngine {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
 
-      Map<String,String> params = new HashMap<String,String>();
+      Map<String,Object> params = new HashMap<String,Object>();
       params.put("id",id);
       JSONObject response = eng.query("select * from Query where @rid = :id",params);
       JSONObject query = (JSONObject) ((JSONArray) response.get("object")).get(0);
@@ -130,7 +130,7 @@ public class ConnectorEngine {
   public void deleteQuery(String id) {
     PersistenceEngine eng = PersistenceEngine.getInstance();
     try {
-      Map<String,String> params = new HashMap<String,String>();
+      Map<String,Object> params = new HashMap<String,Object>();
       params.put("id",id);
       JSONObject response = eng.query("select type from Query where @rid = :id",params);
       JSONObject query = (JSONObject) ((JSONArray) response.get("object")).get(0);

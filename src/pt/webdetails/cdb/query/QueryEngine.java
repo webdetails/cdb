@@ -35,7 +35,7 @@ public class QueryEngine {
     JSONObject response;
     PersistenceEngine pe = PersistenceEngine.getInstance();
     try {
-      Map<String, String> params = new HashMap<String, String>();
+      Map<String, Object> params = new HashMap<String, Object>();
       params.put("user", PentahoSessionHolder.getSession().getName());
 
       response = pe.query("select distinct(group) as name, groupName from Query where userid = :user order by groupName", params);
@@ -49,7 +49,7 @@ public class QueryEngine {
     JSONObject response;
     PersistenceEngine pe = PersistenceEngine.getInstance();
     try {
-      Map<String, String> params = new HashMap<String, String>();
+      Map<String, Object> params = new HashMap<String, Object>();
       params.put("user", PentahoSessionHolder.getSession().getName());
       params.put("group", groupName);
       response = pe.query("select * from Query where group = :group and userid = :user order by groupName", params);
