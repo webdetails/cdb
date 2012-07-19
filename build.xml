@@ -130,10 +130,10 @@
 
     <!-- create the version file -->
     <echo file="${stage.dir}/${plugin.name}/VERSION.txt">${distribution.version}</echo>
-        <echo file="${stage.dir}/${plugin.name}/version.xml" message="&lt;version branch='TRUNK'  buildId='${sequential.build.id}'>${distribution.version}&lt;/version>"/>    
+        <echo file="${stage.dir}/${plugin.name}/version.xml" message="&lt;version branch='STABLE'>${distribution.version}&lt;/version>"/>    
 
 
-	<replace file="${stage.dir}/${plugin.name}/presentation/cdb.cdfde" token="v.12.1a" value="v ${project.revision}"/> 
+	<replace file="${stage.dir}/${plugin.name}/presentation/cdb.cdfde" token="v TRUNK-SNAPSHOT" value="v ${project.revision}"/> 
 
 
     <!-- create a zip file -->
@@ -141,6 +141,16 @@
          basedir="${stage.dir}"
          includes="${plugin.name}/**/*"
          excludes="**/Thumbs.db"/>
+
+<echo file="${dist.dir}/marketplace.xml">&lt;version branch="STABLE">
+		&lt;version>${distribution.version}&lt;/version>
+		&lt;name>Stable&lt;/name>
+		&lt;downloadUrl>http://ci.analytical-labs.com/job/Webdetails-CDB-Release/lastSuccessfulBuild/artifact/dist/cdb-${distribution.version}.zip&lt;/downloadUrl>
+		&lt;description>${distribution.version} release.&lt;/description>
+		&lt;buildId>&lt;/buildId>
+		&lt;/version>	</echo>    
+
+
 
     <copy tofile="${dist.dir}/${ivy.artifact.id}-${project.revision}.zip" file="${dist.dir}/${plugin.zipfile}"/>
   </target>
