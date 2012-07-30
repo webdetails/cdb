@@ -99,14 +99,13 @@ SaikuConnector = function() {
           cube: $('Query', doc).attr('cube'),
           jndi: Dashboards.schemas[$('Query', doc).attr('catalog')].jndi,
           query: $('MDX',doc).text()
-        });        
+        });
+        var filePath = 'cdb/saiku/' + filename;       
         (new wnd.SavedQuery({
           name: filename,
           newname: query.get('name'),
-          xml: response.xml,
-          solution: 'cdb',
-          path: 'saiku',
-          action: filename,
+          content: response.xml,
+          file: filePath,
           overwrite: 'true'
         })).save({ success: function() {
           wnd.puc.refresh_repo();
