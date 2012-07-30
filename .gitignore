@@ -1,7 +1,8 @@
 bin/*
 override.properties
 lib/*
+runtime-lib/*
 nbproject/private/*
 .DS_Store
 dist
-build
+build/*
