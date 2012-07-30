@@ -36,7 +36,7 @@
     <dependency org="pentaho" name="pentaho-bi-platform-web-servlet"
                 rev="${dependency.bi-platform.revision}" transitive="false"  changing="true"/>
                 
-	<dependency org="pentaho" name="cpf"
+	<dependency org="pentaho" name="cpf" conf="runtime,default->default"
 			rev="TRUNK-SNAPSHOT" transitive="false" changing="true"/>                
                 
     <!-- RUNTIME -->
