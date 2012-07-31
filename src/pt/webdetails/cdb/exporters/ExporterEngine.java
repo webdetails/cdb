@@ -64,7 +64,7 @@ public class ExporterEngine {
         Exporter exporter = getExporter(exporterName);
         if (toFile) {
           HttpServletResponse response = (HttpServletResponse) pathParams.getParameter("httpresponse");
-          response.setHeader("content-disposition", "attachment; filename=" + escapePath(exporter.getFilename(group, id, url)));
+          response.setHeader("content-disposition", "attachment; filename=\"" + escapePath(exporter.getFilename(group, id, url)) + "\"") ;
           exporter.binaryExport(group, id, url, out);
         } else {
           out.write(exporter.export(group, id, url).getBytes("utf-8"));
