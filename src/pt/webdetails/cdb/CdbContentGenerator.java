@@ -1,7 +1,6 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
-
 package pt.webdetails.cdb;
 
 import java.io.IOException;
@@ -34,22 +33,22 @@ import pt.webdetails.cpf.persistence.PersistenceEngine;
 public class CdbContentGenerator extends SimpleContentGenerator {
 
   private static final long serialVersionUID = 1L;
-  
   private static Map<String, Method> exposedMethods = new HashMap<String, Method>();
-  static{
+
+  static {
     //to keep case-insensitive methods
     exposedMethods = getExposedMethods(CdbContentGenerator.class, true);
   }
-  
+
   @Override
   protected Method getMethod(String methodName) throws NoSuchMethodException {
-    Method method = exposedMethods.get(StringUtils.lowerCase(methodName) );
-    if(method == null) {
+    Method method = exposedMethods.get(StringUtils.lowerCase(methodName));
+    if (method == null) {
       throw new NoSuchMethodException();
     }
     return method;
   }
-  
+
   @Override
   public String getPluginName() {
     return "cdb";
@@ -61,13 +60,14 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     IParameterProvider requestParams = getRequestParameters();
 //    IParameterProvider pathParams = getPathParameters();
     ServletRequest wrapper = getRequest();
-    String root = wrapper.getServerName() + ":" + wrapper.getServerPort();
+    String root = wrapper.getScheme() + "://"+ wrapper.getServerName() + ":" + wrapper.getServerPort();
 
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("solution", "system");
     params.put("path", "cdb/presentation/");
     params.put("file", "cdb.wcdf");
     params.put("absolute", "true");
+    params.put("inferScheme", "false");
     params.put("root", root);
 
     //add request parameters
@@ -104,11 +104,11 @@ public class CdbContentGenerator extends SimpleContentGenerator {
   @Exposed(accessLevel = AccessLevel.PUBLIC)
   public void doQuery(OutputStream out) throws IOException {
     IParameterProvider requestParams = getRequestParameters();
-    
+
     String group = requestParams.getStringParameter("group", ""),
-           id = requestParams.getStringParameter("id", ""),
-           outputType = requestParams.getStringParameter("outputType", "json");
-    
+            id = requestParams.getStringParameter("id", ""),
+            outputType = requestParams.getStringParameter("outputType", "json");
+
     writeOut(out, ExporterEngine.exportCda(group, id, outputType));
   }
 
@@ -129,53 +129,25 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     OlapUtils utils = new OlapUtils();
     writeOut(out, utils.process(getRequestParameters()).toString());
   }
-  
+
   private void redirectToCdeEditor(OutputStream out, Map<String, Object> params) throws IOException {
-    
+
     StringBuilder urlBuilder = new StringBuilder();
     urlBuilder.append("../pentaho-cdf-dd/edit");
-    if(params.size() > 0) urlBuilder.append("?");
-    
+    if (params.size() > 0) {
+      urlBuilder.append("?");
+    }
+
     List<String> paramArray = new ArrayList<String>();
-    for(String key : params.keySet()){
+    for (String key : params.keySet()) {
       Object value = params.get(key);
       if (value instanceof String) {
-          paramArray.add(key + "=" + URLEncoder.encode((String) value, getEncoding()));
+        paramArray.add(key + "=" + URLEncoder.encode((String) value, getEncoding()));
       }
     }
 
     urlBuilder.append(StringUtils.join(paramArray, "&"));
     redirect(urlBuilder.toString());
   }
-
-//  private void redirectToCDE(OutputStream out, Map<String, Object> params) throws IOException {
-//
-//
-//    StringBuilder str = new StringBuilder();
-//
-//    str.append("<html><head><title>Redirecting</title>");
-//
-//
-//    str.append("<meta http-equiv=\"REFRESH\" content=\"0; url=../pentaho-cdf-dd/edit?");
-//
-//    List<String> paramArray = new ArrayList<String>();
-//    for(String key : params.keySet()){
-//      Object value = params.get(key);
-//      if (value instanceof String) {
-//        paramArray.add(key + "=" + URLEncoder.encode((String) value, "UTF-8"));
-//      }
-//
-//    }
-//
-//    str.append(StringUtils.join(paramArray, "&"));
-//
-//    str.append("\"></head>");
-//    str.append("<body>Redirecting</body></html>");
-//    
-//    writeOut(out, str.toString());
-//
-//    return;
-//
-//  }
 
 }
