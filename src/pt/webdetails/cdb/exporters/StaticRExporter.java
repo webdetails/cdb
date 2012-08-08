@@ -4,8 +4,12 @@
  */
 package pt.webdetails.cdb.exporters;
 
+import com.github.mustachejava.Mustache;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -15,26 +19,19 @@ import java.util.zip.ZipOutputStream;
  */
 public class StaticRExporter extends AbstractExporter {
 
+  final private static String TEMPLATE_PATH = "StaticR.mustache";
   public StaticRExporter() {
     this.fileExportExtension = "zip";
   }
 
   @Override
-  public String export(String group, String id, String url) {
-    String code = "cdbData <- read.csv2(\"" + id + ".csv\")\n"; 
-    return code;
-  }
-
-  @Override
   public void binaryExport(String group, String id, String url, OutputStream out) throws IOException {
-    String code = "cdbData <- read.csv2(\"" + id + ".csv\")\n"; 
+    String src = getSource(group, id, url);
     ZipOutputStream zos = new ZipOutputStream(out);
-    zos.putNextEntry(new ZipEntry(group + "/"));
-    zos.putNextEntry(new ZipEntry(group + "/" + id + ".R"));
-    zos.write(code.getBytes("utf-8"));
-    zos.putNextEntry(new ZipEntry(group + "/" + id + ".csv"));
+    zos.putNextEntry(new ZipEntry(id + ".py"));
+    zos.write(src.getBytes("utf-8"));
+    zos.putNextEntry(new ZipEntry(id + ".csv"));
     zos.write(ExporterEngine.exportCda(group, id, "csv").getBytes("utf-8"));
     zos.close();
   }
-
 }

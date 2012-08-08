@@ -1,0 +1,18 @@
+readCdb <- function(server,group,id) {
+  # read in user and password. Don' know of a way to read password without echoing it... :(
+  cat("User: ");
+  user <- readline();
+  cat("Password: ");
+  password <- readline();
+  #build the URL parameters
+  url <- paste(server, "/pentaho/content/cdb/doQuery?",sep="");
+  group <- paste("group=",group,sep="");
+  id <- paste("&id=",id,sep="");
+  outputType <- "&outputType=csv";
+  # assemble the complete URL
+  completeUrl <- paste(url, group, id, outputType, "&userid=",user,"&password=",password,sep="");
+  # read in the csv from the URL
+  return(read.csv2(URLencode(completeUrl)));
+};
+
+cdbData <- readCdb("{{url}}", "{{group}}","{{id}}");
