@@ -20,7 +20,7 @@ public class DynamicPythonExporter extends AbstractExporter {
           + "  # server, so we make sure to escape all the bits of the URL we'e building\n"
           + "  user = \"&userid=\" + urllib.quote(raw_input(\"User: \"))\n"
           + "  password = \"&password=\" + urllib.quote(getpass.getpass())\n"
-          + "  base_path = \"/pentaho/content/cdb/doQuery?outputType=csv\"\n"
+          + "  base_path = \"/content/cdb/doQuery?outputType=csv\"\n"
           + "  file = \"&group=\" + urllib.quote(group)\n"
           + "  data_id = \"&id=\" + urllib.quote(id)\n"
           + "  complete_url = url + base_path + file + data_id + user + password\n"
