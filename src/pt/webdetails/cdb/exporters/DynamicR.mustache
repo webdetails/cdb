@@ -10,9 +10,41 @@ readCdb <- function(server,group,id) {
   id <- paste("&id=",id,sep="");
   outputType <- "&outputType=csv";
   # assemble the complete URL
-  completeUrl <- paste(url, group, id, outputType, "&userid=",user,"&password=",password,sep="");
-  # read in the csv from the URL
-  return(read.csv2(URLencode(completeUrl)));
-};
+  completeUrl <- paste(c(server,"/content/cdb/doQuery?group=",
+                         group,"&outputType=json&id=",
+                         query,"&userid=",user,"&password=",password), collapse = "");
+  
+  # Read it
+  json <- fromJSON(,URLencode(completeUrl));
+  
+  # Get types
+  ct <- sapply(json$metadata,function(d){d$colType})
+  cn <- sapply(json$metadata,function(d){d$colName});
+  df <- as.data.frame(t(sapply(json$resultset, function(d){unlist(rbind(d))})),stringsAsFactors=TRUE)
+  
+  # Convert numerics
+  for(i in c(1:length(ct))){
+    
+    if(ct[i]=="Numeric"){
+      if(toNumeric == TRUE)
+        df[[i]] <- toNumericFunc(df[[i]])
+    }
+    else{
+      # Introspection for date
+      if(toDate == TRUE && length(grep("date",cn[[i]],ignore.case=TRUE))>0){
+        df[[i]] <- toDateFunc(df[[i]])
+      }      
+    }    
+  }  
+  names(df) <- make.names(cn);
+  return(df);
+}
+
+# change these
+user<- "joe";
+password <-"password";
+
+result <- cdb.fromJSONUrl("{{url}}", "{{group}}","{{id}}",user,password,toNumeric=TRUE, toDate=TRUE);
+
 
 cdbData <- readCdb("{{url}}", "{{group}}","{{id}}");
