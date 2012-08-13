@@ -240,8 +240,8 @@ wd.cdb.cloneQueryTypeSelector = function(groupName, queryObj){
   var paramMap = {
     'queryTypeParam' : (guidParam+'TypeParam')
   };
-  
-  Dashboards.setParameter(guidParam+'TypeParam',queryObj.getType());
+  /* Hardcoded "Saiku" default. It's crappy, but */
+  Dashboards.setParameter(guidParam+'TypeParam',queryObj.getType() || "Saiku");
   
   var clone = render_queryTypeSelector.clone(paramMap,{},objectPlaceHolderMap);
   clone.htmlObject = queryGuid+'Type';
