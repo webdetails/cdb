@@ -21,5 +21,4 @@ public class DynamicRExporter extends AbstractExporter {
     this.fileExportExtension = "r";
     this.templateFile = "DynamicR.mustache";
   }
-
 }
