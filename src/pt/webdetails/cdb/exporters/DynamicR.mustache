@@ -10,6 +10,7 @@ readCdb <- function(server,group,id) {
   id <- paste("&id=",id,sep="");
   outputType <- "&outputType=csv";
   # assemble the complete URL
+
   completeUrl <- paste(url, group, id, outputType, "&userid=",user,"&password=",password,sep="");
   # read in the csv from the URL
   return(read.csv2(URLencode(completeUrl)));
