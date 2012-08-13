@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.platform.api.repository.ISolutionRepository;
+import org.pentaho.platform.engine.core.system.PentahoRequestContextHolder;
 import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 import pt.webdetails.cdb.ExporterNotFoundException;
@@ -58,7 +59,7 @@ public class ExporterEngine {
                 group = requestParams.getStringParameter("group", ""),
                 id = requestParams.getStringParameter("id", ""),
                 filename = requestParams.getStringParameter("filename", "default"),
-                url = wrapper.getScheme() + "://" + wrapper.getServerName() + ":" + wrapper.getServerPort();
+                url = wrapper.getScheme() + "://" + wrapper.getServerName() + ":" + wrapper.getServerPort() + PentahoRequestContextHolder.getRequestContext().getContextPath();
 
         boolean toFile = requestParams.getStringParameter("toFile", "false").equals("true");
         Exporter exporter = getExporter(exporterName);
