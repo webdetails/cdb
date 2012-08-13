@@ -8,16 +8,36 @@ wd.cdb.connectors = wd.cdb.connectors || {};
  * @constructor
  */
 wd.cdb.connectors.ConnectorEngine = (function() {
-  var myself = {};
-  var _connectors = {};
-  myself.registerConnector = function(connector) {
-    _connectors[connector.getName()] = connector;
+  var isExperimental = Dashboards.getQueryParameter("experimental") == "true",
+      myself = {},
+      _connectors = {},
+      _experimental = {};
+
+  myself.registerConnector = function(connector,flags) {
+    flags = flags || {};
+    if(flags.experimental) {
+      _experimental[connector.getName()] = connector;
+    } else {
+      _connectors[connector.getName()] = connector;
+    }
   };
+
   myself.getConnector = function(type) {
-    return _connectors[type];
+    if(isExperimental) { 
+      return _experimental[type] || _connectors[type];
+    }else {
+      return _connectors[type];
+    };
   };
+
   myself.listConnectors = function() {
-    return _connectors
+    var ret = {};
+    if(isExperimental) {
+      _.extend(ret,_connectors,_experimental);
+    } else {
+      _.extend(ret,_connectors);
+    }
+    return ret
   };
 
   myself.newQuery = function($ph, type, group, name, callback) {
