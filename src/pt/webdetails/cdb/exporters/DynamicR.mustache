@@ -43,8 +43,9 @@ cdb.fromJSONUrl <- function(server,group,query,user,password, toNumeric = TRUE, 
   return(df);
 }
 
-user<- "palves@mozilla.com";
-password <-"";
+# change these
+user<- "joe";
+password <-"password";
 
 result <- cdb.fromJSONUrl("{{url}}", "{{group}}","{{id}}",user,password,toNumeric=TRUE, toDate=TRUE);
 

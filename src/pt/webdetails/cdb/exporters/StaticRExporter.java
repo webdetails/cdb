@@ -19,9 +19,9 @@ import java.util.zip.ZipOutputStream;
  */
 public class StaticRExporter extends AbstractExporter {
 
-  final private static String TEMPLATE_PATH = "StaticR.mustache";
   public StaticRExporter() {
     this.fileExportExtension = "zip";
+    this.templateFile = "StaticR.mustache";
   }
 
   @Override

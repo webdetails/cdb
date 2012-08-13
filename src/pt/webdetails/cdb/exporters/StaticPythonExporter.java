@@ -19,7 +19,6 @@ import java.util.zip.ZipOutputStream;
  */
 public class StaticPythonExporter extends AbstractExporter {
 
-  final private static String TEMPLATE_PATH = "StaticPython.mustache";
   public StaticPythonExporter() {
     this.fileExportExtension = "zip";
     this.templateFile = "StaticPython.mustache";
