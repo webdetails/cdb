@@ -3,6 +3,29 @@
   "title": "cToolsTemplate",
   "rows": [
    {
+    "id": "a8ad09bd-26f6-712b-9927-7858e062f414",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "ace",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     },
+     {
+      "name": "resourceFile",
+      "value": "../pentaho-cdf-dd/getJsResource/resources/ace/src/ace.js",
+      "type": "ResourceFile"
+     }
+    ]
+   },
+   {
     "id": "d1433c8c-a62b-507f-ada1-c013b851f169",
     "type": "LayoutResourceFile",
     "typeDesc": "Resource",
@@ -182,6 +205,29 @@
      {
       "name": "resourceFile",
       "value": "static/client/connectors/saiku-connector.js",
+      "type": "ResourceFile"
+     }
+    ]
+   },
+   {
+    "id": "19d022fe-1ad9-7d00-cb44-a30451cf440c",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "sql_connector",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     },
+     {
+      "name": "resourceFile",
+      "value": "static/client/connectors/sql-connector.js",
       "type": "ResourceFile"
      }
     ]
@@ -5157,6 +5203,16 @@
       "name": "tooltip",
       "value": "",
       "type": "Html"
+     },
+     {
+      "name": "maxLength",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "size",
+      "value": "",
+      "type": "Integer"
      }
     ]
    },
@@ -5220,6 +5276,16 @@
       "name": "tooltip",
       "value": "",
       "type": "Html"
+     },
+     {
+      "name": "maxLength",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "size",
+      "value": "",
+      "type": "Integer"
      }
     ]
    },
