@@ -61,7 +61,12 @@ public class ConnectorEngine {
       Map<String,Object> params = new HashMap<String,Object>();
       params.put("group",groupId);
       params.put("user",PentahoSessionHolder.getSession().getName());
-      JSONObject response = eng.query("select * from Query where group = :group and userid = :user",params);
+      
+      
+      // DISABLING MULTI USER SUPPORT BY NOW JSONObject response = eng.query("select * from Query where group = :group and userid = :user",params);
+      JSONObject response = eng.query("select * from Query where group = :group ",params);
+      
+      
       JSONArray queries = (JSONArray) response.get("object");
       CdaSettings cda = new CdaSettings(groupId, null);
       for (int i = 0; i < queries.length(); i++) {
