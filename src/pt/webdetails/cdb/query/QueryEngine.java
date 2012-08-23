@@ -38,7 +38,8 @@ public class QueryEngine {
       Map<String, Object> params = new HashMap<String, Object>();
       params.put("user", PentahoSessionHolder.getSession().getName());
 
-      response = pe.query("select distinct(group) as name, groupName from Query where userid = :user order by groupName", params);
+      // DISBLING MULTI USER SUPPORT BY NOW response = pe.query("select distinct(group) as name, groupName from Query where userid = :user order by groupName", params);
+      response = pe.query("select distinct(group) as name, groupName from Query order by groupName", null);
     } catch (JSONException e) {
       return null;
     }
@@ -52,7 +53,10 @@ public class QueryEngine {
       Map<String, Object> params = new HashMap<String, Object>();
       params.put("user", PentahoSessionHolder.getSession().getName());
       params.put("group", groupName);
-      response = pe.query("select * from Query where group = :group and userid = :user order by groupName", params);
+ 
+      // DISABLING MULTI USER SUPPORT BY NOW response = pe.query("select * from Query where group = :group and userid = :user order by groupName", params);
+      response = pe.query("select * from Query where group = :group order by groupName", params);
+      
     } catch (JSONException e) {
       return null;
     }
