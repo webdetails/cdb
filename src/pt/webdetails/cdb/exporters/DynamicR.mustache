@@ -1,21 +1,24 @@
-readCdb <- function(server,group,id) {
-  # read in user and password. Don' know of a way to read password without echoing it... :(
-  cat("User: ");
-  user <- readline();
-  cat("Password: ");
-  password <- readline();
-  #build the URL parameters
-  url <- paste(server, "/pentaho/content/cdb/doQuery?",sep="");
-  group <- paste("group=",group,sep="");
-  id <- paste("&id=",id,sep="");
-  outputType <- "&outputType=csv";
+#install.packages("RJSONIO");
+require("RJSONIO")
+
+cdb.fromJSONUrl <- function(server,group,query,user,password, toNumeric = TRUE, toDate = TRUE) {
+  
+  # Utility functions
+  toNumericFunc <- function(ds){
+    return(as.numeric(levels(ds)[ds]));  
+  }
+  
+  toDateFunc <- function(d){
+    return(as.POSIXct(d, tz = "GMT"));
+  }
+  
   # assemble the complete URL
   completeUrl <- paste(c(server,"/content/cdb/doQuery?group=",
                          group,"&outputType=json&id=",
                          query,"&userid=",user,"&password=",password), collapse = "");
   
   # Read it
-  json <- fromJSON(,URLencode(completeUrl));
+  json <- fromJSON(URLencode(completeUrl),nullValue=NA);
   
   # Get types
   ct <- sapply(json$metadata,function(d){d$colType})
