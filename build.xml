@@ -133,12 +133,12 @@
 
     <!-- create the version file -->
     <echo file="${stage.dir}/${plugin.name}/VERSION.txt">${distribution.version}</echo>
-        <echo file="${stage.dir}/${plugin.name}/version.xml" message="&lt;version branch='TRUNK'  buildId='${sequential.build.id}'>${distribution.version}&lt;/version>"/>    
+        <echo file="${stage.dir}/${plugin.name}/version.xml" message="&lt;version branch='TRUNK'  buildId='${sequential.build.id}'>${project.revision}&lt;/version>"/>    
 
 
        
 	<echo file="${dist.dir}/marketplace.xml">&lt;version branch="TRUNK">
-		&lt;version>${distribution.version}&lt;/version>
+		&lt;version>${project.revision}&lt;/version>
 		&lt;name>Trunk&lt;/name>
 		&lt;downloadUrl>http://ci.analytical-labs.com/job/Webdetails-CDB/lastSuccessfulBuild/artifact/dist/cdb-TRUNK-SNAPSHOT.zip&lt;/downloadUrl>
 		&lt;description>Trunk Snapshot. Install at your own risk....&lt;/description>
