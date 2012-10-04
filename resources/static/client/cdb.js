@@ -408,6 +408,10 @@ wd.cdb.showQueryEditor = function(groupName,queryObj,callback,isNew) {
         popup = $('#editionPopup');
     popup.stop();
     popup.find(".title").text(queryObj.getLabel());
+    if(!queryObj.getType()) {
+      var typeParam = Dashboards.getParameterValue("param" + queryObj.getGUID().replace(/-/g,"_") + "TypeParam");
+      queryObj.setType(typeParam);
+    }
     var connector = wd.cdb.connectors.ConnectorEngine.getConnector(queryObj.getType());
     if (isNew) {
       connector.newQuery(env,queryObj,function(){
