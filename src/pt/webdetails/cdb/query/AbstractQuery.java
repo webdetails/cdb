@@ -92,7 +92,7 @@ public abstract class AbstractQuery implements Query {
       _key = json.getString("@rid");
       _group = json.getString("group");
       _name = json.getString("name");
-      JSONObject props = new JSONObject(json.get("definition"));
+      JSONObject props = json.getJSONObject("definition");
       for (String key : JSONObject.getNames(props)) {
         _properties.put(key, props.get(key));
       }
