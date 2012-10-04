@@ -14,11 +14,11 @@ import pt.webdetails.cda.connections.Connection;
  */
 public interface Connector {
 
-  public DataAccess exportCdaDataAccess(JSONObject query);
+  public DataAccess exportCdaDataAccess();
 
-  public Connection exportCdaConnection(JSONObject query);
+  public Connection exportCdaConnection();
 
-  public void copyQuery(String oldGuid, String newGuid);
+  public void copy(String newGuid);
 
-  public void deleteQuery(String guid);
+  public void delete();
 }
