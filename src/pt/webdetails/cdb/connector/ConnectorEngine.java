@@ -1,7 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
 package pt.webdetails.cdb.connector;
 
 import java.io.OutputStream;
@@ -42,7 +41,7 @@ public class ConnectorEngine {
 
   protected Connector getConnector(String connectorName) throws ConnectorRuntimeException, ConnectorNotFoundException {
     try {
-      Class<?> connectorClass = Class.forName("pt.webdetails.cdb.connector." + connectorName + "Connector");
+      Class<?> connectorClass = Class.forName("pt.webdetails.cdb.query." + connectorName + "Query");
       return (Connector) connectorClass.getConstructor().newInstance();
     } catch (ClassNotFoundException e) {
       throw new ConnectorNotFoundException(e);
@@ -114,6 +113,8 @@ public class ConnectorEngine {
           cda.addConnection(connection);
           DataAccess dataAccess = q.exportCdaDataAccess();
           cda.addDataAccess(dataAccess);
+        } catch (ConnectorNotFoundException cnfe ) {
+          logger.error("Connector of type "+ type + " not found.", cnfe);
         } catch (ConnectorException e) {
           logger.error(e);
         }

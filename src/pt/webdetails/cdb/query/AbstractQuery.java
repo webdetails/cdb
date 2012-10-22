@@ -105,6 +105,7 @@ public abstract class AbstractQuery implements Query {
       name = _name;
       properties = _properties;
     } catch (JSONException jse) {
+      logger.error("Error while reading values from JSON", jse);
     }
   }
 
