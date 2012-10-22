@@ -1,19 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
 package pt.webdetails.cdb.query;
 
 import java.io.IOException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONException;
 import org.json.JSONObject;
 import pt.webdetails.cda.connections.Connection;
-import pt.webdetails.cda.connections.sql.JndiConnection;
-import pt.webdetails.cda.connections.sql.SqlJndiConnectionInfo;
+import pt.webdetails.cda.connections.mondrian.MondrianJndiConnectionInfo;
+import pt.webdetails.cda.connections.mondrian.JndiConnection;
 import pt.webdetails.cda.dataaccess.DataAccess;
-import pt.webdetails.cda.dataaccess.SqlDataAccess;
+import pt.webdetails.cda.dataaccess.MdxDataAccess;
 import pt.webdetails.cpf.Util;
 import pt.webdetails.cpf.repository.RepositoryAccess;
 
@@ -32,16 +30,19 @@ public class SaikuQuery extends AbstractQuery {
     id = getName();
     name = id;
     queryContent = getProperty("query").toString();
-    DataAccess dataAccess = new SqlDataAccess(id, name, id, queryContent);
+    DataAccess dataAccess = new MdxDataAccess(id, name, id, queryContent);
     //dataAccess;
     return dataAccess;
   }
 
   @Override
   public Connection exportCdaConnection() {
-    String jndi;
+    String jndi, cube, catalog;
     jndi = getProperty("jndi").toString();
-    SqlJndiConnectionInfo cinfo = new SqlJndiConnectionInfo(jndi, null, null, null, null);
+    cube = getProperty("cube").toString();
+    catalog = getProperty("catalog").toString();
+
+    MondrianJndiConnectionInfo cinfo = new MondrianJndiConnectionInfo(jndi, catalog, cube);
     Connection conn = new JndiConnection(getName(), cinfo);
     return conn;
   }

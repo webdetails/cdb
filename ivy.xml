@@ -41,12 +41,16 @@
                 
     <!-- RUNTIME -->
     <dependency org="pentaho" name="cda" rev="TRUNK-SNAPSHOT" changing="true" transitive="false" conf="default,runtime->default" />
-    <!-- orient db (persistence) -->
+
+
+<!-- orient db (persistence) -->
     <dependency org="com.orientechnologies" name="orient-commons" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default"/>
     <dependency org="com.orientechnologies" name="orientdb-core" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default"/>
     <dependency org="com.orientechnologies" name="orientdb-server" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
     <dependency org="com.orientechnologies" name="orientdb-client" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
     <dependency org="com.orientechnologies" name="orientdb-enterprise" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
+
+    
     <!-- Mustache templates -->
     <dependency org="com.github.spullara.mustache.java" name="compiler" conf='runtime,default->default' rev="0.8.4"/>
   </dependencies>
