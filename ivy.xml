@@ -37,7 +37,7 @@
                 rev="${dependency.bi-platform.revision}" transitive="false"  changing="true"/>
                 
     <dependency org="pentaho" name="cpf"
-        rev="TRUNK-SNAPSHOT" transitive="false" changing="true" conf='runtime->default'/>                
+        rev="TRUNK-SNAPSHOT" transitive="false" changing="true" conf='runtime,test->default'/>                
                 
     <!-- RUNTIME -->
     <dependency org="pentaho" name="cda" rev="TRUNK-SNAPSHOT" changing="true" transitive="false" conf="default,runtime->default" />
