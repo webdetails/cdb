@@ -124,7 +124,7 @@ public class ConnectorEngine {
 
       //RepositoryUtils.writeSolutionFile("cdb/queries", PentahoSessionHolder.getSession().getName() + "." + groupId + ".cda", cda.asXML());
     } catch (Exception e) {
-      logger.error(e);
+      logger.error("Exception while exporting CDA.", e);
     }
   }
 
