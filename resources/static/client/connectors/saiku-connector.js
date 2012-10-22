@@ -20,13 +20,10 @@ SaikuConnector = function() {
       )),
       paramString = $.param(params);
 
-    /* Not entirely sure why, but we need the hash with
-     * /query/open/ and a third part of some sort. It
-     * works irrespectively of what we put in there, so
-     * 'blank' does just fine.
+    /* the hash parameter starts a Backbone Router that opens the given query
      */
     var $iframe = $("<iframe>", {
-          src: saikuPath + paramString + "#query/open/blank",
+          src: saikuPath + paramString + ( mode == "edit" ? "#query/open/" + action : ""),
           style: 'width:100%;height:700px'
         });
     placeholder.empty().append($iframe);
@@ -102,11 +99,8 @@ SaikuConnector = function() {
         });
         var filePath = 'cdb/saiku/' + filename;       
         (new wnd.SavedQuery({
-          name: filename,
-          newname: query.get('name'),
           content: response.xml,
-          file: filePath,
-          overwrite: 'true'
+          file: filePath
         })).save({ success: function() {
           wnd.puc.refresh_repo();
           callback(queryObj);
