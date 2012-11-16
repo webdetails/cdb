@@ -20,7 +20,7 @@ wd.ctools.persistence = (function(){
     var params = {
       method: "store",
       "class": type,
-      data: obj.toJSON(),
+      data: obj.toJSON()
     };
 
     if (key) {
