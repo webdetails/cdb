@@ -25,6 +25,7 @@ import pt.webdetails.cpf.annotations.AccessLevel;
 import pt.webdetails.cpf.annotations.Exposed;
 import pt.webdetails.cpf.olap.OlapUtils;
 import pt.webdetails.cpf.persistence.PersistenceEngine;
+import pt.webdetails.cpf.utils.PluginUtils;
 
 /**
  *
@@ -71,7 +72,7 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     params.put("root", root);
 
     //add request parameters
-    copyParametersFromProvider(params, requestParams);
+    PluginUtils.getInstance().copyParametersFromProvider(params, requestParams);
 
     if (requestParams.hasParameter("mode") && requestParams.getStringParameter("mode", "Render").equals("edit")) {
 
