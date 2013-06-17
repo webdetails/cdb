@@ -15,6 +15,9 @@ import javax.servlet.ServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.pentaho.platform.api.engine.IParameterProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import pt.webdetails.cdb.exporters.ExporterEngine;
 import pt.webdetails.cdb.connector.ConnectorEngine;
 import pt.webdetails.cdb.query.QueryEngine;
@@ -34,7 +37,10 @@ import pt.webdetails.cpf.utils.PluginUtils;
 public class CdbContentGenerator extends SimpleContentGenerator {
 
   private static final long serialVersionUID = 1L;
+
   private static Map<String, Method> exposedMethods = new HashMap<String, Method>();
+
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
   static {
     //to keep case-insensitive methods
@@ -59,17 +65,26 @@ public class CdbContentGenerator extends SimpleContentGenerator {
   public void home(OutputStream out) throws IOException {
 
     IParameterProvider requestParams = getRequestParameters();
-//    IParameterProvider pathParams = getPathParameters();
+    // IParameterProvider pathParams = getPathParameters();
     ServletRequest wrapper = getRequest();
-    String root = wrapper.getScheme() + "://"+ wrapper.getServerName() + ":" + wrapper.getServerPort();
+    // String root = wrapper.getScheme() + "://" + wrapper.getServerName() + ":" + wrapper.getServerPort();
 
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("solution", "system");
     params.put("path", "cdb/presentation/");
     params.put("file", "cdb.wcdf");
-    params.put("absolute", "true");
+    params.put("absolute", "false");
     params.put("inferScheme", "false");
-    params.put("root", root);
+    // params.put("root", root);
+
+    //    String baseUrl = wrapper.getServletContext().getInitParameter("base-url");
+    //    logger.info("baseUrl={}", baseUrl);
+    //
+    //    if (baseUrl != null) {
+    //      params.put("absolute", "true");
+    //      params.put("inferScheme", "false");
+    //      params.put("root", baseUrl);
+    //    }
 
     //add request parameters
     PluginUtils.getInstance().copyParametersFromProvider(params, requestParams);
@@ -106,9 +121,8 @@ public class CdbContentGenerator extends SimpleContentGenerator {
   public void doQuery(OutputStream out) throws IOException {
     IParameterProvider requestParams = getRequestParameters();
 
-    String group = requestParams.getStringParameter("group", ""),
-            id = requestParams.getStringParameter("id", ""),
-            outputType = requestParams.getStringParameter("outputType", "json");
+    String group = requestParams.getStringParameter("group", ""), id = requestParams.getStringParameter("id", ""), outputType = requestParams
+        .getStringParameter("outputType", "json");
 
     writeOut(out, ExporterEngine.exportCda(group, id, outputType));
   }
@@ -150,5 +164,4 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     urlBuilder.append(StringUtils.join(paramArray, "&"));
     redirect(urlBuilder.toString());
   }
-
 }
