@@ -77,15 +77,6 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     params.put("inferScheme", "false");
     // params.put("root", root);
 
-    //    String baseUrl = wrapper.getServletContext().getInitParameter("base-url");
-    //    logger.info("baseUrl={}", baseUrl);
-    //
-    //    if (baseUrl != null) {
-    //      params.put("absolute", "true");
-    //      params.put("inferScheme", "false");
-    //      params.put("root", baseUrl);
-    //    }
-
     //add request parameters
     PluginUtils.getInstance().copyParametersFromProvider(params, requestParams);
 
