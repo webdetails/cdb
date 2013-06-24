@@ -6,3 +6,4 @@ nbproject/private/*
 .DS_Store
 dist
 build/*
+test-lib/*
