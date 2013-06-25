@@ -65,21 +65,14 @@ public class CdbContentGenerator extends SimpleContentGenerator {
   public void home(OutputStream out) throws IOException {
 
     IParameterProvider requestParams = getRequestParameters();
-    // IParameterProvider pathParams = getPathParameters();
-    ServletRequest wrapper = getRequest();
-    
-    // HINT: hack to correctly resolve resources paths behind web front-ends
-    // String root = wrapper.getScheme() + "://" + wrapper.getServerName() + ":" + wrapper.getServerPort();
+    // ServletRequest wrapper = getRequest();
 
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("solution", "system");
     params.put("path", "cdb/presentation/");
     params.put("file", "cdb.wcdf");
-    params.put("absolute", "true");
+    params.put("absolute", "false");
     params.put("inferScheme", "false");
-    
-    // HINT: hack to correctly resolve resources paths behind web front-ends
-    params.put("root", "");
 
     //add request parameters
     PluginUtils.getInstance().copyParametersFromProvider(params, requestParams);
