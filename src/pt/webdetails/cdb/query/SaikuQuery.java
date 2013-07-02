@@ -13,7 +13,7 @@ import pt.webdetails.cda.connections.mondrian.JndiConnection;
 import pt.webdetails.cda.dataaccess.DataAccess;
 import pt.webdetails.cda.dataaccess.MdxDataAccess;
 import pt.webdetails.cpf.Util;
-import pt.webdetails.cpf.repository.RepositoryAccess;
+import pt.webdetails.cpf.repository.PentahoRepositoryAccess;
 
 /**
  *
@@ -52,7 +52,7 @@ public class SaikuQuery extends AbstractQuery {
     String newFileName = newGuid + ".saiku",
             oldFileName = getId() + ".saiku";
     try {
-      RepositoryAccess.getRepository().copySolutionFile(Util.joinPath(path, oldFileName), Util.joinPath(path, newFileName));
+      PentahoRepositoryAccess.getRepository().copySolutionFile(Util.joinPath(path, oldFileName), Util.joinPath(path, newFileName));
     } catch (IOException e) {
       logger.error(e);
     }
@@ -61,7 +61,7 @@ public class SaikuQuery extends AbstractQuery {
   @Override
   public void delete() {
     String fileName = getId() + ".saiku";
-    RepositoryAccess.getRepository().removeFile(path + "/" + fileName);
+    PentahoRepositoryAccess.getRepository().removeFile(path + "/" + fileName);
   }
 
   @Override

@@ -3,7 +3,6 @@
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 package pt.webdetails.cdb.connector;
 
-import org.json.JSONObject;
 import pt.webdetails.cda.dataaccess.DataAccess;
 import pt.webdetails.cda.connections.Connection;
 

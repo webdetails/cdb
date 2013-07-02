@@ -18,7 +18,7 @@ import pt.webdetails.cda.dataaccess.DataAccess;
 import pt.webdetails.cda.settings.CdaSettings;
 import pt.webdetails.cdb.query.Query;
 import pt.webdetails.cpf.persistence.PersistenceEngine;
-import pt.webdetails.cpf.repository.RepositoryAccess;
+import pt.webdetails.cpf.repository.PentahoRepositoryAccess;
 
 /**
  *
@@ -120,7 +120,7 @@ public class ConnectorEngine {
         }
       }
       String fileName = PentahoSessionHolder.getSession().getName() + "." + groupId + ".cda";
-      RepositoryAccess repository = RepositoryAccess.getRepository();
+      PentahoRepositoryAccess repository = (PentahoRepositoryAccess)PentahoRepositoryAccess.getRepository();
       repository.publishFile("cdb/queries/" + fileName, cda.asXML(), true);
 
       //RepositoryUtils.writeSolutionFile("cdb/queries", PentahoSessionHolder.getSession().getName() + "." + groupId + ".cda", cda.asXML());
