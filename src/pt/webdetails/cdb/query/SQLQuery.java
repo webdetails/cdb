@@ -4,18 +4,15 @@
  */
 package pt.webdetails.cdb.query;
 
-import java.io.IOException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONException;
 import org.json.JSONObject;
 import pt.webdetails.cda.connections.Connection;
 import pt.webdetails.cda.connections.sql.JndiConnection;
 import pt.webdetails.cda.connections.sql.SqlJndiConnectionInfo;
 import pt.webdetails.cda.dataaccess.DataAccess;
 import pt.webdetails.cda.dataaccess.SqlDataAccess;
-import pt.webdetails.cpf.Util;
-import pt.webdetails.cpf.repository.RepositoryAccess;
+
 
 /**
  *

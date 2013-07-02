@@ -24,6 +24,7 @@ import pt.webdetails.cdb.query.QueryEngine;
 import pt.webdetails.cpf.InterPluginCall;
 import pt.webdetails.cpf.InvalidOperationException;
 import pt.webdetails.cpf.SimpleContentGenerator;
+import pt.webdetails.cpf.WrapperUtils;
 import pt.webdetails.cpf.annotations.AccessLevel;
 import pt.webdetails.cpf.annotations.Exposed;
 import pt.webdetails.cpf.olap.OlapUtils;
@@ -75,7 +76,9 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     params.put("inferScheme", "false");
 
     //add request parameters
-    PluginUtils.getInstance().copyParametersFromProvider(params, requestParams);
+    //XXX this will require the initialization of PluginUtils ... could this method be static?
+    new PluginUtils().copyParametersFromProvider(params, WrapperUtils.wrapParamProvider(requestParams));
+    //PluginUtils.getInstance().copyParametersFromProvider(params, requestParams);
 
     if (requestParams.hasParameter("mode") && requestParams.getStringParameter("mode", "Render").equals("edit")) {
       // Send this to CDE

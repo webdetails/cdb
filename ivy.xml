@@ -32,13 +32,18 @@
     <dependency org="pentaho" name="pentaho-bi-platform-plugin-services"
                 rev="${dependency.bi-platform.revision}" changing="true"/>
     <dependency org="pentaho" name="pentaho-bi-platform-plugin-actions"
-                rev="${dependency.bi-platform.revision}" changing="true"/>
+                rev="${dependency.bi-platform.revision}" changing="true">
+                <exclude module="nekohtml" name="*" type="*" ext="*" conf="" matcher="exact"></exclude>
+    </dependency>
     <dependency org="pentaho" name="pentaho-bi-platform-web-servlet"
                 rev="${dependency.bi-platform.revision}" transitive="false"  changing="true"/>
                 
-    <dependency org="pentaho" name="cpf"
-        rev="TRUNK-SNAPSHOT" transitive="false" changing="true" conf='runtime,test->default'/>                
-                
+        <dependency org="pt.webdetails" name="cpf-core" rev="TRUNK-SNAPSHOT" transitive="false" changing="true" conf='runtime->default'/>
+    <dependency org="pt.webdetails" name="cpf-pentaho" rev="TRUNK-SNAPSHOT" transitive="false" changing="true" conf='runtime->default'/>     
+
+     <dependency org="pentaho" name="cda-core" rev="TRUNK-SNAPSHOT" />
+    <dependency org="pentaho" name="cda-pentaho" rev="TRUNK-SNAPSHOT" />
+
     <!-- RUNTIME 
     <dependency org="pentaho" name="cda" rev="TRUNK-SNAPSHOT" changing="true" transitive="false" conf="default,runtime->default" />
 -->
