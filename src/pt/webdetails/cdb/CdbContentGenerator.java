@@ -76,9 +76,7 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     params.put("inferScheme", "false");
 
     //add request parameters
-    //XXX this will require the initialization of PluginUtils ... could this method be static?
-    new PluginUtils().copyParametersFromProvider(params, WrapperUtils.wrapParamProvider(requestParams));
-    //PluginUtils.getInstance().copyParametersFromProvider(params, requestParams);
+    PluginUtils.copyParametersFromProvider(params, WrapperUtils.wrapParamProvider(requestParams));
 
     if (requestParams.hasParameter("mode") && requestParams.getStringParameter("mode", "Render").equals("edit")) {
       // Send this to CDE
