@@ -1,3 +1,7 @@
+13.09.10
+    * CDB now uses CPF-Core and CPF-Pentaho
+    * Fixed [REDMINE-2023]: Includes use absolute URLs so CDB cannot be embedded
+
 13.06.05
     * Layout UI Tweaks: New logos and icons
 
