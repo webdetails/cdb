@@ -6,7 +6,6 @@ package pt.webdetails.cdb.exporters;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +23,7 @@ import org.pentaho.platform.api.repository.ISolutionRepository;
 import org.pentaho.platform.engine.core.system.PentahoRequestContextHolder;
 import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
+import pt.webdetails.cdb.CdbEngine;
 import pt.webdetails.cdb.ExporterNotFoundException;
 import pt.webdetails.cpf.InterPluginCall;
 

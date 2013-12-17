@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exporters>
+  <!-- R Exporters -->
+  <exporter>
+    <name>Static R Exporter</name>
+    <description>Export data as a static dataset in a format that can be used with the R environment</description>
+    <implementation>pt.webdetails.cdb.exporters.StaticRExporter</implementation>
+  </exporter>
+  <exporter>
+    <name>Dynamic R Exporter</name>
+    <description>Generate a code snippet that can be used from the R environment to query the database in runtime</description>
+    <implementation>pt.webdetails.cdb.exporters.DynamicRExporter</implementation>
+  </exporter>
+  <!-- Python Exporters -->
+  <exporter>
+    <name>Static Python Exporter</name>
+    <description>Export data as a static dataset in a format that can be used with Python</description>
+    <implementation>pt.webdetails.cdb.exporters.StaticPythonExporter</implementation>
+  </exporter>
+  <exporter>
+    <name>Dynamic Python Exporter</name>
+    <description>Generate a code snippet that can be used from Python to query the database in runtime</description>
+    <implementation>pt.webdetails.cdb.exporters.DynamicPythonExporter</implementation>
+  </exporter>
+</exporters>

@@ -1,25 +1,25 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
+/*!
+* Copyright 2002 - 2013 Webdetails, a Pentaho company. All rights reserved.
+*
+* This software was developed by Webdetails and is provided under the terms
+* of the Mozilla Public License, Version 2.0, or any later version. You may not use
+* this file except in compliance with the license. If you need a copy of the license,
+* please go to http://mozilla.org/MPL/2.0/. The Initial Developer is Webdetails.
+*
+* Software distributed under the Mozilla Public License is distributed on an "AS IS"
+* basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. Please refer to
+* the license for the specific language governing your rights and limitations.
+*/
+
 package pt.webdetails.cdb;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.lang.reflect.Method;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.servlet.ServletRequest;
-
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import pt.webdetails.cdb.exporters.ExporterEngine;
 import pt.webdetails.cdb.connector.ConnectorEngine;
+import pt.webdetails.cdb.exporters.ExporterEngine;
 import pt.webdetails.cdb.query.QueryEngine;
 import pt.webdetails.cpf.InterPluginCall;
 import pt.webdetails.cpf.InvalidOperationException;
@@ -29,7 +29,18 @@ import pt.webdetails.cpf.annotations.AccessLevel;
 import pt.webdetails.cpf.annotations.Exposed;
 import pt.webdetails.cpf.olap.OlapUtils;
 import pt.webdetails.cpf.persistence.PersistenceEngine;
+import pt.webdetails.cpf.utils.JsonUtils;
 import pt.webdetails.cpf.utils.PluginUtils;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.Method;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  *
@@ -127,8 +138,39 @@ public class CdbContentGenerator extends SimpleContentGenerator {
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
   public void olapUtils(OutputStream out) throws IOException {
-    OlapUtils utils = new OlapUtils();
-    writeOut(out, utils.process(getRequestParameters()).toString());
+      OlapUtils olapUtils = new OlapUtils();
+      JSONObject result = null;
+
+      try {
+          String operation = getRequestParameters().getStringParameter( "operation", "-" );
+
+          if ( operation.equals( "GetOlapCubes" ) ) {
+
+              result = olapUtils.getOlapCubes();
+
+          } else if ( operation.equals( "GetCubeStructure" ) ) {
+
+              String catalog = getRequestParameters().getStringParameter( "catalog", null );
+              String cube = getRequestParameters().getStringParameter( "cube", null );
+              String jndi = getRequestParameters().getStringParameter( "jndi", null );
+
+              result = olapUtils.getCubeStructure( catalog, cube, jndi );
+
+          } else if ( operation.equals( "GetLevelMembersStructure" ) ) {
+
+              String catalog = getRequestParameters().getStringParameter( "catalog", null );
+              String cube = getRequestParameters().getStringParameter( "cube", null );
+              String member = getRequestParameters().getStringParameter( "member", null );
+              String direction = getRequestParameters().getStringParameter( "direction", null );
+
+              result = olapUtils.getLevelMembersStructure( catalog, cube, member, direction );
+
+          }
+          JsonUtils.buildJsonResult(out, result != null, result);
+      } catch ( Exception ex ) {
+          logger.error(ex.toString());
+          JsonUtils.buildJsonResult( out, false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
+      }
   }
 
   private void redirectToCdeEditor(OutputStream out, Map<String, Object> params) throws IOException {

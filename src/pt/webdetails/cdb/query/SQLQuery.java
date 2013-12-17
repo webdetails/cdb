@@ -21,7 +21,7 @@ import pt.webdetails.cda.dataaccess.SqlDataAccess;
 public class SQLQuery extends AbstractQuery {
 
   private static final Log logger = LogFactory.getLog(SQLQuery.class);
-  private static final String path = "cdb/saiku";
+  private static final String path = "cdb/queries";
 
   @Override
   public DataAccess exportCdaDataAccess() {

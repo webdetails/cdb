@@ -35,10 +35,10 @@ public class QueryEngine {
     PersistenceEngine pe = PersistenceEngine.getInstance();
     try {
       Map<String, Object> params = new HashMap<String, Object>();
-      params.put("user", PentahoSessionHolder.getSession().getName());
+      //params.put("user", PentahoSessionHolder.getSession().getName());
 
       // DISBLING MULTI USER SUPPORT BY NOW response = pe.query("select distinct(group) as name, groupName from Query where userid = :user order by groupName", params);
-      response = pe.query("select distinct(group) as name, groupName from Query order by groupName", null);
+      response = pe.query("select distinct(group) as name, groupName from Query order by groupName", params);
     } catch (JSONException e) {
       return null;
     }

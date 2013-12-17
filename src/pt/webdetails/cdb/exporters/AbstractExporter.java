@@ -7,16 +7,12 @@ package pt.webdetails.cdb.exporters;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.StringWriter;
+import pt.webdetails.cdb.util.AliasedGroup;
+
+
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-import pt.webdetails.cpf.repository.AliasedGroup;
 
 /**
  *
@@ -29,7 +25,7 @@ public abstract class AbstractExporter implements Exporter {
 
   AbstractExporter() {
     aliasGroup = new AliasedGroup();
-    aliasGroup.addSolutionDir("cdb/exporters/templates");
+    aliasGroup.addSolutionDir("exporters/templates");
     aliasGroup.addClass(this.getClass());
   }
 
@@ -74,7 +70,8 @@ public abstract class AbstractExporter implements Exporter {
     return group + "-" + id + "." + fileExportExtension;
   }
 
-  public Mustache loadTempate(String name) throws FileNotFoundException {
+  public Mustache loadTempate(String name) throws IOException {
+    //InputStream templateStream = this.getClass().getResource(name).openStream();
     InputStream templateStream = aliasGroup.getResourceStream(name);
     Reader templateReader = new InputStreamReader(templateStream);
     MustacheFactory mf = new DefaultMustacheFactory();
