@@ -146,7 +146,7 @@ public class CdbApi {
       JsonUtils.buildJsonResult( response.getOutputStream(), false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
     }
   }
-
+    /*
   @GET
   @Path( "/olaputils" )
   @Produces( "text/javascript" )
@@ -167,7 +167,7 @@ public class CdbApi {
       logger.error(ex.toString());
       JsonUtils.buildJsonResult( response.getOutputStream(), false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
     }
-  }
+  }   */
 
   private void redirectToCdeEditor( HttpServletResponse response,
                                     Map<String, Object> params ) throws IOException {

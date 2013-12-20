@@ -16,11 +16,14 @@ package pt.webdetails.cdb;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.pentaho.platform.api.engine.IParameterProvider;
+import org.pentaho.platform.engine.core.system.PentahoRequestContextHolder;
 import org.pentaho.platform.engine.security.SecurityHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.webdetails.cdb.connector.ConnectorEngine;
+import pt.webdetails.cdb.exporters.Exporter;
 import pt.webdetails.cdb.exporters.ExporterEngine;
+import pt.webdetails.cdb.exporters.ExporterRuntimeException;
 import pt.webdetails.cdb.query.QueryEngine;
 import pt.webdetails.cdb.util.JsonUtils;
 import pt.webdetails.cpf.InterPluginCall;
@@ -33,6 +36,8 @@ import pt.webdetails.cpf.olap.OlapUtils;
 import pt.webdetails.cpf.persistence.PersistenceEngine;
 import pt.webdetails.cpf.utils.PluginUtils;
 
+import javax.servlet.ServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
@@ -106,9 +111,35 @@ public class CdbContentGenerator extends SimpleContentGenerator {
   }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
-  public void export(OutputStream out) {
+  public void export(OutputStream out) throws IOException, ExporterRuntimeException, ExporterNotFoundException {
     ExporterEngine engine = ExporterEngine.getInstance();
-    engine.process(getRequestParameters(), getPathParameters(), out);
+    IParameterProvider requestParams = getRequestParameters(),
+              pathParams = getPathParameters();
+
+    String method = requestParams.getStringParameter("method", "");
+
+    if ("listExporters".equals(method)) {
+      String exporters = engine.listExporters();
+      JsonUtils.buildJsonResult( out, exporters != null, exporters );
+    } else if ("export".equals(method)) {
+      ServletRequestWrapper wrapper = (ServletRequestWrapper) pathParams.getParameter("httprequest");
+      String exporterName = requestParams.getStringParameter("exporter", ""),
+              group = requestParams.getStringParameter("group", ""),
+              id = requestParams.getStringParameter("id", ""),
+              url = wrapper.getScheme() + "://" + wrapper.getServerName() + ":" + wrapper.getServerPort() + PentahoRequestContextHolder.getRequestContext().getContextPath();
+
+      boolean toFile = requestParams.getStringParameter("toFile", "false").equals("true");
+      Exporter exporter = engine.getExporter(exporterName);
+      if (toFile) {
+        HttpServletResponse response = (HttpServletResponse) pathParams.getParameter("httpresponse");
+        String path = exporter.getFilename(group, id, url).replaceAll("\\\\", "\\\\").replaceAll("\"", "\\\"");
+        response.setHeader("content-disposition", "attachment; filename=\"" + path + "\"") ;
+        exporter.binaryExport(group, id, url, out);
+      } else {
+        String export = exporter.export( group, id, url );
+        JsonUtils.buildJsonResult( out, export != null, export);
+      }
+    }
   }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
@@ -124,13 +155,46 @@ public class CdbContentGenerator extends SimpleContentGenerator {
   @Exposed(accessLevel = AccessLevel.PUBLIC)
   public void connector(OutputStream out) throws IOException {
     ConnectorEngine engine = ConnectorEngine.getInstance();
-    engine.process(getRequestParameters(), getPathParameters(), out);
+    IParameterProvider requestParams = getRequestParameters();
+
+    String method = requestParams.getStringParameter(MethodParams.METHOD, ""),
+            newGuid = requestParams.getStringParameter(MethodParams.NEW_GUID, ""),
+            group = requestParams.getStringParameter(MethodParams.GROUP, ""),
+            id = requestParams.getStringParameter(MethodParams.ID, "");
+
+    if ("exportCda".equals(method)) {
+      engine.exportCda(group);
+    } else if ("copyQuery".equals(method)) {
+      engine.copyQuery(id, newGuid);
+    } else if ("deleteQuery".equals(method)) {
+      engine.deleteQuery(id);
+    } else {
+      logger.error("Unsupported method");
+    }
   }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
   public void query(OutputStream out) throws IOException {
     QueryEngine engine = QueryEngine.getInstance();
-    engine.process(getRequestParameters(), getPathParameters(), out);
+    IParameterProvider requestParams = getRequestParameters();
+
+    String method = requestParams.getStringParameter(MethodParams.METHOD, ""),
+            group = requestParams.getStringParameter(MethodParams.GROUP, "");
+
+    if ("listGroups".equals(method)) {
+      try {
+        out.write(engine.listGroups().toString(2).getBytes("utf-8"));
+      } catch (Exception e) {
+        logger.error("Error listing queries: " + e);
+      }
+    } else if ("loadGroup".equals(method)) {
+      org.json.JSONObject response = engine.loadGroup(group);
+      try {
+        out.write(response.toString(2).getBytes("utf-8"));
+      } catch (Exception e) {
+        logger.error("Error loading group: " + e);
+      }
+    }
   }
 
   @Exposed(accessLevel = AccessLevel.PUBLIC)
@@ -188,5 +252,13 @@ public class CdbContentGenerator extends SimpleContentGenerator {
 
     urlBuilder.append(StringUtils.join(paramArray, "&"));
     redirect(urlBuilder.toString());
+  }
+
+  private class MethodParams {
+    public static final String METHOD = "method";
+    public static final String GROUP = "group";
+    public static final String NEW_GUID = "newguid";
+    public static final String ID = "id";
+
   }
 }

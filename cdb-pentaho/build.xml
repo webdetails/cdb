@@ -37,6 +37,10 @@
             value="cdb"
             description="Name of the plugin"/>
 
+    <property name="pentaho-base.src.dir"
+              value="../cdb-pentaho-base/src"
+              description="Name of the pentaho base source directory"/>
+
   <property name="resource.dir"
             value="resources"
             description="Name of the resource directory"/>
@@ -67,6 +71,26 @@
     </fileset>
   </path>
 
+    <!--=======================================================================
+   compile.compile
+
+   Performs the actual compile
+   ====================================================================-->
+    <target name="compile.compile" depends="init">
+        <javac destdir="${classes.dir}"
+               debug="${javac.debug}"
+               deprecation="${javac.deprecation}"
+               fork="true"
+               memorymaximumsize="${javac.maxmemory}"
+               source="${javac.source}"
+               target="${javac.target}">
+            <classpath>
+                <path refid="classpath" />
+            </classpath>
+            <src path="${src.dir}" />
+            <src path="${pentaho-base.src.dir}" />
+        </javac>
+    </target>
 
   <!-- Build the project.revision property -->
   <condition property="distribution.version" value="${project.stage}-${DSTAMP}" else="${project.stage}-${project.version}">

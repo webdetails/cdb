@@ -32,7 +32,7 @@ public class ExportApi {
   @Path( "/listExporters" )
   @Produces( "text/javascript" )
   public void listExporters(@Context HttpServletResponse response) throws IOException {
-    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
+    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LIFECYCLE GIVES AN ERROR
     String result = ExporterEngine.getInstance().listExporters();
     JsonUtils.buildJsonResult( response.getOutputStream(), result != null, result );
   }
@@ -43,13 +43,12 @@ public class ExportApi {
   public void export(@QueryParam( MethodParams.EXPORTER ) String exporter,
                      @QueryParam( MethodParams.GROUP ) String group,
                      @QueryParam( MethodParams.ID ) String id,
-                     @QueryParam( MethodParams.FILE_NAME ) String filename,
                      @QueryParam( MethodParams.TO_FILE ) String toFile,
                      @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
-    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
+    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LIFECYCLE GIVES AN ERROR
 
     if (toFile.equals( "true" ))
-      ExporterEngine.getInstance().exportToFile( request, response, exporter, group, id, filename );
+      ExporterEngine.getInstance().exportToFile( request, response, exporter, group, id );
     else
       ExporterEngine.getInstance().exportNoFile( request, response, exporter, group, id);
   }
@@ -59,7 +58,6 @@ public class ExportApi {
     public static final String EXPORTER = "exporter";
     public static final String GROUP = "group";
     public static final String ID = "id";
-    public static final String FILE_NAME = "filename";
     public static final String TO_FILE = "toFile";
   }
 }

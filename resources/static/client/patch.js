@@ -1,1 +1,0 @@
-webAppPath = "/pentaho/content";

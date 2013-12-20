@@ -1,79 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
 
-<info organisation="pentaho" module="cdb-pentaho" revision="${project.revision}"/>
+    <info organisation="pentaho" module="cdb-pentaho" revision="${project.revision}"/>
 
-  <configurations>
-    <conf name="default"/>
-    <conf name="test" visibility="private"/>
-    <conf name="codegen" visibility="private"/>
-    <conf name="runtime" visibility="private"/>
-    <conf name="dev" visibility="private"/>
-    <conf name="zip" visibility="private"/>
-  </configurations>
-
-
-  <publications>
-    <artifact name="${ivy.artifact.id}" type="jar" conf="default" />
-    <artifact name="${package.id}" type="zip" conf="zip" />
-  </publications>
-
-  <dependencies defaultconf="default->default">
-
-    <!--  pentaho dependencies -->
-    <dependency org="pentaho" name="pentaho-platform-api"
-                 rev="${dependency.bi-platform.revision}" changing="true" transitive="false" />
-    <dependency org="pentaho" name="pentaho-platform-core"
-                  rev="${dependency.bi-platform.revision}" changing="true" transitive="false" />
-
-    <!--  webdetails dependencies -->
-    <dependency org="pentaho" name="cdb-core"
-                rev="TRUNK-SNAPSHOT" transitive="false" changing="true" conf='runtime->default'/>
-
-    <dependency org="pentaho" name="cpf-core" rev="REFACTOR-SNAPSHOT" transitive="false" changing="true" conf='runtime->default'/>
-    <dependency org="pentaho" name="cpf-pentaho5" rev="REFACTOR-SNAPSHOT" transitive="false" changing="true" conf='runtime->default'/>
-
-    <dependency org="pentaho" name="cda-core" rev="REFACTOR-SNAPSHOT" changing="true" conf='runtime->default'/>
-    <dependency org="pentaho" name="cda-pentaho5" rev="REFACTOR-SNAPSHOT" changing="true" conf='runtime->default'/>
-
-    <!--  third party dependencies -->
-    <dependency org="net.sf.json-lib" name="json-lib" rev="2.4" transitive="false" conf='runtime->default'>
-      <artifact name="json-lib" type="jar" m:classifier="jdk15"/>
-    </dependency>
-    <dependency org="commons-logging" name="commons-logging" rev="1.1" transitive="false"/>
-    <dependency org="dom4j" name="dom4j" rev="1.6.1" transitive="false"/>
-    <dependency org="net.sf.ehcache" name="ehcache" rev="1.4.1" transitive="false"/>
-    <dependency org="commons-lang" name="commons-lang" rev="2.4" transitive="false"/>
-    <dependency org="org.json" name="json" rev="${dependency.json.revision}" transitive="false"/>
-    <dependency org="javax.servlet" name="servlet-api" rev="2.4" transitive="false"/>
-    <dependency org="javax.ws.rs" name="javax.ws.rs-api" rev="2.0" transitive="false"/>
-    <dependency org="commons-jxpath" name="commons-jxpath" rev="1.3" transitive="false"/>
-    <dependency org="org.slf4j" name="slf4j-api" rev="1.7.5"/>
-    <dependency org="org.codehaus.jackson" name="jackson-mapper-asl" rev="1.8.2" conf='runtime->default'/>
-
-    <!-- TODO: replace by either jackson or org.json -->
-    <dependency org="net.sf.ezmorph" name="ezmorph" rev="1.0.6" conf='runtime->default'/>
-
-    <!-- orient db (persistence) -->
-    <dependency org="com.orientechnologies" name="orient-commons" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default"/>
-    <dependency org="com.orientechnologies" name="orientdb-core" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default"/>
-    <dependency org="com.orientechnologies" name="orientdb-server" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
-    <dependency org="com.orientechnologies" name="orientdb-client" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
-    <dependency org="com.orientechnologies" name="orientdb-enterprise" rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
-
-    <!-- olap -->
-    <dependency org="pentaho" name="mondrian" rev="3.5.0">
-      <exclude org="commons-dbcp" name="commons-dbcp"/>
-      <exclude org="javax.servlet" name="jsp-api"/>
-      <exclude org="javax.servlet" name="servlet-api"/>
-    </dependency>
-    <!-- mustache templates -->
-    <dependency org="com.github.spullara.mustache.java" name="compiler" conf='runtime,default->default' rev="0.8.4"/>
+    <configurations>
+        <conf name="default"/>
+        <conf name="test"       visibility="private"/>
+        <conf name="codegen"    visibility="private"/>
+        <conf name="runtime"    visibility="private"/>
+        <conf name="dev"        visibility="private"/>
+        <conf name="zip"        visibility="private"/>
+    </configurations>
 
 
-    <!-- tests -->
-    <dependency org="junit" name="junit" conf="test->default" rev='4.10'/>
+    <publications>
+        <artifact name="${ivy.artifact.id}" type="jar" conf="default"/>
+        <artifact name="${package.id}"      type="zip" conf="zip"/>
+    </publications>
 
-    <exclude module="nekohtml" conf="" matcher="exact"></exclude>
-  </dependencies>
+    <dependencies defaultconf="default->default">
+
+        <!--  pentaho dependencies -->
+        <dependency org="pentaho"           name="pentaho-platform-api"         rev="${dependency.bi-platform.revision}"    transitive="false"/>
+        <dependency org="pentaho"           name="pentaho-platform-core"        rev="${dependency.bi-platform.revision}"    transitive="false"/>
+        <dependency org="pentaho"           name="pentaho-platform-extensions"  rev="${dependency.bi-platform.revision}"    transitive="false"/>
+        <dependency org="pentaho-library"   name="libloader"                    rev="5.0.1"                                 transitive="false"/>
+        <dependency org="pentaho"           name="mondrian"                     rev="3.5.0"                                 transitive="false">
+            <exclude org="commons-dbcp"     name="commons-dbcp"/>
+            <exclude org="javax.servlet"    name="jsp-api"/>
+            <exclude org="javax.servlet"    name="servlet-api"/>
+        </dependency>
+
+        <!--  webdetails dependencies -->
+        <dependency org="pentaho" name="cdb-core"       rev="REFACTOR-SNAPSHOT" transitive="false" changing="true" conf='runtime->default'/>
+        <dependency org="pentaho" name="cpf-core"       rev="REFACTOR-SNAPSHOT" transitive="false" changing="true" conf='runtime->default'/>
+        <dependency org="pentaho" name="cpf-pentaho5"   rev="REFACTOR-SNAPSHOT" transitive="false" changing="true" conf='runtime->default'/>
+        <dependency org="pentaho" name="cda-core"       rev="REFACTOR-SNAPSHOT" transitive="false" changing="true" conf='runtime->default'/>
+
+        <!--  third party dependencies -->
+        <dependency org="net.sf.json-lib"       name="json-lib"             rev="2.4"   transitive="false" conf='runtime->default'>
+            <artifact name="json-lib" type="jar" m:classifier="jdk15"/>
+        </dependency>
+        <dependency org="commons-logging"       name="commons-logging"      rev="1.1"   transitive="false"/>
+        <dependency org="commons-jxpath"        name="commons-jxpath"       rev="1.3"   transitive="false"/>
+        <dependency org="commons-lang"          name="commons-lang"         rev="2.4"   transitive="false"/>
+        <dependency org="commons-io"            name="commons-io"           rev="2.4"   transitive="false"/>
+        <dependency org="dom4j"                 name="dom4j"                rev="1.6.1" transitive="false"/>
+        <dependency org="net.sf.ehcache"        name="ehcache"              rev="1.4.1" transitive="false"/>
+        <dependency org="org.json"              name="json"                 rev="3.1"   transitive="false"/>
+        <dependency org="javax.servlet"         name="servlet-api"          rev="2.4"   transitive="false"/>
+        <dependency org="javax.ws.rs"           name="javax.ws.rs-api"      rev="2.0"   transitive="false"/>
+        <dependency org="org.slf4j"             name="slf4j-api"            rev="1.7.5" transitive="false"/>
+        <dependency org="org.codehaus.jackson"  name="jackson-mapper-asl"   rev="1.8.2" transitive="false" conf='runtime->default'/>
+        <dependency org="com.sun.jersey"        name="jersey-core"          rev="1.4"   transitive="false"/>
+        <dependency org="com.sun.jersey"        name="jersey-server"        rev="1.4"   transitive="false"/>
+        <dependency org="net.sf.ezmorph"        name="ezmorph"              rev="1.0.6" transitive="false" conf='runtime->default'/>
+
+        <!-- orient db (persistence) -->
+        <dependency org="com.orientechnologies" name="orient-commons"       rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
+        <dependency org="com.orientechnologies" name="orientdb-core"        rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
+        <dependency org="com.orientechnologies" name="orientdb-server"      rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
+        <dependency org="com.orientechnologies" name="orientdb-client"      rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
+        <dependency org="com.orientechnologies" name="orientdb-enterprise"  rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
+
+        <!-- mustache templates -->
+        <dependency org="com.github.spullara.mustache.java" name="compiler" conf='runtime,default->default' rev="0.8.4" transitive="false"/>
+
+        <!-- tests -->
+        <dependency org="junit" name="junit" conf="test->default" rev='4.10' transitive="false"/>
+
+        <exclude module="nekohtml" conf="" matcher="exact"></exclude>
+    </dependencies>
 </ivy-module>

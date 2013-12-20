@@ -18,6 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import pt.webdetails.cdb.bean.factory.ICdbBeanFactory;
 import pt.webdetails.cpf.PentahoPluginEnvironment;
 import pt.webdetails.cpf.exceptions.InitializationException;
+import pt.webdetails.cpf.persistence.PersistenceEngine;
 
 public class PentahoCdbEnvironment extends PentahoPluginEnvironment implements ICdbEnvironment {
 
