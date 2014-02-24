@@ -25,10 +25,6 @@ public class CdbLifeCycleListener extends SimpleLifeCycleListener {
       logger.debug("Init for CDB");
     }
 
-    @Override
-    public void unLoaded() throws PluginLifecycleException {
-      logger.debug( "Unload for CDB" );
-    }
 
     @Override
     public PluginEnvironment getEnvironment() {
