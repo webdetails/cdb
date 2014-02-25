@@ -36,12 +36,6 @@ public class CdbLifeCycleListener extends SimpleLifeCycleListener implements IPl
   }
 
   @Override
-  public void unLoaded() throws PluginLifecycleException {
-    //super.unLoaded();
-    logger.debug( "Unload for CDB" );
-  }
-
-  @Override
   public PluginEnvironment getEnvironment() {
     return (PluginEnvironment) CdbEngine.getInstance().getEnvironment();
   }
