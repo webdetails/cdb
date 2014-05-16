@@ -256,18 +256,8 @@ wd.cdb.QueryManager = (function() {
     };
     
     myself.loadGroupList = function(callback) {
-      $.getJSON('query?method=listGroups',{},function(response){
-        var groups = response.object,
-            i;
-        for (i = 0; i < groups.length;i++) {
-        	if (groups[i].name)
-	          myself.newGroup(groups[i].name, groups[i].groupName);
-        }
-        if (callback && typeof callback == 'function') {
-          callback(myself);
-        }
-      });
-    };
+      cdbFunctions.loadGroupList(callback, myself);
+    }
     
     return myself;
 }());

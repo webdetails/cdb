@@ -2,6 +2,29 @@
  "layout": {
   "title": "cToolsTemplate",
   "rows": [
+  {
+    "id": "02e6f252-8fe0-e770-e98d-d9f482923417",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "cdb_base",
+      "type": "Id"
+     },
+     {
+      "name": "resourceFile",
+      "value": "static/client/cdb-base.js",
+      "type": "ResourceFile"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     }
+    ]
+   },
    {
     "id": "a8ad09bd-26f6-712b-9927-7858e062f414",
     "type": "LayoutResourceFile",

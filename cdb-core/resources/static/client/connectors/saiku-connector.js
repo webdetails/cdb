@@ -3,10 +3,9 @@ SaikuConnector = function() {
   var _name = 'Saiku',
       _label = 'MDX Query via Saiku'
       saikuPath = webAppPath + "/content/saiku-ui/index.html?";
-  function openSaiku(placeholder, solution,path,action, callback, mode) {
-    var params = $.extend({
-        biplugin: true
-      },
+  function openSaiku(placeholder, solution, path, action, callback, mode) {
+    var params = $.extend(
+      cdbFunctions.getPluginParam(),
       (mode == "edit" ? {
         solution: solution,
         path: path,

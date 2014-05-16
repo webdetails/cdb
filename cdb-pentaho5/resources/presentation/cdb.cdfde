@@ -2,6 +2,29 @@
  "layout": {
   "title": "cToolsTemplate",
   "rows": [
+  {
+    "id": "2ecd990a-cfd6-44c1-ce14-b4bfaed43cb9",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "cdb_base",
+      "type": "Id"
+     },
+     {
+      "name": "resourceFile",
+      "value": "${system:/static/client/cdb-base.js}",
+      "type": "ResourceFile"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     }
+    ]
+   },
    {
     "id": "a8ad09bd-26f6-712b-9927-7858e062f414",
     "type": "LayoutResourceFile",
@@ -5883,7 +5906,7 @@
      },
      {
       "name": "javaScript",
-      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionPopup\").css('height','0').hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide();\n    $(\"#confirmButtons\").hide();\n    wd.cdb.QueryManager.loadGroupList(function(manager){\n         var groups = [];\n          $.each(manager.listGroups(),function(i,e){\n            groups.push(e);\n         });\n        wd.cdb.openGroups(groups);\n          if (groups.length === 0) {\n            wd.cdb.createGroup();\n          }\n    });\n    $.getJSON('olaputils',{operation: 'GetOlapCubes'},function(resp){\n      var schemas = {},\n        catalogs = resp.result.catalogs,\n        i,cat;\n      for (i = 0; i < catalogs.length; i++) {\n          cat = catalogs[i];\n          schemas[cat.name] = cat;\n      }\n      Dashboards.schemas = schemas;\n    });\n    $.getJSON('exporter/listExporters',{},function(resp){\n      var exporters = {},exp;\n      for (i = 0; i < resp.length; i++) {\n          exp = resp[i];\n          exporters[exp.id] = exp;\n      }\n      Dashboards.exporters = exporters;\n    })\n}",
+      "value": "Dashboards.preInit = function(){\n    $(\"#dummyGroup\").hide();\n    $(\"#dummyQuery\").hide();\n    $(\"#editionPopup\").css('height','0').hide();\n    $(\"#exportEnvironment\").hide();\n    $(\"#removeEnvironment\").hide();\n    $(\"#openEnvironment\").hide();\n    $(\"#confirmButtons\").hide();\n    wd.cdb.QueryManager.loadGroupList(function(manager){\n         var groups = [];\n          $.each(manager.listGroups(),function(i,e){\n            groups.push(e);\n         });\n        wd.cdb.openGroups(groups);\n          if (groups.length === 0) {\n            wd.cdb.createGroup();\n          }\n    });\n    $.getJSON(Dashboards.getWebAppPath() + '/plugin/pentaho-cdf-dd/api/olap/getCubes',function(resp){\n      var schemas = {},\n        catalogs = resp.result.catalogs,\n        i,cat;\n      for (i = 0; i < catalogs.length; i++) {\n          cat = catalogs[i];\n          schemas[cat.name] = cat;\n      }\n      Dashboards.schemas = schemas;\n    });\n    $.getJSON('exporter/listExporters',{},function(resp){\n      var exporters = {},exp;\n      for (i = 0; i < resp.length; i++) {\n          exp = resp[i];\n          exporters[exp.id] = exp;\n      }\n      Dashboards.exporters = exporters;\n    })\n}",
       "type": "JavaScript"
      }
     ]

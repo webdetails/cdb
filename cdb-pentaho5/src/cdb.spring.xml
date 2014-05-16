@@ -12,8 +12,11 @@ http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xs
 http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd">
 
   <context:annotation-config />
-
+  <bean id="api" class="org.pentaho.platform.web.servlet.JAXRSPluginServlet"/>
   <bean id="ICdbEnvironment" class="pt.webdetails.cdb.PentahoCdbEnvironment" scope="prototype"/>
+  <bean id="cdb.query" class="pt.webdetails.cdb.api.QueryApi"/>
+  <bean id="cdb.exporter" class="pt.webdetails.cdb.api.ExportApi"/>
+
   <!--<bean id="IPluginCall" class="pt.webdetails.cpf.PentahoInterPluginCall" scope="prototype"/>-->
   <!--<bean id="IResourceLoader" class="pt.webdetails.cpf.resources.PentahoPluginResourceLoader" scope="prototype"/>-->
   <!--<bean id="IFileHandler" class="pt.webdetails.cdf.dd.extapi.FileHandler" scope="prototype"/>-->
