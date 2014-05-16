@@ -1,5 +1,5 @@
 /*!
-* Copyright 2002 - 2013 Webdetails, a Pentaho company. All rights reserved.
+* Copyright 2002 - 2014 Webdetails, a Pentaho company. All rights reserved.
 *
 * This software was developed by Webdetails and is provided under the terms
 * of the Mozilla Public License, Version 2.0, or any later version. You may not use
@@ -10,6 +10,7 @@
 * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. Please refer to
 * the license for the specific language governing your rights and limitations.
 */
+
 package pt.webdetails.cdb.api;
 
 import pt.webdetails.cdb.CdbEngine;
@@ -31,8 +32,8 @@ public class ExportApi {
   @GET
   @Path( "/listExporters" )
   @Produces( "text/javascript" )
-  public void listExporters(@Context HttpServletResponse response) throws IOException {
-    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LIFECYCLE GIVES AN ERROR
+  public void listExporters( @Context HttpServletResponse response ) throws IOException {
+    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LIFECYCLE GIVES AN ERROR
     String result = ExporterEngine.getInstance().listExporters();
     JsonUtils.buildJsonResult( response.getOutputStream(), result != null, result );
   }
@@ -40,17 +41,18 @@ public class ExportApi {
   @GET
   @Path( "/export" )
   @Produces( "text/javascript" )
-  public void export(@QueryParam( MethodParams.EXPORTER ) String exporter,
-                     @QueryParam( MethodParams.GROUP ) String group,
-                     @QueryParam( MethodParams.ID ) String id,
-                     @QueryParam( MethodParams.TO_FILE ) String toFile,
-                     @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
-    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LIFECYCLE GIVES AN ERROR
+  public void export( @QueryParam( MethodParams.EXPORTER ) String exporter,
+                      @QueryParam( MethodParams.GROUP ) String group,
+                      @QueryParam( MethodParams.ID ) String id,
+                      @QueryParam( MethodParams.TO_FILE ) String toFile,
+                      @Context HttpServletRequest request, @Context HttpServletResponse response ) throws IOException {
+    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LIFECYCLE GIVES AN ERROR
 
-    if (toFile.equals( "true" ))
+    if ( toFile.equals( "true" ) ) {
       ExporterEngine.getInstance().exportToFile( request, response, exporter, group, id );
-    else
-      ExporterEngine.getInstance().exportNoFile( request, response, exporter, group, id);
+    } else {
+      ExporterEngine.getInstance().exportNoFile( request, response, exporter, group, id );
+    }
   }
 
 

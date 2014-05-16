@@ -1,5 +1,5 @@
 /*!
-* Copyright 2002 - 2013 Webdetails, a Pentaho company. All rights reserved.
+* Copyright 2002 - 2014 Webdetails, a Pentaho company. All rights reserved.
 *
 * This software was developed by Webdetails and is provided under the terms
 * of the Mozilla Public License, Version 2.0, or any later version. You may not use
@@ -10,6 +10,7 @@
 * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. Please refer to
 * the license for the specific language governing your rights and limitations.
 */
+
 package pt.webdetails.cdb.api;
 
 import org.apache.commons.lang.StringUtils;
@@ -51,23 +52,23 @@ import java.util.Map;
 @Path( "/cdb/api" )
 public class CdbApi {
 
-  static Log logger = LogFactory.getLog(CdbApi.class);
+  static Log logger = LogFactory.getLog( CdbApi.class );
 
   public static final String PLUGIN_NAME = "cdb";
 
   @GET
   @Path( "/ping" )
   public String ping() {
-    logger.info("pong");
+    logger.info( "pong" );
     return "pong";
   }
 
   @GET
   @Path( "/home" )
   @Produces( MimeTypes.HTML )
-  public String home(@Context HttpServletRequest request, @Context HttpServletResponse response,
-      @Context HttpHeaders headers ) throws IOException {
-    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
+  public String home( @Context HttpServletRequest request, @Context HttpServletResponse response,
+                      @Context HttpHeaders headers ) throws IOException {
+    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     //IParameterProvider requestParams = getRequestParameters();
     // ServletRequest wrapper = getRequest();
 
@@ -75,26 +76,26 @@ public class CdbApi {
     Map<String, Object> requestMap = new HashMap<String, Object>();
     Map<String, Object> requestParams = params.get( "request" );
 
-    requestMap.put("solution", "system");
-    requestMap.put("path", "cdb/presentation");
-    requestMap.put("file", "cdb.wcdf");
-    requestMap.put("absolute", "false");
-    requestMap.put("inferScheme", "false");
+    requestMap.put( "solution", "system" );
+    requestMap.put( "path", "cdb/presentation" );
+    requestMap.put( "file", "cdb.wcdf" );
+    requestMap.put( "absolute", "false" );
+    requestMap.put( "inferScheme", "false" );
     for ( String name : requestParams.keySet() ) {
       requestMap.put( name, requestParams.get( name ) );
     }
     //add request parameters
     //PluginUtils.copyParametersFromProvider(params, WrapperUtils.wrapParamProvider(requestParams));
 
-    if (requestMap.get( "mode" ) != null && requestMap.get( "mode" ).equals("edit")) {
-        // Send this to CDE
-        redirectToCdeEditor(response, requestMap);
-        return "";
+    if ( requestMap.get( "mode" ) != null && requestMap.get( "mode" ).equals( "edit" ) ) {
+      // Send this to CDE
+      redirectToCdeEditor( response, requestMap );
+      return "";
     }
 
 
     try {
-      InterPluginBroker.run(requestMap, response.getOutputStream());
+      InterPluginBroker.run( requestMap, response.getOutputStream() );
     } catch ( Exception e ) {
       return e.toString();  //To change body of catch statement use File | Settings | File Templates.
     }
@@ -110,40 +111,43 @@ public class CdbApi {
   @GET
   @Path( "/storage" )
   @Produces( "text/javascript" )
-  public void storage(@Context HttpServletRequest request, @Context HttpServletResponse response,
-                      @Context HttpHeaders headers ) throws IOException, InvalidOperationException {
-    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
+  public void storage( @Context HttpServletRequest request, @Context HttpServletResponse response,
+                       @Context HttpHeaders headers ) throws IOException, InvalidOperationException {
+    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     Map<String, Map<String, Object>> bloatedMap = RestApiUtils.buildBloatedMap( request, response, headers );
     try {
       PersistenceEngine engine = PersistenceEngine.getInstance();
-      String result = engine.process( RestApiUtils.getRequestParameters(bloatedMap), PentahoSessionHolder .getSession());
+      String result =
+        engine.process( RestApiUtils.getRequestParameters( bloatedMap ), PentahoSessionHolder.getSession() );
       JsonUtils.buildJsonResult( response.getOutputStream(), result != null, result );
     } catch ( Exception ex ) {
-      logger.error(ex.toString());
-      JsonUtils.buildJsonResult( response.getOutputStream(), false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
+      logger.error( ex.toString() );
+      JsonUtils.buildJsonResult( response.getOutputStream(), false,
+        "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
     }
   }
 
   @GET
   @Path( "/doquery" )
   @Produces( "text/javascript" )
-  public void doQuery(@Context HttpServletRequest request, @Context HttpServletResponse response,
-                      @Context HttpHeaders headers ) throws IOException {
-    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
+  public void doQuery( @Context HttpServletRequest request, @Context HttpServletResponse response,
+                       @Context HttpHeaders headers ) throws IOException {
+    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     Map<String, Map<String, Object>> bloatedMap = RestApiUtils.buildBloatedMap( request, response, headers );
 
     IParameterProvider requestParams = RestApiUtils.getRequestParameters( bloatedMap );
 
-    String group = requestParams.getStringParameter("group", ""),
-      id = requestParams.getStringParameter("id", ""),
-      outputType = requestParams.getStringParameter("outputType", "json");
+    String group = requestParams.getStringParameter( "group", "" ),
+      id = requestParams.getStringParameter( "id", "" ),
+      outputType = requestParams.getStringParameter( "outputType", "json" );
 
     try {
       String result = ExporterEngine.exportCda( group, id, outputType );
       JsonUtils.buildJsonResult( response.getOutputStream(), result != null, result );
-    } catch (Exception ex) {
+    } catch ( Exception ex ) {
       logger.error( ex.toString() );
-      JsonUtils.buildJsonResult( response.getOutputStream(), false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
+      JsonUtils.buildJsonResult( response.getOutputStream(), false,
+        "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
     }
   }
     /*
@@ -165,7 +169,8 @@ public class CdbApi {
       JsonUtils.buildJsonResult(response.getOutputStream(), result != null, result);
     } catch ( Exception ex ) {
       logger.error(ex.toString());
-      JsonUtils.buildJsonResult( response.getOutputStream(), false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
+      JsonUtils.buildJsonResult( response.getOutputStream(), false, "Exception found: " + ex.getClass().getName() + "
+       - " + ex.getMessage() );
     }
   }   */
 
@@ -182,33 +187,34 @@ public class CdbApi {
     for ( String key : params.keySet() ) {
       Object value = params.get( key );
       if ( value instanceof String ) {
-        paramArray.add( key + "=" + URLEncoder.encode( (String) value, CharsetHelper.getEncoding()) );
+        paramArray.add( key + "=" + URLEncoder.encode( (String) value, CharsetHelper.getEncoding() ) );
       }
     }
 
     urlBuilder.append( StringUtils.join( paramArray, "&" ) );
 
-    if (response == null) {
-      logger.error("response not found");
+    if ( response == null ) {
+      logger.error( "response not found" );
       return;
     }
     try {
-      response.sendRedirect(urlBuilder.toString());
-    } catch (IOException e) {
-      logger.error("could not redirect", e);
+      response.sendRedirect( urlBuilder.toString() );
+    } catch ( IOException e ) {
+      logger.error( "could not redirect", e );
     }
   }
 
   @GET
   @Path( "/{path: [^?]+ }" )
   @Produces( { MediaType.WILDCARD } )
-  public Response getSystemResource( @PathParam( "path" ) String path, @Context HttpServletResponse response ) throws IOException {
+  public Response getSystemResource( @PathParam( "path" ) String path, @Context HttpServletResponse response )
+    throws IOException {
 
     String pluginId = CdbEngine.getInstance().getEnvironment().getPluginId();
 
     IPluginManager pluginManager = PentahoSystem.get( IPluginManager.class );
 
-    if(!StringUtils.isEmpty( path ) && pluginManager.isPublic( pluginId, path ) ){
+    if ( !StringUtils.isEmpty( path ) && pluginManager.isPublic( pluginId, path ) ) {
 
       Response readFileResponse = new PluginResource( response ).readFile( pluginId, path );
 
