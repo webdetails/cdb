@@ -14,6 +14,8 @@ package pt.webdetails.cdb;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import pt.webdetails.cda.CdaEngine;
+import pt.webdetails.cda.PentahoCdaEnvironment;
 import pt.webdetails.cdb.bean.factory.ICdbBeanFactory;
 import pt.webdetails.cpf.PentahoPluginEnvironment;
 import pt.webdetails.cpf.exceptions.InitializationException;
@@ -30,6 +32,7 @@ public class PentahoCdbEnvironment extends PentahoPluginEnvironment implements I
   public void init( ICdbBeanFactory factory ) throws InitializationException {
     this.factory = factory;
     init( this );
+    CdaEngine.init( new PentahoCdaEnvironment() );
   }
 
   public void refresh() {

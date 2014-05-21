@@ -76,12 +76,13 @@ public class ExporterEngine {
 
   public void exportNoFile( HttpServletRequest request, HttpServletResponse response, String exporterName,
                             String group, String id ) throws IOException {
-    ServletRequestWrapper wrapper = (ServletRequestWrapper) request;
-    String url = wrapper.getScheme() + "://" + wrapper.getServerName() + ":" + wrapper.getServerPort()
+
+    String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
       + PentahoRequestContextHolder.getRequestContext().getContextPath();
 
     Exporter exporter = null;
     try {
+      exporter = getExporter( exporterName );
       String export = exporter.export( group, id, url );
       JsonUtils.buildJsonResult( response.getOutputStream(), export != null, export );
     } catch ( Exception ex ) {

@@ -179,13 +179,7 @@ wd.cdb.QueryGroup = function(label, description) {
   };
 
   this.save = function() {
-  var q, query;
-  for (q in _queries) if (_queries.hasOwnProperty(q)) {
-    query = _queries[q];
-    wd.ctools.persistence.saveObject(null,"Query",query);
-  }
-
-  $.getJSON("connector?method=exportCda&group=" + _label,function(){console.log("Saved to CDA")});
+    cdbFunctions.saveQuery(_queries, _label);
   };
 
   this.deleteQuery = function(queryGuid) {

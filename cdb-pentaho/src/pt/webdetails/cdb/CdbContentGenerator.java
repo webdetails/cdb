@@ -20,6 +20,7 @@ import org.pentaho.platform.engine.core.system.PentahoRequestContextHolder;
 import org.pentaho.platform.engine.security.SecurityHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pt.webdetails.cda.CdaEngine;
 import pt.webdetails.cdb.connector.ConnectorEngine;
 import pt.webdetails.cdb.exporters.Exporter;
 import pt.webdetails.cdb.exporters.ExporterEngine;

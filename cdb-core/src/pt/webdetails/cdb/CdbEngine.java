@@ -20,6 +20,8 @@ import pt.webdetails.cpf.Util;
 import pt.webdetails.cpf.exceptions.InitializationException;
 import pt.webdetails.cpf.repository.api.IRWAccess;
 
+
+
 public class CdbEngine {
 
   private static CdbEngine instance;
@@ -70,6 +72,9 @@ public class CdbEngine {
       // XXX figure out where to put ensureBasicDirs
       instance.ensureBasicDirs();
       //PersistenceEngine.getInstance();
+
+
+
     }
   }
 
@@ -105,4 +110,6 @@ public class CdbEngine {
       throw new InitializationException( msg, null );
     }
   }
+
+
 }

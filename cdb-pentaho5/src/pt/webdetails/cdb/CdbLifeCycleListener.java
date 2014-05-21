@@ -25,13 +25,13 @@ public class CdbLifeCycleListener extends SimpleLifeCycleListener implements IPl
 
   @Override
   public void init() throws PluginLifecycleException {
-    //super.init();
+    super.init();
     logger.debug("Init for CDB");
   }
 
   @Override
   public void loaded() throws PluginLifecycleException {
-    //super.loaded();
+    super.loaded();
     logger.debug("Load for CDB");
   }
 

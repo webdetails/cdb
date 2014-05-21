@@ -27,7 +27,6 @@ import pt.webdetails.cdb.exporters.ExporterEngine;
 import pt.webdetails.cdb.util.JsonUtils;
 import pt.webdetails.cdb.utils.RestApiUtils;
 import pt.webdetails.cpf.InvalidOperationException;
-import pt.webdetails.cpf.olap.OlapUtils;
 import pt.webdetails.cpf.persistence.PersistenceEngine;
 import pt.webdetails.cpf.utils.CharsetHelper;
 import pt.webdetails.cpf.utils.MimeTypes;
@@ -150,29 +149,6 @@ public class CdbApi {
         "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
     }
   }
-    /*
-  @GET
-  @Path( "/olaputils" )
-  @Produces( "text/javascript" )
-  public void olapUtils(@Context HttpServletRequest request, @Context HttpServletResponse response,
-                        @Context HttpHeaders headers ) throws IOException {
-    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
-    Map<String, Map<String, Object>> bloatedMap = RestApiUtils.buildBloatedMap( request, response, headers );
-    OlapUtils olapUtils = new OlapUtils();
-    net.sf.json.JSONObject result = null;
-    try {
-      String operation = RestApiUtils.getRequestParameters(bloatedMap).getStringParameter( "operation", "-" );
-
-      if ( operation.equals( "GetOlapCubes" ) ) {
-        result = olapUtils.getOlapCubes();
-      }
-      JsonUtils.buildJsonResult(response.getOutputStream(), result != null, result);
-    } catch ( Exception ex ) {
-      logger.error(ex.toString());
-      JsonUtils.buildJsonResult( response.getOutputStream(), false, "Exception found: " + ex.getClass().getName() + "
-       - " + ex.getMessage() );
-    }
-  }   */
 
   private void redirectToCdeEditor( HttpServletResponse response,
                                     Map<String, Object> params ) throws IOException {

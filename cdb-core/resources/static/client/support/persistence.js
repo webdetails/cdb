@@ -2,7 +2,7 @@ wd = wd || {};
 wd.ctools = wd.ctools || {};
 wd.ctools.persistence = (function(){
   var myself = {},
-      persistenceUrl = webAppPath + "/content/cdb/storage";
+      persistenceUrl = cdbFunctions.getPersistenceUrl();
 
   myself.query = function(query,callback) {
     throw "UnsupportedOperation";

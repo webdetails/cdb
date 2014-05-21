@@ -9,7 +9,12 @@ import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 import pt.webdetails.cdb.util.AliasedGroup;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,57 +29,57 @@ public abstract class AbstractExporter implements Exporter {
 
   AbstractExporter() {
     aliasGroup = new AliasedGroup();
-    aliasGroup.addSolutionDir("exporters/templates");
-    aliasGroup.addClass(this.getClass());
+
+    aliasGroup.addClass( this.getClass() );
   }
 
   @Override
-  public String export(String group, String id, String url, Map<String, String> params) {
-    throw new UnsupportedOperationException("Not implemented yet");
+  public String export( String group, String id, String url, Map<String, String> params ) {
+    throw new UnsupportedOperationException( "Not implemented yet" );
   }
 
   @Override
-  public String export(String group, String id, String url) {
-    return getSource(group, id, url);
+  public String export( String group, String id, String url ) {
+    return getSource( group, id, url );
   }
 
-  protected String getSource(String group, String id, String url) {
+  protected String getSource( String group, String id, String url ) {
     Map<String, String> values = new HashMap<String, String>();
-    values.put("group", group);
-    values.put("id", id);
-    values.put("url", url);
+    values.put( "group", group );
+    values.put( "id", id );
+    values.put( "url", url );
     Mustache templ;
     try {
-      templ = loadTempate(templateFile);
-    } catch (Exception e) {
+      templ = loadTempate( templateFile );
+    } catch ( Exception e ) {
       return null;
     }
     StringWriter writer = new StringWriter();
-    templ.execute(writer, values);
+    templ.execute( writer, values );
     return writer.getBuffer().toString();
   }
 
   @Override
-  public void binaryExport(String group, String id, String url, Map<String, String> params, OutputStream out) {
-    throw new UnsupportedOperationException("Not implemented yet");
+  public void binaryExport( String group, String id, String url, Map<String, String> params, OutputStream out ) {
+    throw new UnsupportedOperationException( "Not implemented yet" );
   }
 
   @Override
-  public void binaryExport(String group, String id, String url, OutputStream out) throws IOException {
-    out.write(export(group, id, url).getBytes("utf-8"));
+  public void binaryExport( String group, String id, String url, OutputStream out ) throws IOException {
+    out.write( export( group, id, url ).getBytes( "utf-8" ) );
   }
 
   @Override
-  public String getFilename(String group, String id, String url) {
+  public String getFilename( String group, String id, String url ) {
     return group + "-" + id + "." + fileExportExtension;
   }
 
-  public Mustache loadTempate(String name) throws IOException {
+  public Mustache loadTempate( String name ) throws IOException {
     //InputStream templateStream = this.getClass().getResource(name).openStream();
-    InputStream templateStream = aliasGroup.getResourceStream(name);
-    Reader templateReader = new InputStreamReader(templateStream);
+    InputStream templateStream = aliasGroup.getResourceStream( name );
+    Reader templateReader = new InputStreamReader( templateStream );
     MustacheFactory mf = new DefaultMustacheFactory();
-    return mf.compile(templateReader, name);
+    return mf.compile( templateReader, name );
   }
 
 }
