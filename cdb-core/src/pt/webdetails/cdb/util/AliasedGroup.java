@@ -1,13 +1,13 @@
 /*!
-* Copyright 2002 - 2013 Webdetails, a Pentaho company. All rights reserved.
+* Copyright 2002 - 2014 Webdetails, a Pentaho company.  All rights reserved.
 *
 * This software was developed by Webdetails and is provided under the terms
 * of the Mozilla Public License, Version 2.0, or any later version. You may not use
 * this file except in compliance with the license. If you need a copy of the license,
-* please go to http://mozilla.org/MPL/2.0/. The Initial Developer is Webdetails.
+* please go to  http://mozilla.org/MPL/2.0/. The Initial Developer is Webdetails.
 *
 * Software distributed under the Mozilla Public License is distributed on an "AS IS"
-* basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. Please refer to
+* basis, WITHOUT WARRANTY OF ANY KIND, either express or  implied. Please refer to
 * the license for the specific language governing your rights and limitations.
 */
 
@@ -29,25 +29,25 @@ public class AliasedGroup {
     repositoryList = new ArrayList<IReadAccess>();
   }
 
-  public void addClass(Class<?> klass) {
-    repositoryList.add(new PackageResolver(klass));
+  public void addClass( Class<?> klass ) {
+    repositoryList.add( new PackageResolver( klass ) );
   }
 
-  public void addSolutionDir(String dir) {
-    repositoryList.add(CdbEngine.getEnv().getContentAccessFactory().getPluginRepositoryReader(dir));
+  public void addSolutionDir( String dir ) {
+    repositoryList.add( CdbEngine.getEnv().getContentAccessFactory().getPluginRepositoryReader( dir ) );
   }
 
-  public InputStream getResourceStream(String file) throws FileNotFoundException {
-    for (IReadAccess resolver : repositoryList) {
-      if (resolver.fileExists(file)) {
+  public InputStream getResourceStream( String file ) throws FileNotFoundException {
+    for ( IReadAccess resolver : repositoryList ) {
+      if ( resolver.fileExists( file ) ) {
         try {
-          return resolver.getFileInputStream(file);
-        } catch (IOException e) {
-                  //carry on
+          return resolver.getFileInputStream( file );
+        } catch ( IOException e ) {
+          //carry on
         }
       }
     }
-    throw new FileNotFoundException(file);
+    throw new FileNotFoundException( file );
   }
 
 }

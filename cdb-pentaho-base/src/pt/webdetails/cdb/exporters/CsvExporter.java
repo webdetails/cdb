@@ -1,13 +1,19 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
+/*!
+* Copyright 2002 - 2014 Webdetails, a Pentaho company.  All rights reserved.
+*
+* This software was developed by Webdetails and is provided under the terms
+* of the Mozilla Public License, Version 2.0, or any later version. You may not use
+* this file except in compliance with the license. If you need a copy of the license,
+* please go to  http://mozilla.org/MPL/2.0/. The Initial Developer is Webdetails.
+*
+* Software distributed under the Mozilla Public License is distributed on an "AS IS"
+* basis, WITHOUT WARRANTY OF ANY KIND, either express or  implied. Please refer to
+* the license for the specific language governing your rights and limitations.
+*/
 
 package pt.webdetails.cdb.exporters;
 
-import pt.webdetails.cdb.exporters.ExporterEngine;
-
 /**
- *
  * @author pdpi
  */
 public class CsvExporter extends AbstractExporter {
@@ -15,9 +21,10 @@ public class CsvExporter extends AbstractExporter {
   public CsvExporter() {
     this.fileExportExtension = "csv";
   }
+
   @Override
-  public String export(String group, String id, String url) {
-    return ExporterEngine.exportCda(group, id, "csv");
+  public String export( String group, String id, String url ) {
+    return ExporterEngine.exportCda( group, id, "csv" );
   }
 
 }
