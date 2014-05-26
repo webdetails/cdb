@@ -17,6 +17,7 @@ import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 import pt.webdetails.cdb.util.AliasedGroup;
+import pt.webdetails.cpf.utils.PluginIOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,7 +75,7 @@ public abstract class AbstractExporter implements Exporter {
 
   @Override
   public void binaryExport( String group, String id, String url, OutputStream out ) throws IOException {
-    out.write( export( group, id, url ).getBytes( "utf-8" ) );
+    PluginIOUtils.writeOutAndFlush( out, export( group, id, url ) );
   }
 
   @Override

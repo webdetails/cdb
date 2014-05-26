@@ -224,20 +224,7 @@ wd.cdb.QueryManager = (function() {
     };
 
     myself.loadGroup = function(group,callback) {
-      $.getJSON("query",{method:"loadGroup",group: group.getLabel()}, function(results){
-        if(results) {
-          var query, q, queryData;
-          myself.addGroup(group);
-          for (q in results.object) if (results.object.hasOwnProperty(q)) {
-            queryData = results.object[q];
-            query = new wd.cdb.Query(queryData.name, queryData.group, queryData.type, queryData.guid, queryData.definition);
-            query.setKey(queryData["@rid"]);
-            query.setGroupName(group.getDescription());
-            group.addQuery(query);
-          }
-          callback(group);
-        }
-      });
+      cdbFunctions.loadGroup(myself, group, callback);
     };
 
     myself.deleteGroup = function(label) {
@@ -250,7 +237,7 @@ wd.cdb.QueryManager = (function() {
     };
     
     myself.loadGroupList = function(callback) {
-      cdbFunctions.loadGroupList(callback, myself);
+      cdbFunctions.loadGroupList(myself, callback);
     }
     
     return myself;

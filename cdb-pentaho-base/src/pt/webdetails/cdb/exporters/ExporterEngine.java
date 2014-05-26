@@ -28,6 +28,10 @@ import pt.webdetails.cdb.ExporterNotFoundException;
 import pt.webdetails.cdb.util.CdbEnvironment;
 import pt.webdetails.cdb.util.JsonUtils;
 import pt.webdetails.cpf.InterPluginCall;
+import pt.webdetails.cpf.PluginEnvironment;
+import pt.webdetails.cpf.plugin.CorePlugin;
+import pt.webdetails.cpf.plugincall.api.IPluginCall;
+import pt.webdetails.cpf.plugincall.base.CallParameters;
 import pt.webdetails.cpf.repository.api.IReadAccess;
 
 import javax.servlet.ServletRequestWrapper;
@@ -39,7 +43,7 @@ import java.util.List;
 import java.util.Map;
 import java.io.OutputStream;
 
-public class ExporterEngine {
+public class  ExporterEngine {
 
   protected Log logger = LogFactory.getLog( pt.webdetails.cdb.exporters.ExporterEngine.class );
   private static pt.webdetails.cdb.exporters.ExporterEngine _instance;
@@ -56,8 +60,7 @@ public class ExporterEngine {
 
   public void exportToFile( HttpServletRequest request, HttpServletResponse response, String exporterName, String group,
                             String id ) throws IOException {
-    ServletRequestWrapper wrapper = (ServletRequestWrapper) request;
-    String url = wrapper.getScheme() + "://" + wrapper.getServerName() + ":" + wrapper.getServerPort()
+    String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
       + PentahoRequestContextHolder.getRequestContext().getContextPath();
 
     Exporter exporter = null;
@@ -173,7 +176,7 @@ public class ExporterEngine {
     params.put( "dataAccessId", id );
     params.put( "outputType", outputType );
 
-    InterPluginCall pluginCall = new InterPluginCall( InterPluginCall.CDA, "doQuery", params );
+    InterPluginCall pluginCall = new InterPluginCall( InterPluginCall.CDA, "doQueryInterPlugin", params );
     return pluginCall.call();
   }
 

@@ -4355,7 +4355,7 @@
      },
      {
       "name": "expression",
-      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      target = $(\"#download\"),\n      params = {},\n      url = \"export?\";\n    if (!target.length) {\n        target = $(\"<iframe id='download'>\").appendTo(document.body);\n    };\n    params.id = query.getLabel();\n    params.group = Dashboards.context.user + \".\" + query.getGroup();\n    params.method = \"export\";\n    params.exporter = window.exportTypeParam;\n    params.toFile = true;\n    params.filename = \"foo.bar\";\n    target.attr(\"src\", url + $.param(params));\n}",
+      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      //target = $(\"#download\"),\n      target = $(\"<iframe id='download'>\"),\n      params = {},\n      url = \"exporter/export?\";\n    params.id = query.getLabel();\n    params.group = Dashboards.context.user + \".\" + query.getGroup();\n    params.exporter = window.exportTypeParam;\n    params.toFile = true;\n    target.attr(\"src\", url + $.param(params));\n    target.empty().appendTo(document.body);\n}",
       "type": "JavaScript"
      },
      {
@@ -4433,7 +4433,7 @@
      },
      {
       "name": "expression",
-      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      target = $(\"#code\"),\n      params = {},\n      url = \"exporter/export\";\n\n  params.id = query.getLabel();\n  params.group = Dashboards.context.user + \".\" + query.getGroup();\n  params.toFile = false;\n  params.exporter = window.exportTypeParam;\n  $.ajax(url, {\n      type: 'GET',\n      dataType: 'text',\n      data:params,\n      success: function(response){\n        $(\"#codeholder\").slideDown(400);\n        target.val(response).focus().select();\n      }\n  });\n}\n",
+      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      target = $(\"#code\"),\n      params = {},\n      url = \"exporter/export\";\n\n  params.id = query.getLabel();\n  params.group = Dashboards.context.user + \".\" + query.getGroup();\n  params.toFile = false;\n  params.exporter = window.exportTypeParam;\n  $.ajax(url, {\n      type: 'GET',\n      dataType: 'text',\n      data:params,\n      success: function(response){\n        var res = JSON.parse(response);\n        $(\"#codeholder\").slideDown(400);\n        target.val(res.result).focus().select();\n      }\n  });\n}\n",
       "type": "JavaScript"
      },
      {

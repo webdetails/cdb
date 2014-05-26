@@ -1,17 +1,59 @@
 var cdbFunctions = cdbFunctions || {};
 
-cdbFunctions.loadGroupList = function(callback, myself) {
-    $.getJSON('query/listGroups', {}, function(response) {
+cdbFunctions.loadGroupList = function( myself, callback ) {
+	var url = 'query/listGroups',
+		params = {};
+    $.getJSON( url, params, function(response) {
         var groups = response.result,
             i;
-        for (i = 0; i < groups.length;i++) {
-            if (groups[i].name)
-                myself.newGroup(groups[i].name, groups[i].groupName);
+
+        for (i = 0; i < groups.length;i++) if (groups[i].group) {
+            myself.newGroup(groups[i].group, groups[i].name);
         }
 
         if (callback && typeof callback == 'function') {
             callback(myself);
         }
+
+    });
+};
+
+cdbFunctions.loadGroup = function( myself, group, callback ) {
+	var url = "query/loadGroup",
+		params = {
+			group: group.getLabel()
+		};
+
+	$.getJSON( url, params, function(response){
+		if(response) {
+			var query, q, queryData;
+			myself.addGroup(group);
+			for (q in response.result) if (response.result.hasOwnProperty(q)) {
+				queryData = response.result[q];
+				query = new wd.cdb.Query(queryData.name, queryData.group, queryData.type, queryData.guid, queryData.definition);
+				query.setKey(queryData["@rid"]);
+				query.setGroupName(group.getDescription());
+				group.addQuery(query);
+			}
+			callback(group);
+		}
+	});
+};
+
+cdbFunctions.saveQuery = function( queries, label ) {
+    var q, query,
+    	url = "connector/exportCda",
+    	params = {
+    		group: label
+    	};
+    	
+    for (q in queries) if (queries.hasOwnProperty(q)) {
+      query = queries[q];
+      wd.ctools.persistence.saveObject(null, "Query", query);
+    }
+
+    $.getJSON( url, params, function() { 
+    	console.log("Saved to CDA") 
     });
 };
 
@@ -37,14 +79,4 @@ cdbFunctions.getSaikuPath = function() {
 
 cdbFunctions.getPersistenceUrl = function() {
     return webAppPath + "/plugin/cdb/api/storage";
-};
-
-cdbFunctions.saveQuery = function(queries, label) {
-    var q, query;
-    for (q in queries) if (queries.hasOwnProperty(q)) {
-      query = queries[q];
-      wd.ctools.persistence.saveObject(null,"Query",query);
-    }
-
-    $.getJSON("connector/exportCda?group=" + label,function(){ console.log("Saved to CDA") });
 };

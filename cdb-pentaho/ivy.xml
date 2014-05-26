@@ -60,7 +60,8 @@
         <dependency org="com.orientechnologies" name="orientdb-enterprise"  rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
 
         <!-- mustache templates -->
-        <dependency org="com.github.spullara.mustache.java" name="compiler" rev="0.8.4" conf='runtime,default->default' transitive="false"/>
+        <dependency org="com.github.spullara.mustache.java" name="compiler"       rev="0.8.4" conf='runtime,default->default' transitive="false"/>
+        <dependency org="com.google.guava"                  name="guava"          rev="12.0"  conf='runtime,default->default' transitive="false"/>
 
         <!-- tests -->
         <dependency org="junit" name="junit" conf="test->default" rev='4.10'/>

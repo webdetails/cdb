@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import pt.webdetails.cpf.persistence.PersistenceEngine;
 
 import java.util.HashMap;
@@ -44,23 +45,23 @@ public class QueryEngine {
     PersistenceEngine pe = PersistenceEngine.getInstance();
     try {
       Map<String, Object> params = new HashMap<String, Object>();
-      //params.put("user", PentahoSessionHolder.getSession().getName());
+      params.put("user", PentahoSessionHolder.getSession().getName());
       // DISBLING MULTI USER SUPPORT BY NOW response = pe.query("select distinct(group) as name,
       // groupName from Query where userid = :user order by groupName", params);
-      response = pe.query( "select distinct(group) as name, group from Query order by group", params );
+      response = pe.query( "select distinct(group) as group, groupName as name from Query order by group", params );
     } catch ( JSONException e ) {
       return null;
     }
     return response;
   }
 
-  public JSONObject loadGroup( String groupName ) {
+  public JSONObject loadGroup( String group ) {
     JSONObject response;
     PersistenceEngine pe = PersistenceEngine.getInstance();
     try {
       Map<String, Object> params = new HashMap<String, Object>();
       //params.put("user", PentahoSessionHolder.getSession().getName()); TODO: removed for now since isn't being used
-      params.put( "group", groupName );
+      params.put( "group", group );
 
       // DISABLING MULTI USER SUPPORT BY NOW response = pe.query("select * from Query where group = :group and userid
       // = :user order by groupName", params);
