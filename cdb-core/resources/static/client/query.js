@@ -32,14 +32,7 @@ wd.cdb.Query = function (label, group, type, guid, definition) {
      * is the only way of knowing that's the case.
      */
     if (_id) {
-      var params = {
-        method: 'copyQuery',
-        id: myself.getKey(),
-        newguid: newGuid
-      };
-      $.getJSON(webAppPath + "/content/cdb/connector", $.param(params),function(response){
-        wd.ctools.persistence.saveObject(null, "Query", myself);
-      });
+      cdbFunctions.copyBackend(myself, newGuid);
     }
   }
 
@@ -115,14 +108,7 @@ wd.cdb.Query = function (label, group, type, guid, definition) {
     if (!this.getKey()) {
       return;
     }
-    var params = {
-      method: 'deleteQuery',
-      id: this.getKey(),
-    };
-    var myself = this;
-    $.getJSON(webAppPath + "/content/cdb/connector", $.param(params),function(response){
-      wd.ctools.persistence.deleteObject(myself.getKey(), "Query");
-    });
+    cdbFunctions.deleteSelf(this);
   }
 
   if(group){

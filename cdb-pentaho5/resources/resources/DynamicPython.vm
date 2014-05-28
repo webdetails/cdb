@@ -1,0 +1,18 @@
+def readCdb( url, group, id ):
+  import csv, getpass, urllib
+  # We need to read in the user and the password for the Pentaho
+  # server, so we make sure to escape all the bits of the URL we'e building
+  user = "&userid=" + urllib.quote( raw_input( "User: " ) )
+  password = "&password=" + urllib.quote( getpass.getpass() )
+  base_path = "plugin/cdb/api/doQuery?outputType=csv"
+  file = "&group=" + urllib.quote( group )
+  data_id = "&id=" + urllib.quote( id )
+  complete_url = url + base_path + file + data_id + user + password
+  # Open the CSV file, detect the format (commas or semicolons? etc),
+  # rewind back to the start of the file, and parse it
+  csv_file = open( urllib.urlretrieve( complete_url )[0] )
+  dialect = csv.Sniffer().sniff( csv_file.read(1024) )
+  csv_file.seek( 0 )
+  return csv.reader(csv_file, dialect)
+
+cdbData = readCdb("$url", "$group", "$id")

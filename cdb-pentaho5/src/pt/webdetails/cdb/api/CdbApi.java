@@ -30,6 +30,7 @@ import pt.webdetails.cpf.InvalidOperationException;
 import pt.webdetails.cpf.persistence.PersistenceEngine;
 import pt.webdetails.cpf.utils.CharsetHelper;
 import pt.webdetails.cpf.utils.MimeTypes;
+import pt.webdetails.cpf.utils.PluginIOUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -118,7 +119,7 @@ public class CdbApi {
       PersistenceEngine engine = PersistenceEngine.getInstance();
       String result =
         engine.process( RestApiUtils.getRequestParameters( bloatedMap ), PentahoSessionHolder.getSession() );
-      JsonUtils.buildJsonResult( response.getOutputStream(), result != null, result );
+      PluginIOUtils.writeOutAndFlush( response.getOutputStream(), result );
     } catch ( Exception ex ) {
       logger.error( ex.toString() );
       JsonUtils.buildJsonResult( response.getOutputStream(), false,
@@ -127,8 +128,8 @@ public class CdbApi {
   }
 
   @GET
-  @Path( "/doquery" )
-  @Produces( "text/javascript" )
+  @Path( "/doQuery" )
+  @Produces( { "text/csv", "text/javascript" } )
   public void doQuery( @Context HttpServletRequest request, @Context HttpServletResponse response,
                        @Context HttpHeaders headers ) throws IOException {
     CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
@@ -136,13 +137,13 @@ public class CdbApi {
 
     IParameterProvider requestParams = RestApiUtils.getRequestParameters( bloatedMap );
 
-    String group = requestParams.getStringParameter( "group", "" ),
-      id = requestParams.getStringParameter( "id", "" ),
-      outputType = requestParams.getStringParameter( "outputType", "json" );
+    String group = requestParams.getStringParameter( "group", "" );
+    String id = requestParams.getStringParameter( "id", "" );
+    String outputType = requestParams.getStringParameter( "outputType", "json" );
 
     try {
       String result = ExporterEngine.exportCda( group, id, outputType );
-      JsonUtils.buildJsonResult( response.getOutputStream(), result != null, result );
+      PluginIOUtils.writeOutAndFlush( response.getOutputStream(), result );
     } catch ( Exception ex ) {
       logger.error( ex.toString() );
       JsonUtils.buildJsonResult( response.getOutputStream(), false,
@@ -201,56 +202,4 @@ public class CdbApi {
 
     return Response.status( Response.Status.NOT_FOUND ).build();
   }
-
-
-  /*@GET
-  @Path( "/exportapi" )
-  @Produces( "text/javascript" )
-  public void export(@Context HttpServletRequest request, @Context HttpServletResponse response,
-                     @Context HttpHeaders headers ) throws IOException {
-    CdbEngine.getEnv();
-    Map<String, Map<String, Object>> bloatedMap = RestApiUtils.buildBloatedMap( request, response, headers );
-
-    IParameterProvider requestParams = RestApiUtils.getRequestParameters( bloatedMap );
-    IParameterProvider pathParams = RestApiUtils.getPathParameters( bloatedMap );
-
-    ExporterEngine engine = ExporterEngine.getInstance();
-    engine.process(requestParams, pathParams, response.getOutputStream());
-  }       */
-
-
-
-  /*@GET
-  @Path( "/connectorapi" )
-  @Produces( "text/javascript" )
-  public void connector(@Context HttpServletRequest request, @Context HttpServletResponse response,
-                        @Context HttpHeaders headers ) throws IOException {
-    CdbEngine.getEnv();// FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
-    Map<String, Map<String, Object>> bloatedMap = RestApiUtils.buildBloatedMap( request, response, headers );
-
-    IParameterProvider requestParams = RestApiUtils.getRequestParameters( bloatedMap );
-    IParameterProvider pathParams = RestApiUtils.getPathParameters( bloatedMap );
-
-    ConnectorEngine engine = ConnectorEngine.getInstance();
-    engine.process(requestParams, pathParams, response.getOutputStream());
-  } */
-
-  /*@GET
-  @Path( "/queryapi" )
-  @Produces( "text/javascript" )
-  public void query(@Context HttpServletRequest request, @Context HttpServletResponse response,
-                    @Context HttpHeaders headers ) throws IOException {
-    CdbEngine.getEnv();
-    Map<String, Map<String, Object>> bloatedMap = RestApiUtils.buildBloatedMap( request, response, headers );
-
-    IParameterProvider requestParams = RestApiUtils.getRequestParameters( bloatedMap );
-    IParameterProvider pathParams = RestApiUtils.getPathParameters( bloatedMap );
-
-    QueryEngine engine = QueryEngine.getInstance();
-    engine.process(requestParams, pathParams, response.getOutputStream());
-  }
-
-  private class MethodsParams {
-    public static final String EXPORT_CDA = "exportCda";
-  }     */
 }

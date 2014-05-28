@@ -11,16 +11,22 @@
 * the license for the specific language governing your rights and limitations.
 */
 
-package pt.webdetails.cdb.exporters;
+package pt.webdetails.cdb;
 
-/**
- * @author pdpi
- */
-public class DynamicRExporter extends AbstractExporter {
+import pt.webdetails.cpf.InterPluginCall;
 
-  public DynamicRExporter() {
-    this.fileExportExtension = "r";
-    this.templateFile = "DynamicR.vm";
+import java.util.HashMap;
+import java.util.Map;
+
+public class InterPluginBroker {
+
+  public static String exportCda(  String group, String id, String outputType  ) {
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put( "path", "cdb/queries/" + group + ".cda" );
+    params.put( "dataAccessId", id );
+    params.put( "outputType", outputType );
+
+    InterPluginCall pluginCall = new InterPluginCall( InterPluginCall.CDA, "doQuery", params );
+    return pluginCall.call();
   }
-
 }

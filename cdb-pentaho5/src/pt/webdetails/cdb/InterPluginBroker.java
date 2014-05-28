@@ -15,12 +15,14 @@ package pt.webdetails.cdb;
 
 
 import org.apache.commons.io.IOUtils;
+import pt.webdetails.cpf.InterPluginCall;
 import pt.webdetails.cpf.PluginEnvironment;
 import pt.webdetails.cpf.plugin.CorePlugin;
 import pt.webdetails.cpf.plugincall.api.IPluginCall;
 import pt.webdetails.cpf.plugincall.base.CallParameters;
 
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -39,6 +41,16 @@ public class InterPluginBroker {
     String returnVal = pluginCall.call( parameters.getParameters() );
     IOUtils.write( returnVal, out );
     out.flush();
+  }
+
+  public static String exportCda(  String group, String id, String outputType  ) {
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put( "path", "public/cdb/queries/" + group + ".cda" );
+    params.put( "dataAccessId", id );
+    params.put( "outputType", outputType );
+
+    InterPluginCall pluginCall = new InterPluginCall( InterPluginCall.CDA, "doQueryInterPlugin", params );
+    return pluginCall.call();
   }
 
 }

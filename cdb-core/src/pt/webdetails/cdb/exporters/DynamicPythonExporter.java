@@ -20,7 +20,7 @@ public class DynamicPythonExporter extends AbstractExporter {
 
   public DynamicPythonExporter() {
     this.fileExportExtension = "py";
-    this.templateFile = "DynamicPython.mustache";
+    this.templateFile = "DynamicPython.vm";
   }
 
 }

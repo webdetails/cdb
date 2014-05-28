@@ -41,9 +41,7 @@ public class QueryApi {
     CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     try {
       JSONObject result = QueryEngine.getInstance().listGroups();
-      String data = result.get("object").toString();
-
-      JsonUtils.buildJsonResult( response.getOutputStream(), result != null, data );
+      PluginIOUtils.writeOutAndFlush( response.getOutputStream(), result.toString( 2 ) );
 
     } catch ( Exception ex ) {
       logger.error( "Error listing queries: " + ex );
@@ -60,8 +58,8 @@ public class QueryApi {
     CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     try {
       JSONObject result = QueryEngine.getInstance().loadGroup( group );
-      String data = result.get("object").toString();
-      JsonUtils.buildJsonResult( response.getOutputStream(), result != null, data );
+      PluginIOUtils.writeOutAndFlush( response.getOutputStream(), result.toString( 2 ) );
+
     } catch ( Exception ex ) {
       logger.error( "Error loading group: " + ex );
       JsonUtils.buildJsonResult( response.getOutputStream(), false,

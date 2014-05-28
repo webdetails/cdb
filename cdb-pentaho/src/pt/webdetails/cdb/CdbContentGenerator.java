@@ -147,9 +147,9 @@ public class CdbContentGenerator extends SimpleContentGenerator {
   public void doQuery( OutputStream out ) throws IOException {
     IParameterProvider requestParams = getRequestParameters();
 
-    String group = requestParams.getStringParameter( "group", "" ), id = requestParams.getStringParameter( "id", "" ),
-      outputType = requestParams
-        .getStringParameter( "outputType", "json" );
+    String group = requestParams.getStringParameter( "group", "" );
+    String id = requestParams.getStringParameter( "id", "" );
+    String outputType = requestParams.getStringParameter( "outputType", "json" );
 
     writeOut( out, ExporterEngine.exportCda( group, id, outputType ) );
   }
@@ -199,7 +199,7 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     }
   }
 
-  @Exposed( accessLevel = AccessLevel.PUBLIC )
+  /*@Exposed( accessLevel = AccessLevel.PUBLIC )
   public void olapUtils( OutputStream out ) throws IOException {
     OlapUtils olapUtils = new OlapUtils();
     JSONObject result = null;
@@ -234,7 +234,7 @@ public class CdbContentGenerator extends SimpleContentGenerator {
       logger.error( ex.toString() );
       JsonUtils.buildJsonResult( out, false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
     }
-  }
+  }*/
 
   private void redirectToCdeEditor( Map<String, Object> params ) throws IOException {
 

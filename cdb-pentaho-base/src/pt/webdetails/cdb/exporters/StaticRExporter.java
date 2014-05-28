@@ -27,14 +27,14 @@ public class StaticRExporter extends AbstractExporter {
 
   public StaticRExporter() {
     this.fileExportExtension = "zip";
-    this.templateFile = "StaticR.mustache";
+    this.templateFile = "StaticR.vm";
   }
 
   @Override
   public void binaryExport( String group, String id, String url, OutputStream out ) throws IOException {
     String src = getSource( group, id, url );
     ZipOutputStream zos = new ZipOutputStream( out );
-    zos.putNextEntry( new ZipEntry( id + ".py" ) );
+    zos.putNextEntry( new ZipEntry( id + ".r" ) );
     zos.write( src.getBytes( CharsetHelper.getEncoding() ) );
     zos.putNextEntry( new ZipEntry( id + ".csv" ) );
     zos.write( ExporterEngine.exportCda( group, id, "csv" ).getBytes( CharsetHelper.getEncoding() ) );

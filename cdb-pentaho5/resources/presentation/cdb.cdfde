@@ -2,7 +2,7 @@
  "layout": {
   "title": "cToolsTemplate",
   "rows": [
-  {
+   {
     "id": "2ecd990a-cfd6-44c1-ce14-b4bfaed43cb9",
     "type": "LayoutResourceFile",
     "typeDesc": "Resource",
@@ -15,7 +15,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "${system:/static/client/cdb-base.js}",
+      "value": "static/client/cdb-base.js",
       "type": "ResourceFile"
      },
      {
@@ -107,7 +107,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/jquery.shortcuts.js",
+      "value": "${system:/static/client/jquery.shortcuts.js}",
       "type": "ResourceFile"
      },
      {
@@ -130,7 +130,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/jquery.autoresize.js",
+      "value": "${system:/static/client/jquery.autoresize.js}",
       "type": "ResourceFile"
      },
      {
@@ -153,7 +153,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/saiku-interface.js",
+      "value": "${system:/static/client/saiku-interface.js}",
       "type": "ResourceFile"
      },
      {
@@ -176,7 +176,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/query.js",
+      "value": "${system:/static/client/query.js}",
       "type": "ResourceFile"
      },
      {
@@ -199,7 +199,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/connectors/connectors.js",
+      "value": "${system:/static/client/connectors/connectors.js}",
       "type": "ResourceFile"
      },
      {
@@ -222,7 +222,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/connectors/saiku-connector.js",
+      "value": "${system:/static/client/connectors/saiku-connector.js}",
       "type": "ResourceFile"
      },
      {
@@ -245,7 +245,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/connectors/sql-connector.js",
+      "value": "${system:/static/client/connectors/sql-connector.js}",
       "type": "ResourceFile"
      },
      {
@@ -268,7 +268,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/support/persistence.js",
+      "value": "${system:/static/client/support/persistence.js}",
       "type": "ResourceFile"
      },
      {
@@ -291,7 +291,7 @@
      },
      {
       "name": "resourceFile",
-      "value": "static/client/cdb.css",
+      "value": "${system:/static/client/cdb.css}",
       "type": "ResourceFile"
      },
      {
@@ -3501,6 +3501,26 @@
       "type": "JavaScript"
      },
      {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
       "name": "refreshPeriod",
       "value": "",
       "type": "Integer"
@@ -3577,6 +3597,26 @@
       "name": "expression",
       "value": "function(){\n    wd.cdb.addQuery(this.queryHolder);\n}",
       "type": "JavaScript"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
      },
      {
       "name": "refreshPeriod",
@@ -3657,6 +3697,26 @@
       "type": "JavaScript"
      },
      {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
       "name": "refreshPeriod",
       "value": "",
       "type": "Integer"
@@ -3733,6 +3793,26 @@
       "name": "expression",
       "value": "wd.cdb.saveGroup()",
       "type": "JavaScript"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
      },
      {
       "name": "refreshPeriod",
@@ -3813,6 +3893,26 @@
       "type": "JavaScript"
      },
      {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
       "name": "refreshPeriod",
       "value": "",
       "type": "Integer"
@@ -3889,6 +3989,26 @@
       "name": "expression",
       "value": "",
       "type": "JavaScript"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
      },
      {
       "name": "refreshPeriod",
@@ -3969,6 +4089,26 @@
       "type": "JavaScript"
      },
      {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
       "name": "refreshPeriod",
       "value": "",
       "type": "Integer"
@@ -4045,6 +4185,26 @@
       "name": "expression",
       "value": "function(event){\n    var $openEnv = $(\"#openEnvironment\");\n    var $removeEnv = $(\"#removeEnvironment\");\n    var $exportEnv = $(\"#exportEnvironment\");\n    var left = $(\"#\" + this.htmlObject).parent().parent().offset().left + 950 - 392;\n    var top = $(\"#\" + this.htmlObject).parent().offset().top;\n    $(\"#code\").val('');\n    $(\"#codeholder\").hide();\n    if($openEnv.css('display') != 'none'){\n        wd.cdb.clickDocOpenEnv();\n    }\n    if($removeEnv.css('display') != 'none'){\n        wd.cdb.clickDocRemoveEnv();\n    }\n    \n    $exportEnv.animate({\n        height: 'toggle'\n    }, 400, function(){});\n    $exportEnv.css('top',top+'px').css('left',left+'px');\n    \n    $exportEnv.click(wd.cdb.clickBox);\n    $(document).click(wd.cdb.clickDocExportEnv);\n    window.exportingQuery = this.queryObj;\n    event.stopPropagation();\n}\n\n",
       "type": "JavaScript"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
      },
      {
       "name": "refreshPeriod",
@@ -4125,6 +4285,26 @@
       "type": "JavaScript"
      },
      {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
       "name": "refreshPeriod",
       "value": "",
       "type": "Integer"
@@ -4201,6 +4381,26 @@
       "name": "expression",
       "value": "",
       "type": "JavaScript"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
      },
      {
       "name": "refreshPeriod",
@@ -4281,6 +4481,26 @@
       "type": "JavaScript"
      },
      {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
       "name": "refreshPeriod",
       "value": "",
       "type": "Integer"
@@ -4355,8 +4575,28 @@
      },
      {
       "name": "expression",
-      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      //target = $(\"#download\"),\n      target = $(\"<iframe id='download'>\"),\n      params = {},\n      url = \"exporter/export?\";\n    params.id = query.getLabel();\n    params.group = Dashboards.context.user + \".\" + query.getGroup();\n    params.exporter = window.exportTypeParam;\n    params.toFile = true;\n    target.attr(\"src\", url + $.param(params));\n    target.empty().appendTo(document.body);\n}",
+      "value": "function() {\n  var query = Dashboards.getParameterValue(\"exportingQuery\"),\n      target = $(\"<iframe id='download'>\"),\n      params = {},\n      url = \"exporter/export?\";\n    params.id = query.getLabel();\n    params.group = Dashboards.context.user + \".\" + query.getGroup();\n    params.exporter = window.exportTypeParam;\n    params.toFile = true;\n    target.attr(\"src\", url + $.param(params));\n    target.empty().appendTo(document.body);\n}",
       "type": "JavaScript"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
      },
      {
       "name": "refreshPeriod",
@@ -4437,6 +4677,26 @@
       "type": "JavaScript"
      },
      {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
       "name": "refreshPeriod",
       "value": "",
       "type": "Integer"
@@ -4513,6 +4773,26 @@
       "name": "expression",
       "value": "",
       "type": "JavaScript"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
      },
      {
       "name": "refreshPeriod",
@@ -4593,6 +4873,26 @@
       "type": "JavaScript"
      },
      {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
       "name": "refreshPeriod",
       "value": "",
       "type": "Integer"
@@ -4669,6 +4969,26 @@
       "name": "expression",
       "value": "function(){\n    wd.cdb.openGroups(Dashboards.getParameterValue(render_availableGroups.parameter));\n    wd.cdb.clickDocOpenEnv();\n    Dashboards.setParameter(render_availableGroups.parameter,'');\n    Dashboards.update(render_availableGroups);\n}",
       "type": "JavaScript"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
      },
      {
       "name": "refreshPeriod",
@@ -4749,6 +5069,26 @@
       "type": "JavaScript"
      },
      {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
       "name": "refreshPeriod",
       "value": "",
       "type": "Integer"
@@ -4827,6 +5167,26 @@
       "type": "JavaScript"
      },
      {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
+     },
+     {
       "name": "refreshPeriod",
       "value": "",
       "type": "Integer"
@@ -4903,6 +5263,26 @@
       "name": "expression",
       "value": "function(evt){\n    $(\"#confirmButtons\").animate({height: 'toggle'},400,function(){});\n    $(\"#removeSelectionButton\").animate({height: 'toggle'},400,function(){});\n    \n    wd.cdb.clickDocRemoveEnv();\n    if(removeGroupOrQueriesParam == \"Remove Entire Group\"){\n        wd.cdb.removeGroup(this.groupName); //replace by correct group name\n    } else {\n        wd.cdb.removeQueries(this.groupName, queriesToRemoveParam);\n    }\n    \n    Dashboards.setParameter(render_removeGroupOrQueries.parameter,'');\n    Dashboards.update(render_removeGroupOrQueries);\n    \n    Dashboards.setParameter(render_queriesToRemove.parameter,'');\n    Dashboards.update(render_queriesToRemove);\n\n    \n    \n    \n    \n}\n",
       "type": "JavaScript"
+     },
+     {
+      "name": "successCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "actionParameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "failureCallback",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "Datasource",
+      "value": "",
+      "type": "Datasource"
      },
      {
       "name": "refreshPeriod",
@@ -5924,7 +6304,7 @@
      },
      {
       "name": "javaScript",
-      "value": "Dashboards.postInit = function(){\n    $.Shortcuts.add({\n        type: 'down',\n        mask: 'Shift+N',\n        enableInInput: false,\n        handler: function() {\n            wd.cdb.createGroup();\n        }\n    });\n    \n    $.Shortcuts.add({\n        type: 'down',\n        mask: 'Shift+O',\n        enableInInput: false,\n        handler: function() {\n            var $openEnv = $(\"#openEnvironment\");\n            var object = $(\"#\"+render_openDataGroupButton.htmlObject+\" button\");\n            var left = object.parent().parent().position().left + 120;\n            var top = object.parent().position().top -1;\n            \n        \n            function clickBox(event){\n                event.stopPropagation();\n            }\n            function clickDoc (){\n                $.Shortcuts.start();\n                $openEnv.animate({\n                    height: 'toggle'\n                }, 400, function(){\n                    $(document).unbind(\"click\",clickDoc);\n                    $openEnv.unbind(\"click\", clickBox);\n                });\n            }\n            $.Shortcuts.stop();\n            $openEnv.animate({\n                height: 'toggle'\n            }, 400, function(){\n                \n            });\n            $openEnv.css('top',top+'px').css('left',left+'px');\n            \n            $openEnv.click(clickBox);\n            $(document).click(clickDoc);\n            \n            event.stopPropagation();\n \n        }\n    });\n    \n\n    $.Shortcuts.start();\n}",
+      "value": "Dashboards.postInit = function() {\n    \n    $.each(wd.cdb.QueryManager.listGroups(),function(n, g) {\n        $.each(g.listQueries(), function(i, q) {\n            var queryGuid = q.getGUID();\n            $(\"#\"+queryGuid+'ActiveTypeButton button').removeAttr('disabled').css('width','487px');\n        });\n    });\n\n    $.Shortcuts.add({\n        type: 'down',\n        mask: 'Shift+N',\n        enableInInput: false,\n        handler: function() {\n            wd.cdb.createGroup();\n        }\n    });\n    \n    $.Shortcuts.add({\n        type: 'down',\n        mask: 'Shift+O',\n        enableInInput: false,\n        handler: function() {\n            var $openEnv = $(\"#openEnvironment\");\n            var object = $(\"#\"+render_openDataGroupButton.htmlObject+\" button\");\n            var left = object.parent().parent().position().left + 120;\n            var top = object.parent().position().top -1;\n            \n        \n            function clickBox(event){\n                event.stopPropagation();\n            }\n            function clickDoc (){\n                $.Shortcuts.start();\n                $openEnv.animate({\n                    height: 'toggle'\n                }, 400, function(){\n                    $(document).unbind(\"click\",clickDoc);\n                    $openEnv.unbind(\"click\", clickBox);\n                });\n            }\n            $.Shortcuts.stop();\n            $openEnv.animate({\n                height: 'toggle'\n            }, 400, function(){\n                \n            });\n            $openEnv.css('top',top+'px').css('left',left+'px');\n            \n            $openEnv.click(clickBox);\n            $(document).click(clickDoc);\n            \n            event.stopPropagation();\n \n        }\n    });\n    \n\n    $.Shortcuts.start();\n}",
       "type": "JavaScript"
      }
     ]

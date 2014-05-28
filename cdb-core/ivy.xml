@@ -38,10 +38,11 @@
         <dependency org="pentaho" name="cpf-core" rev="${dependency.pentaho-cpf-plugin.revision}" transitive="false" changing="true" conf='runtime->default'/>
         <dependency org="pentaho" name="cda-core" rev="${dependency.pentaho-cda-plugin.revision}" transitive="false"                 conf='runtime->default'/>
 
-        <!-- Mustache templates -->
-        <dependency org="com.github.spullara.mustache.java" name="compiler" conf='runtime,default->default' rev="0.8.4" transitive="true"/>
+        <!-- Velocity templates -->
+        <dependency org="org.apache.velocity" name="velocity" conf='runtime,default->default' rev="1.7" transitive="false"/>
 
-        <!-- tests -->
+
+      <!-- tests -->
         <dependency org="junit" name="junit" conf="test->default" rev='4.10'/>
 
         <exclude module="nekohtml" conf="" matcher="exact"></exclude>

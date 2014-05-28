@@ -6,7 +6,7 @@ cdbFunctions.loadGroupList = function( myself, callback ) {
             method: "listGroups"
         }
     $.getJSON( url, params, function(response) {
-        var groups = response.result,
+        var groups = response.object,
             i;
 
         for (i = 0; i < groups.length;i++) if (groups[i].group) {
@@ -31,8 +31,8 @@ cdbFunctions.loadGroup = function( myself, group, callback ) {
         if(response) {
             var query, q, queryData;
             myself.addGroup(group);
-            for (q in response.result) if (response.result.hasOwnProperty(q)) {
-                queryData = response.result[q];
+            for (q in response.object) if (response.object.hasOwnProperty(q)) {
+                queryData = response.object[q];
                 query = new wd.cdb.Query(queryData.name, queryData.group, queryData.type, queryData.guid, queryData.definition);
                 query.setKey(queryData["@rid"]);
                 query.setGroupName(group.getDescription());
@@ -73,6 +73,30 @@ cdbFunctions.getPluginParams = function( solution, path, file, mode ) {
             dimension_prefetch: false,
             mode: "edit"
         } : {} ));
+};
+
+cdbFunctions.copyBackend = function(myself, newGuid) {
+    var url = webAppPath + "/content/cdb/connector",
+        params = {
+            method: 'copyQuery',
+            id: myself.getKey(),
+            newguid: newGuid
+        };
+
+      $.getJSON(url, $.param(params),function(response){
+        wd.ctools.persistence.saveObject(null, "Query", myself);
+      });
+};
+
+cdbFunctions.deleteSelf = function(myself) {
+    var url = webAppPath + "/content/cdb/connector",
+        params = {
+            method: 'deleteQuery',
+            id: myself.getKey()
+        };
+    $.getJSON(url, $.param(params),function(response){
+      wd.ctools.persistence.deleteObject(myself.getKey(), "Query");
+    });
 };
 
 cdbFunctions.getSolution = function() {

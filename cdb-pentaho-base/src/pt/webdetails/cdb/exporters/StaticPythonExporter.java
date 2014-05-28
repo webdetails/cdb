@@ -27,7 +27,7 @@ public class StaticPythonExporter extends AbstractExporter {
 
   public StaticPythonExporter() {
     this.fileExportExtension = "zip";
-    this.templateFile = "StaticPython.mustache";
+    this.templateFile = "StaticPython.vm";
   }
 
   @Override

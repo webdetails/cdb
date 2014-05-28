@@ -48,7 +48,7 @@ public class QueryEngine {
       params.put("user", PentahoSessionHolder.getSession().getName());
       // DISBLING MULTI USER SUPPORT BY NOW response = pe.query("select distinct(group) as name,
       // groupName from Query where userid = :user order by groupName", params);
-      response = pe.query( "select distinct(group) as group, groupName as name from Query order by group", params );
+      response = pe.query( "select distinct(group) as group, distinct(groupName) as name from Query order by group", params );
     } catch ( JSONException e ) {
       return null;
     }

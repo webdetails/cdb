@@ -25,28 +25,22 @@ import org.json.JSONObject;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.platform.engine.core.system.PentahoRequestContextHolder;
 import pt.webdetails.cdb.ExporterNotFoundException;
+import pt.webdetails.cdb.InterPluginBroker;
 import pt.webdetails.cdb.util.CdbEnvironment;
 import pt.webdetails.cdb.util.JsonUtils;
-import pt.webdetails.cpf.InterPluginCall;
-import pt.webdetails.cpf.PluginEnvironment;
-import pt.webdetails.cpf.plugin.CorePlugin;
-import pt.webdetails.cpf.plugincall.api.IPluginCall;
-import pt.webdetails.cpf.plugincall.base.CallParameters;
 import pt.webdetails.cpf.repository.api.IReadAccess;
 
-import javax.servlet.ServletRequestWrapper;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.io.OutputStream;
 
 public class  ExporterEngine {
 
   protected Log logger = LogFactory.getLog( pt.webdetails.cdb.exporters.ExporterEngine.class );
   private static pt.webdetails.cdb.exporters.ExporterEngine _instance;
+  private static final String EXPORTERS_DIR = "resources/";
 
   private ExporterEngine() {
   }
@@ -95,14 +89,14 @@ public class  ExporterEngine {
     }
   }
 
-  public void process( IParameterProvider requestParams, IParameterProvider pathParams, OutputStream out ) {
+  /*public void process( IParameterProvider requestParams, IParameterProvider pathParams, OutputStream out ) {
     try {
 
     } catch ( Exception ex ) {
       logger.error( ex );
       JsonUtils.buildJsonResult( out, false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
     }
-  }
+  }*/
 
   private String escapePath( String path ) {
     return path.replaceAll( "\\\\", "\\\\" ).replaceAll( "\"", "\\\"" );
@@ -171,13 +165,7 @@ public class  ExporterEngine {
   }
 
   public static String exportCda( String group, String id, String outputType ) {
-    Map<String, Object> params = new HashMap<String, Object>();
-    params.put( "path", "public/cdb/queries/" + group + ".cda" );
-    params.put( "dataAccessId", id );
-    params.put( "outputType", outputType );
-
-    InterPluginCall pluginCall = new InterPluginCall( InterPluginCall.CDA, "doQueryInterPlugin", params );
-    return pluginCall.call();
+    return InterPluginBroker.exportCda( group, id, outputType );
   }
 
   private Document getConfigFile() {
@@ -185,7 +173,7 @@ public class  ExporterEngine {
     try {
       IReadAccess read = CdbEnvironment.getPluginSystemReader();
       SAXReader reader = new SAXReader();
-      doc = reader.read( read.getFileInputStream( "exporters.xml" ) );
+      doc = reader.read( read.getFileInputStream( EXPORTERS_DIR + "exporters.xml" ) );
     } catch ( IOException e ) {
       doc = null;
     } catch ( DocumentException e ) {
