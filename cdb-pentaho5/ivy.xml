@@ -36,6 +36,7 @@
         <dependency org="pentaho" name="cpf-core"       rev="${dependency.pentaho-cpf-plugin.revision}" transitive="false" changing="true" conf='runtime->default'/>
         <dependency org="pentaho" name="cpf-pentaho5"   rev="${dependency.pentaho-cpf-plugin.revision}" transitive="false" changing="true" conf='runtime->default'/>
         <dependency org="pentaho" name="cda-core"       rev="${dependency.pentaho-cda-plugin.revision}" transitive="false" changing="true" conf='runtime->default'/>
+        <dependency org="pentaho" name="cda-pentaho5"       rev="${dependency.pentaho-cda-plugin.revision}" transitive="false" changing="true" conf='runtime->default'/>
 
         <!--  third party dependencies -->
         <dependency org="net.sf.json-lib"       name="json-lib"             rev="2.4"   transitive="false" conf='runtime->default'>
@@ -63,8 +64,8 @@
         <dependency org="com.orientechnologies" name="orientdb-client"      rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
         <dependency org="com.orientechnologies" name="orientdb-enterprise"  rev="${dependency.orientdb.revision}" transitive="false" conf="runtime,default->default" />
 
-        <!-- mustache templates -->
-        <dependency org="com.github.spullara.mustache.java" name="compiler" conf='runtime,default->default' rev="0.8.4" transitive="false"/>
+        <!-- Velocity templates -->
+        <dependency org="org.apache.velocity" name="velocity" conf='runtime,default->default' rev="1.7" transitive="false"/>
 
         <!-- tests -->
         <dependency org="junit" name="junit" conf="test->default" rev='4.10' transitive="false"/>

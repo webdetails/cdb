@@ -32,14 +32,7 @@ wd.cdb.Query = function (label, group, type, guid, definition) {
      * is the only way of knowing that's the case.
      */
     if (_id) {
-      var params = {
-        method: 'copyQuery',
-        id: myself.getKey(),
-        newguid: newGuid
-      };
-      $.getJSON(webAppPath + "/content/cdb/connector", $.param(params),function(response){
-        wd.ctools.persistence.saveObject(null, "Query", myself);
-      });
+      cdbFunctions.copyBackend(myself, newGuid);
     }
   }
 
@@ -115,14 +108,7 @@ wd.cdb.Query = function (label, group, type, guid, definition) {
     if (!this.getKey()) {
       return;
     }
-    var params = {
-      method: 'deleteQuery',
-      id: this.getKey(),
-    };
-    var myself = this;
-    $.getJSON(webAppPath + "/content/cdb/connector", $.param(params),function(response){
-      wd.ctools.persistence.deleteObject(myself.getKey(), "Query");
-    });
+    cdbFunctions.deleteSelf(this);
   }
 
   if(group){
@@ -179,13 +165,7 @@ wd.cdb.QueryGroup = function(label, description) {
   };
 
   this.save = function() {
-  var q, query;
-  for (q in _queries) if (_queries.hasOwnProperty(q)) {
-    query = _queries[q];
-    wd.ctools.persistence.saveObject(null,"Query",query);
-  }
-
-  $.getJSON("connector?method=exportCda&group=" + _label,function(){console.log("Saved to CDA")});
+    cdbFunctions.saveQuery(_queries, _label);
   };
 
   this.deleteQuery = function(queryGuid) {
@@ -230,20 +210,7 @@ wd.cdb.QueryManager = (function() {
     };
 
     myself.loadGroup = function(group,callback) {
-      $.getJSON("query",{method:"loadGroup",group: group.getLabel()}, function(results){
-        if(results) {
-          var query, q, queryData;
-          myself.addGroup(group);
-          for (q in results.object) if (results.object.hasOwnProperty(q)) {
-            queryData = results.object[q];
-            query = new wd.cdb.Query(queryData.name, queryData.group, queryData.type, queryData.guid, queryData.definition);
-            query.setKey(queryData["@rid"]);
-            query.setGroupName(group.getDescription());
-            group.addQuery(query);
-          }
-          callback(group);
-        }
-      });
+      cdbFunctions.loadGroup(myself, group, callback);
     };
 
     myself.deleteGroup = function(label) {
@@ -256,18 +223,8 @@ wd.cdb.QueryManager = (function() {
     };
     
     myself.loadGroupList = function(callback) {
-      $.getJSON('query?method=listGroups',{},function(response){
-        var groups = response.object,
-            i;
-        for (i = 0; i < groups.length;i++) {
-        	if (groups[i].name)
-	          myself.newGroup(groups[i].name, groups[i].groupName);
-        }
-        if (callback && typeof callback == 'function') {
-          callback(myself);
-        }
-      });
-    };
+      cdbFunctions.loadGroupList(myself, callback);
+    }
     
     return myself;
 }());

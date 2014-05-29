@@ -17,4 +17,6 @@
   <bean id="connector" class="pt.webdetails.cdb.api.ConnectorApi"/>
   <bean id="exporter" class="pt.webdetails.cdb.api.ExportApi"/>
   <bean id="query" class="pt.webdetails.cdb.api.QueryApi"/>
+  <bean id="olap" class="pt.webdetails.cpf.olap.OlapApi"/>
+
 </beans>

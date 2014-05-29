@@ -1,0 +1,2 @@
+#set( $id = $id + ".csv")
+cdbData <- read.csv2("$id")

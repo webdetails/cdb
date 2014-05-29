@@ -1,5 +1,5 @@
 /*!
-* Copyright 2002 - 2013 Webdetails, a Pentaho company. All rights reserved.
+* Copyright 2002 - 2014 Webdetails, a Pentaho company. All rights reserved.
 *
 * This software was developed by Webdetails and is provided under the terms
 * of the Mozilla Public License, Version 2.0, or any later version. You may not use
@@ -10,6 +10,7 @@
 * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. Please refer to
 * the license for the specific language governing your rights and limitations.
 */
+
 package pt.webdetails.cdb.api;
 
 import org.apache.commons.logging.Log;
@@ -18,6 +19,7 @@ import org.json.JSONObject;
 import pt.webdetails.cdb.CdbEngine;
 import pt.webdetails.cdb.query.QueryEngine;
 import pt.webdetails.cdb.util.JsonUtils;
+import pt.webdetails.cpf.utils.PluginIOUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
@@ -34,31 +36,34 @@ public class QueryApi {
 
   @GET
   @Path( "/listGroups" )
-  @Produces( "text/javascript" )
-  public void listGroups(@Context HttpServletResponse response) throws IOException
-  {
-    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
+  @Produces( { "application/json", "text/javascript" } )
+  public void listGroups( @Context HttpServletResponse response ) throws IOException {
+    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     try {
       JSONObject result = QueryEngine.getInstance().listGroups();
-      JsonUtils.buildJsonResult( response.getOutputStream(), result != null, result );
-    } catch (Exception ex) {
-      logger.error("Error listing queries: " + ex);
-      JsonUtils.buildJsonResult( response.getOutputStream(), false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
+      PluginIOUtils.writeOutAndFlush( response.getOutputStream(), result.toString( 2 ) );
+
+    } catch ( Exception ex ) {
+      logger.error( "Error listing queries: " + ex );
+      JsonUtils.buildJsonResult( response.getOutputStream(), false,
+        "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
     }
   }
 
   @GET
   @Path( "/loadGroup" )
-  @Produces( "text/javascript" )
-  public void loadGroup(  @QueryParam( MethodParams.GROUP ) String group, @Context HttpServletResponse response) throws IOException
-  {
-    CdbEngine.getEnv();// TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
+  @Produces( { "application/json", "text/javascript" } )
+  public void loadGroup( @QueryParam( MethodParams.GROUP ) String group, @Context HttpServletResponse response )
+    throws IOException {
+    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     try {
       JSONObject result = QueryEngine.getInstance().loadGroup( group );
-      JsonUtils.buildJsonResult( response.getOutputStream(), result != null, result );
-    } catch (Exception ex) {
-      logger.error("Error loading group: " + ex);
-      JsonUtils.buildJsonResult( response.getOutputStream(), false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
+      PluginIOUtils.writeOutAndFlush( response.getOutputStream(), result.toString( 2 ) );
+
+    } catch ( Exception ex ) {
+      logger.error( "Error loading group: " + ex );
+      JsonUtils.buildJsonResult( response.getOutputStream(), false,
+        "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
     }
   }
 

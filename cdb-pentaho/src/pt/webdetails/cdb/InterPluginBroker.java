@@ -11,18 +11,22 @@
 * the license for the specific language governing your rights and limitations.
 */
 
-package pt.webdetails.cdb.connector;
+package pt.webdetails.cdb;
 
-/**
- * @author pdpi
- */
-public class ConnectorNotFoundException extends ConnectorException {
+import pt.webdetails.cpf.InterPluginCall;
 
-  public ConnectorNotFoundException() {
+import java.util.HashMap;
+import java.util.Map;
+
+public class InterPluginBroker {
+
+  public static String exportCda(  String group, String id, String outputType  ) {
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put( "path", "cdb/queries/" + group + ".cda" );
+    params.put( "dataAccessId", id );
+    params.put( "outputType", outputType );
+
+    InterPluginCall pluginCall = new InterPluginCall( InterPluginCall.CDA, "doQuery", params );
+    return pluginCall.call();
   }
-
-  public ConnectorNotFoundException( Exception cause ) {
-    super( cause );
-  }
-
 }
