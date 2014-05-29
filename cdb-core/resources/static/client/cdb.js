@@ -140,9 +140,11 @@ wd.cdb.createGroup = function(){
   while (wd.cdb.QueryManager.getGroup(groupName)) {
   	groupName = 'group'+(++wd.cdb.groupIndex);  
   }
-  
+
   var group = wd.cdb.QueryManager.newGroup(groupName, 'Untitled Group');
   wd.cdb.showGroup(group);
+  
+  $("#"+groupName+"Remove").css('display', 'none');
   
 };
 
@@ -492,10 +494,9 @@ wd.cdb.addQuery = function(groupName,queryObj){
   query.css('maxWidth','950px');
   var queryGuid = queryObj.getGUID();
   query.attr('id',queryGuid);
+
   if(!isNew) {
     query.find("#dummyQueryName").removeClass('toEdit');
-    
-
   }
 
   query.find("#dummyQueryName").attr('id',queryGuid+'Name').css('margin','0px 8px 4px 4px');
@@ -532,6 +533,8 @@ wd.cdb.addQuery = function(groupName,queryObj){
     }, 500, function() {
       // Animation complete.
     });
+
+  $("#"+groupName+"Remove").css('display', 'inline');
 };
 
 wd.cdb.pasteQuery = function(groupName){
