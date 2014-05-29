@@ -167,7 +167,7 @@
 	    &lt;branch>${project.stage}&lt;/branch>
 			&lt;version>${project.revision}&lt;/version>
     		&lt;name>${marketplace.metadata.name}&lt;/name>
-	        &lt;package_url>${marketplace.metadata.package_url}&lt;/package_url>
+	        &lt;package_url>${marketplace.metadata.package_url.4x}&lt;/package_url>
             &lt;description>${marketplace.metadata.description.4x}&lt;/description>
 		    &lt;build_id>${sequential.build.id}&lt;/build_id>
             &lt;min_parent_version>${marketplace.metadata.min_parent_version.4x}&lt;/min_parent_version>		
