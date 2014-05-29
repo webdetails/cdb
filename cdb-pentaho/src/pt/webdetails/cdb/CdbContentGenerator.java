@@ -199,7 +199,7 @@ public class CdbContentGenerator extends SimpleContentGenerator {
     }
   }
 
-  /*@Exposed( accessLevel = AccessLevel.PUBLIC )
+  @Exposed( accessLevel = AccessLevel.PUBLIC )
   public void olapUtils( OutputStream out ) throws IOException {
     OlapUtils olapUtils = new OlapUtils();
     JSONObject result = null;
@@ -234,7 +234,7 @@ public class CdbContentGenerator extends SimpleContentGenerator {
       logger.error( ex.toString() );
       JsonUtils.buildJsonResult( out, false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
     }
-  }*/
+  }
 
   private void redirectToCdeEditor( Map<String, Object> params ) throws IOException {
 
