@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
+
+    <info organisation="pentaho" module="cdb-core" revision="${project.revision}"/>
+
+    <configurations>
+        <conf name="default"/>
+        <conf name="test"       visibility="private"/>
+        <conf name="codegen"    visibility="private"/>
+        <conf name="runtime"    visibility="private"/>
+        <conf name="dev"        visibility="private"/>
+        <conf name="zip"        visibility="private"/>
+    </configurations>
+
+    <publications>
+        <artifact name="${ivy.artifact.id}" type="jar" conf="default"/>
+        <artifact name="${package.id}"      type="zip" conf="zip"/>
+    </publications>
+
+    <dependencies defaultconf="default->default">
+
+        <!--  third party dependencies -->
+        <dependency org="commons-logging"               name="commons-logging"      rev="1.1"               transitive="false"/>
+        <dependency org="commons-io"                    name="commons-io"           rev="1.4"               transitive="false"/>
+        <dependency org="net.sf.json-lib"               name="json-lib"             rev="2.4"               transitive="false">
+            <artifact name="json-lib" type="jar" m:classifier="jdk15"/>
+        </dependency>
+        <dependency org="org.json"                      name="json"                 rev="3.1"               transitive="false"/>
+        <dependency org="commons-lang"                  name="commons-lang"         rev="2.4"               transitive="false"/>
+        <dependency org="org.slf4j"                     name="slf4j-api"            rev="1.7.5"             transitive="false"/>
+        <dependency org="org.springframework"           name="spring-core"          rev="3.0.3.RELEASE"     transitive="false"/>
+        <dependency org="org.springframework"           name="spring-beans"         rev="3.0.3.RELEASE"     transitive="false"/>
+        <dependency org="org.springframework.security"  name="spring-security-core" rev="3.0.3.RELEASE"     transitive="false"/>
+        <dependency org="org.springframework"           name="spring-context"       rev="3.0.3.RELEASE"     transitive="false"/>
+        <dependency org="net.sf.ezmorph"                name="ezmorph"              rev="1.0.6"             transitive="false"  conf='runtime->default'/>
+
+        <!-- webdetails dependencies-->
+        <dependency org="pentaho" name="cpf-core" rev="${dependency.pentaho-cpf-plugin.revision}" transitive="false" changing="true" conf='runtime->default'/>
+        <dependency org="pentaho" name="cda-core" rev="${dependency.pentaho-cda-plugin.revision}" transitive="false"                 conf='runtime->default'/>
+
+        <!-- Velocity templates -->
+        <dependency org="org.apache.velocity" name="velocity" conf='runtime,default->default' rev="1.7" transitive="false"/>
+
+
+      <!-- tests -->
+        <dependency org="junit" name="junit" conf="test->default" rev='4.10'/>
+
+        <exclude module="nekohtml" conf="" matcher="exact"></exclude>
+    </dependencies>
+
+</ivy-module>

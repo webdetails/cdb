@@ -1,7 +1,0 @@
-import csv, getpass, urllib
-# Open the CSV file, detect the format (commas or semicolons? etc),
-# rewind back to the start of the file, and parse it
-csv_file = open("{{id}}.csv")
-dialect = csv.Sniffer().sniff(csv_file.read(1024))
-csv_file.seek(0)
-cdbData = csv.reader(csv_file, dialect)
