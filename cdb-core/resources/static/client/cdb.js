@@ -144,7 +144,7 @@ wd.cdb.createGroup = function(){
   var group = wd.cdb.QueryManager.newGroup(groupName, 'Untitled Group');
   wd.cdb.showGroup(group);
   
-  $("#"+groupName+"Remove").css('display', 'none');
+  $("#"+groupName+"Remove").hide();
   
 };
 
@@ -278,7 +278,7 @@ wd.cdb.cloneCopyButton = function(groupName, queryObj){
     wd.cdb.queryClipboard = queryObj;
     $.each($.find('.pasteQueryButton'),
       function(){
-        $(this).show();
+        $(this).css('display', 'inline-block');
       });
 
     $.each($.find('.queryCopyButton button'),function(){$(this).css('background-color','transparent');});
@@ -359,11 +359,11 @@ wd.cdb.setClosedMode = function(queryObj) {
   wd.cdb.setQueryState(queryObj,'closed');
   $("#"+queryGuid+'OkButton').hide();
   $("#"+queryGuid+'CancelButton').hide();
-  $("#"+queryGuid+'CopyButton').show();
-  $("#"+queryGuid+'ExportButton').show();
+  $("#"+queryGuid+'CopyButton').css('display', 'inline-block');
+  $("#"+queryGuid+'ExportButton').css('display', 'inline-block');
   $("#"+queryGuid+'ProceedButton').hide();
   $("#"+queryGuid+'Type').hide();
-  $("#"+queryGuid+'ActiveTypeButton').show();
+  $("#"+queryGuid+'ActiveTypeButton').css('display', 'inline-block');
   
   $("#"+queryGuid+"CopyButton").css('margin','4px 1px 4px 8px');
   $("#"+queryGuid+"ExportButton").css('margin','4px 4px 4px 1px');
@@ -378,21 +378,21 @@ wd.cdb.setNewMode = function (queryObj) {
   $("#"+queryGuid+'CancelButton').hide();
   $("#"+queryGuid+'CopyButton').hide();
   $("#"+queryGuid+'ExportButton').hide();
-  $("#"+queryGuid+'ProceedButton').show();
-  $("#"+queryGuid+'Type').show();
+  $("#"+queryGuid+'ProceedButton').css('display', 'inline-block');
+  $("#"+queryGuid+'Type').css('display', 'inline-block');
   $("#"+queryGuid+'ActiveTypeButton').hide();
 };
 
 wd.cdb.setEditMode = function(queryObj) {
   var queryGuid = queryObj.getGUID();
   wd.cdb.setQueryState(queryObj,'edition edited');
-  $("#"+queryGuid+'OkButton').show();
-  $("#"+queryGuid+'CancelButton').show().css('margin-left','200px');
+  $("#"+queryGuid+'OkButton').css('display', 'inline-block');
+  $("#"+queryGuid+'CancelButton').css('display', 'inline-block').css('margin-left','200px');
   $("#"+queryGuid+'CopyButton').hide();
   $("#"+queryGuid+'ExportButton').hide();
   $("#"+queryGuid+'ProceedButton').hide();
   $("#"+queryGuid+'Type').hide();
-  $("#"+queryGuid+'ActiveTypeButton').show();
+  $("#"+queryGuid+'ActiveTypeButton').css('display', 'inline-block');
   
   $("#"+queryGuid+"CopyButton").css('margin','4px 1px 4px 8px');
   $("#"+queryGuid+"ExportButton").css('margin','4px 8px 4px 1px');
@@ -429,7 +429,7 @@ wd.cdb.showQueryEditor = function(groupName,queryObj,callback,isNew) {
         console.log('done!');
       });
     }
-    popup.show().animate({height: '100%'}, 500, callback);
+    popup.css('display', 'inline-block').animate({height: '100%'}, 500, callback);
     $("#body").hide();
   }
 
@@ -449,7 +449,7 @@ wd.cdb.showQueryEditor = function(groupName,queryObj,callback,isNew) {
       $("#"+queryGuid+'ActiveTypeButton button').removeAttr('disabled').width('487px');
     }
     
-    $("#body").show();
+    $("#body").css('display', 'inline-block');
     $('#editionPopup').animate({
         height: '0px'
       }, 500, function() {
@@ -462,7 +462,7 @@ wd.cdb.showQueryEditor = function(groupName,queryObj,callback,isNew) {
     var connector = wd.cdb.connectors.ConnectorEngine.getConnector(queryObj.getType()),
         $ph =  $('#editionPopup');
     connector.saveQuery($('#editionEnvironment'),queryObj,function(){
-      $("#body").show();
+      $("#body").css('display', 'inline-block');
       $ph.animate({ height: '0px'}, 500, function() {
         $ph.hide();
       });
@@ -534,7 +534,7 @@ wd.cdb.addQuery = function(groupName,queryObj){
       // Animation complete.
     });
 
-  $("#"+groupName+"Remove").css('display', 'inline');
+  $("#"+groupName+"Remove").css('display', 'inline-block');
 };
 
 wd.cdb.pasteQuery = function(groupName){
