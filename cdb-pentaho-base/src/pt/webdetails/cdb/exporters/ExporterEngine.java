@@ -89,38 +89,9 @@ public class  ExporterEngine {
     }
   }
 
-  /*public void process( IParameterProvider requestParams, IParameterProvider pathParams, OutputStream out ) {
-    try {
-
-    } catch ( Exception ex ) {
-      logger.error( ex );
-      JsonUtils.buildJsonResult( out, false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
-    }
-  }*/
-
   private String escapePath( String path ) {
     return path.replaceAll( "\\\\", "\\\\" ).replaceAll( "\"", "\\\"" );
   }
-
-  /*public void export(String exporterName, String group, String id, String url,
-  OutputStream out) throws ExporterRuntimeException, ExporterNotFoundException {
-    Exporter exporter = getExporter(exporterName);
-    try {
-      out.write(exporter.export(group, id, url).getBytes("utf-8"));
-    } catch (Exception e) {
-      logger.error(e);
-    }
-  }  */
-
-  /*public void exportToFile(String exporterName, String group, String id, String url,
-  OutputStream out) throws ExporterRuntimeException, ExporterNotFoundException {
-    Exporter exporter = getExporter(exporterName);
-    try {
-      exporter.binaryExport(group, id, url, out);
-    } catch (Exception e) {
-      logger.error(e);
-    }
-  }    */
 
   public Exporter getExporter( String exporterName ) throws ExporterRuntimeException, ExporterNotFoundException {
     try {

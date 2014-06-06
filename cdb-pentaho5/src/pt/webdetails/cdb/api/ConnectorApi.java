@@ -26,7 +26,6 @@ public class ConnectorApi {
   @GET
   @Path( "/exportCda" )
   public void exportCda( @QueryParam( MethodParams.GROUP ) String group ) {
-    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     ConnectorEngine.getInstance();
     ConnectorEngine.exportCda( group );
   }
@@ -35,14 +34,12 @@ public class ConnectorApi {
   @Path( "/copyQuery" )
   public void copyQuery( @QueryParam( MethodParams.ID ) String id,
                          @QueryParam( MethodParams.NEW_GUID ) String newguid ) {
-    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     ConnectorEngine.getInstance().copyQuery( id, newguid );
   }
 
   @GET
   @Path( "/deleteQuery" )
   public void deleteQuery( @QueryParam( MethodParams.ID ) String id ) {
-    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     ConnectorEngine.getInstance().deleteQuery( id );
   }
 

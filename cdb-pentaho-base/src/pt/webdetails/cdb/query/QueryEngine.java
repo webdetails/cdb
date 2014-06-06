@@ -45,9 +45,7 @@ public class QueryEngine {
     PersistenceEngine pe = PersistenceEngine.getInstance();
     try {
       Map<String, Object> params = new HashMap<String, Object>();
-      params.put("user", PentahoSessionHolder.getSession().getName());
-      // DISBLING MULTI USER SUPPORT BY NOW response = pe.query("select distinct(group) as name,
-      // groupName from Query where userid = :user order by groupName", params);
+
       response = pe.query( "select distinct(group) as group, distinct(groupName) as name from Query order by group", params );
     } catch ( JSONException e ) {
       return null;
@@ -60,11 +58,8 @@ public class QueryEngine {
     PersistenceEngine pe = PersistenceEngine.getInstance();
     try {
       Map<String, Object> params = new HashMap<String, Object>();
-      //params.put("user", PentahoSessionHolder.getSession().getName()); TODO: removed for now since isn't being used
       params.put( "group", group );
 
-      // DISABLING MULTI USER SUPPORT BY NOW response = pe.query("select * from Query where group = :group and userid
-      // = :user order by groupName", params);
       response = pe.query( "select * from Query where group = :group order by group", params );
 
     } catch ( JSONException e ) {
@@ -73,16 +68,8 @@ public class QueryEngine {
     return response;
   }
 
-/*
-  TODO: not sure if this is being used. This must be exposed via content generator or rest api
-  public JSONObject loadGroup(IParameterProvider requestParams, IParameterProvider pathParams) {
-    String groupName = requestParams.getStringParameter("group", "");
-    JSONObject response = loadGroup(groupName);
-
-    return response;
-  }
-
-  public JSONObject saveQuery(IParameterProvider requestParams, IParameterProvider pathParams, OutputStream out) {
+  //TODO: not sure if this is being used. This must be exposed via content generator or rest api
+  /*public JSONObject saveQuery(IParameterProvider requestParams, IParameterProvider pathParams, OutputStream out) {
     return null;
   }*/
 
