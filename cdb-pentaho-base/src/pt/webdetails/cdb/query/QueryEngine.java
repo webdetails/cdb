@@ -61,8 +61,11 @@ public class QueryEngine {
     PersistenceEngine pe = PersistenceEngine.getInstance();
     try {
       Map<String, Object> params = new HashMap<String, Object>();
+      //params.put("user", PentahoSessionHolder.getSession().getName()); TODO: removed for now since isn't being used
       params.put( "group", group );
 
+      // DISABLING MULTI USER SUPPORT BY NOW response = pe.query("select * from Query where group = :group and userid
+      // = :user order by group", params);
       response = pe.query( "select * from Query where group = :group order by group", params );
 
     } catch ( JSONException e ) {
