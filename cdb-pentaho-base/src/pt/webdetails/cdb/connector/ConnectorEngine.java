@@ -97,7 +97,10 @@ public class ConnectorEngine {
 
       Map<String, Object> params = new HashMap<String, Object>();
       params.put( "group", groupId );
+      params.put( "user", PentahoSessionHolder.getSession().getName() );
 
+      // DISABLING MULTI USER SUPPORT BY NOW JSONObject response = eng.query("select * from Query where group =
+      // :group and userid = :user",params);
       JSONObject response = eng.query( "select * from Query where group = :group ", params );
 
 
