@@ -36,7 +36,6 @@ public class SaikuQuery extends AbstractQuery {
     name = id;
     queryContent = getProperty( "query" ).toString();
     DataAccess dataAccess = new MdxDataAccess( id, name, id, queryContent );
-    //dataAccess;
     return dataAccess;
   }
 

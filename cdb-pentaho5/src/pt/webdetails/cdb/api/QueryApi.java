@@ -38,7 +38,6 @@ public class QueryApi {
   @Path( "/listGroups" )
   @Produces( { "application/json", "text/javascript" } )
   public void listGroups( @Context HttpServletResponse response ) throws IOException {
-    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     try {
       JSONObject result = QueryEngine.getInstance().listGroups();
       PluginIOUtils.writeOutAndFlush( response.getOutputStream(), result.toString( 2 ) );
@@ -55,7 +54,6 @@ public class QueryApi {
   @Produces( { "application/json", "text/javascript" } )
   public void loadGroup( @QueryParam( MethodParams.GROUP ) String group, @Context HttpServletResponse response )
     throws IOException {
-    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
     try {
       JSONObject result = QueryEngine.getInstance().loadGroup( group );
       PluginIOUtils.writeOutAndFlush( response.getOutputStream(), result.toString( 2 ) );

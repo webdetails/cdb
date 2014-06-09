@@ -32,11 +32,6 @@ public class CdbEngine {
     logger.debug( "Starting ElementEngine" );
   }
 
-  /*private CdbEngine(ICdbEnvironment environment) {
-    this();
-    this.cdbEnv = environment;
-  } */
-
   public static CdbEngine getInstance() {
 
     if ( instance == null ) {
@@ -69,10 +64,8 @@ public class CdbEngine {
       }
 
       instance.cdbEnv = env;
-      // XXX figure out where to put ensureBasicDirs
-      instance.ensureBasicDirs();
-      //PersistenceEngine.getInstance();
 
+      instance.ensureBasicDirs();
 
     }
   }

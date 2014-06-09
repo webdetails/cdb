@@ -33,7 +33,6 @@ public class ExportApi {
   @Path( "/listExporters" )
   @Produces( "text/javascript" )
   public void listExporters( @Context HttpServletResponse response ) throws IOException {
-    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LIFECYCLE GIVES AN ERROR
     String result = ExporterEngine.getInstance().listExporters();
     JsonUtils.buildJsonResult( response.getOutputStream(), result != null, result );
   }
@@ -46,7 +45,6 @@ public class ExportApi {
                       @QueryParam( MethodParams.ID ) String id,
                       @QueryParam( MethodParams.TO_FILE ) String toFile,
                       @Context HttpServletRequest request, @Context HttpServletResponse response ) throws IOException {
-    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LIFECYCLE GIVES AN ERROR
 
     if ( toFile.equals( "true" ) ) {
       ExporterEngine.getInstance().exportToFile( request, response, exporter, group, id );

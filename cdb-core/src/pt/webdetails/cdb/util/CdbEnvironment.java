@@ -65,14 +65,6 @@ public class CdbEnvironment {
     return getContentAccessFactory().getOtherPluginSystemReader( pluginId, initialPath );
   }
 
-  /*public static IPluginResourceLocationManager getPluginResourceLocationManager(){
-    return CbeEngine.getInstance().getEnvironment().getPluginResourceLocationManager();
-  }
-
-  public static IDataSourceManager getDataSourceManager(){
-    return CdeEngine.getInstance().getEnvironment().getDataSourceManager();
-  } */
-
   public static String getPluginRepositoryDir() {
     return CdbEngine.getInstance().getEnvironment().getPluginRepositoryDir();
   }
@@ -85,7 +77,4 @@ public class CdbEnvironment {
     return CdbEngine.getInstance().getEnvironment().getSystemDir();
   }
 
-  /*public static IFileHandler getFileHandler(){
-    return CdeEngine.getInstance().getEnvironment().getFileHandler();
-  } */
 }

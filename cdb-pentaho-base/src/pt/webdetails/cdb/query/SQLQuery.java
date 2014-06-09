@@ -25,7 +25,6 @@ import pt.webdetails.cda.dataaccess.SqlDataAccess;
 public class SQLQuery extends AbstractQuery {
 
   private static final Log logger = LogFactory.getLog( pt.webdetails.cdb.query.SQLQuery.class );
-  //private static final String path = "cdb/queries";
 
   @Override
   public DataAccess exportCdaDataAccess() {
@@ -34,7 +33,6 @@ public class SQLQuery extends AbstractQuery {
     name = id;
     queryContent = getProperty( "query" ).toString();
     DataAccess dataAccess = new SqlDataAccess( id, name, id, queryContent );
-    //dataAccess;
     return dataAccess;
   }
 

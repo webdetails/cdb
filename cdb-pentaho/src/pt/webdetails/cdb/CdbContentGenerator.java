@@ -77,7 +77,6 @@ public class CdbContentGenerator extends SimpleContentGenerator {
   public void home( OutputStream out ) throws IOException {
     CdbEngine.getInstance().getEnvironment();
     IParameterProvider requestParams = getRequestParameters();
-    // ServletRequest wrapper = getRequest();
 
     Map<String, Object> params = new HashMap<String, Object>();
     params.put( "solution", "system" );

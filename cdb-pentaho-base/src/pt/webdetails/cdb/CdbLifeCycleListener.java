@@ -30,7 +30,7 @@ public class CdbLifeCycleListener extends SimpleLifeCycleListener {
 
   @Override
   public void loaded() throws PluginLifecycleException {
-    //getEnvironment();
+    super.loaded();
     logger.debug( "Init for CDB" );
   }
 

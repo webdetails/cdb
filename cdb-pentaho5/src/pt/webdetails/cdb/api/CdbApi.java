@@ -68,9 +68,6 @@ public class CdbApi {
   @Produces( MimeTypes.HTML )
   public String home( @Context HttpServletRequest request, @Context HttpServletResponse response,
                       @Context HttpHeaders headers ) throws IOException {
-    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
-    //IParameterProvider requestParams = getRequestParameters();
-    // ServletRequest wrapper = getRequest();
 
     Map<String, Map<String, Object>> params = RestApiUtils.buildBloatedMap( request, response, headers );
     Map<String, Object> requestMap = new HashMap<String, Object>();
@@ -84,8 +81,6 @@ public class CdbApi {
     for ( String name : requestParams.keySet() ) {
       requestMap.put( name, requestParams.get( name ) );
     }
-    //add request parameters
-    //PluginUtils.copyParametersFromProvider(params, WrapperUtils.wrapParamProvider(requestParams));
 
     if ( requestMap.get( "mode" ) != null && requestMap.get( "mode" ).equals( "edit" ) ) {
       // Send this to CDE
@@ -100,10 +95,6 @@ public class CdbApi {
       return e.toString();  //To change body of catch statement use File | Settings | File Templates.
     }
 
-    /*InterPluginCall pluginCall = new InterPluginCall(InterPluginCall.CDE, "Render", params);
-    pluginCall.setResponse(response);
-    //pluginCall.setOutputStream(out);
-    pluginCall.run();*/
     return "";
   }
 
@@ -113,7 +104,7 @@ public class CdbApi {
   @Produces( "text/javascript" )
   public void storage( @Context HttpServletRequest request, @Context HttpServletResponse response,
                        @Context HttpHeaders headers ) throws IOException, InvalidOperationException {
-    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
+
     Map<String, Map<String, Object>> bloatedMap = RestApiUtils.buildBloatedMap( request, response, headers );
     try {
       PersistenceEngine engine = PersistenceEngine.getInstance();
@@ -132,7 +123,7 @@ public class CdbApi {
   @Produces( { "text/csv", "text/javascript" } )
   public void doQuery( @Context HttpServletRequest request, @Context HttpServletResponse response,
                        @Context HttpHeaders headers ) throws IOException {
-    CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
+
     Map<String, Map<String, Object>> bloatedMap = RestApiUtils.buildBloatedMap( request, response, headers );
 
     IParameterProvider requestParams = RestApiUtils.getRequestParameters( bloatedMap );

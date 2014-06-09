@@ -12,7 +12,7 @@
   <overlays>
     <overlay id="startup.cdv" resourcebundle="plugin/cdb/api/resources/lang/messages">
       <menubar id="toolsmenu">
-        <menuitem id="cdb" label="cdb" command="mantleXulHandler.openUrl('cdb','cdb','plugin/cdb/api/home')"/>
+        <menuitem id="cdb" label="CDB" command="mantleXulHandler.openUrl('CDB','CDB','plugin/cdb/api/home')"/>
       </menubar>
     </overlay>
   </overlays>
