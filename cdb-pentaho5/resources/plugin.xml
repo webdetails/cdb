@@ -10,9 +10,9 @@
   </content-types>
 
   <overlays>
-    <overlay id="startup.cdv" resourcebundle="plugin/cdb/api/resources/lang/messages">
+    <overlay id="startup.cdb" resourcebundle="plugin/cdb/api/resources/lang/messages">
       <menubar id="toolsmenu">
-        <menuitem id="cdb" label="cdb" command="mantleXulHandler.openUrl('cdb','cdb','plugin/cdb/api/home')"/>
+        <menuitem id="CDB" label="CDB" command="mantleXulHandler.openUrl('cdb','cdb','plugin/cdb/api/home')"/>
       </menubar>
     </overlay>
   </overlays>
