@@ -20,6 +20,7 @@ import pt.webdetails.cda.PentahoCdaEnvironment;
 import pt.webdetails.cdb.bean.factory.ICdbBeanFactory;
 import pt.webdetails.cpf.PentahoPluginEnvironment;
 import pt.webdetails.cpf.exceptions.InitializationException;
+import pt.webdetails.cpf.persistence.PersistenceEngine;
 
 public class PentahoCdbEnvironment extends PentahoPluginEnvironment implements ICdbEnvironment {
 
@@ -31,6 +32,7 @@ public class PentahoCdbEnvironment extends PentahoPluginEnvironment implements I
   private ICdbBeanFactory factory;
 
   public void init( ICdbBeanFactory factory ) throws InitializationException {
+    PersistenceEngine.getInstance(); //Force Persistence engine initialization
     this.factory = factory;
     init( this );
     CdaEngine.init( new PentahoCdaEnvironment() );

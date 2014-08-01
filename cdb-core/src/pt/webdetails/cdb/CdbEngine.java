@@ -71,7 +71,6 @@ public class CdbEngine {
       instance.cdbEnv = env;
       // XXX figure out where to put ensureBasicDirs
       instance.ensureBasicDirs();
-      //PersistenceEngine.getInstance();
 
 
     }
