@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin title="cdb">
+  <lifecycle-listener class="pt.webdetails.cdb.CdbLifeCycleListener"/>
+  <static-paths>
+    <static-path url="/cdb/static" localFolder="static"/>
+    <static-path url="/cdb/overlay" localFolder="overlay"/>
+    <static-path url="/cdb/lang" localFolder="lang"/>
+  </static-paths>
+   <content-types>
+  </content-types>
+
+  <overlays>
+    <overlay id="startup.cdb" resourcebundle="plugin/cdb/api/resources/lang/messages">
+      <menubar id="toolsmenu">
+        <menuitem id="CDB" label="CDB" command="mantleXulHandler.openUrl('CDB Home','CDB Home','plugin/cdb/api/home')"/>
+      </menubar>
+    </overlay>
+  </overlays>
+</plugin>

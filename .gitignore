@@ -7,3 +7,15 @@ nbproject/private/*
 dist
 build/*
 test-lib/*
+cdb-pentaho5/lib
+cdb-pentaho5/runtime-lib
+cdb-pentaho5/bin
+cdb-pentaho/runtime-lib
+cdb-pentaho/lib
+cdb-pentaho/test-lib
+cdb-core/runtime-lib
+cdb-core/lib
+cdb-core/bin
+cdb-core/test-lib
+cdb-pentaho5/test-lib
+cdb-pentaho/bin
