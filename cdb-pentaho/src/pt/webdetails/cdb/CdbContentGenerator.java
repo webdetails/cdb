@@ -229,9 +229,10 @@ public class CdbContentGenerator extends SimpleContentGenerator {
         result = olapUtils.getLevelMembersStructure( catalog, cube, member, direction );
 
       }
-      
-      out.write(("{\"status\" : \"true\", \"result\" : " +  result.toString(2) + "}").getBytes());
-//      JsonUtils.buildJsonResult( out, result != null, result );
+
+      out.write( ( "{\"status\" : \"true\", \"result\" : " +  result.toString(2)
+        + "}" ).getBytes() );
+
     } catch ( Exception ex ) {
       logger.error( ex.toString() );
       JsonUtils.buildJsonResult( out, false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
