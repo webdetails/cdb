@@ -13,7 +13,7 @@
 
 package pt.webdetails.cdb;
 
-import net.sf.json.JSONObject;
+import org.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.platform.engine.core.system.PentahoRequestContextHolder;
@@ -229,7 +229,9 @@ public class CdbContentGenerator extends SimpleContentGenerator {
         result = olapUtils.getLevelMembersStructure( catalog, cube, member, direction );
 
       }
-      JsonUtils.buildJsonResult( out, result != null, result );
+
+      out.write( ( "{\"status\" : \"true\", \"result\" : " +  result.toString(2)
+        + "}" ).getBytes() );
     } catch ( Exception ex ) {
       logger.error( ex.toString() );
       JsonUtils.buildJsonResult( out, false, "Exception found: " + ex.getClass().getName() + " - " + ex.getMessage() );
