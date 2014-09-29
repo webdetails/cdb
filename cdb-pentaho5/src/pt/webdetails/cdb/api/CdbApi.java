@@ -65,7 +65,7 @@ public class CdbApi {
 
   @GET
   @Path( "/home" )
-  @Produces( MimeTypes.HTML )
+  @Produces( MediaType.TEXT_HTML  )
   public String home( @Context HttpServletRequest request, @Context HttpServletResponse response,
                       @Context HttpHeaders headers ) throws IOException {
     CdbEngine.getEnv(); // TODO: FOR REMOVE WHEN FOUND A WAY TO INSTANTIATE IN LYFECYCLE GIVES AN ERROR
@@ -95,6 +95,7 @@ public class CdbApi {
 
 
     try {
+      response.setContentType( MimeTypes.HTML );
       InterPluginBroker.run( requestMap, response.getOutputStream() );
     } catch ( Exception e ) {
       return e.toString();  //To change body of catch statement use File | Settings | File Templates.
